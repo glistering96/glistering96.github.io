@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="김원준 Backend Portfolio — AI 서비스를 운영 가능한 백엔드 시스템으로 만드는 엔지니어" />
+  <title>김원준 Backend Portfolio</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="김원준 Backend Portfolio home">
+        <span class="brand-mark">KWJ</span>
+        <span class="brand-text">Backend Portfolio</span>
+      </a>
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="#capability">Capability</a>
+        <a href="#cases">Case Studies</a>
+        <a href="#performance">Performance</a>
+        <a href="#stack">Stack</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero section">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">김원준 · BE / ML Engineer</p>
+          <h1>AI 서비스를 운영 가능한<br />백엔드 시스템으로 만드는 엔지니어</h1>
+          <p class="hero-copy">
+            AI/ML 모델과 복잡한 도메인 로직을 실제 사용자가 쓰는 서비스로 연결해 왔습니다.
+            장시간 추론을 위한 비동기 처리, 시스템 간 데이터 계약, 사용자별 runtime 격리,
+            폐쇄망 Kubernetes 운영, CI/CD와 모니터링 기반 MLOps 개선 경험이 있습니다.
+          </p>
+          <div class="hero-actions" aria-label="포트폴리오 주요 링크">
+            <a class="button primary" href="#cases">Case Study 보기</a>
+            <a class="button secondary" href="#summary">요약 보기</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="핵심 요약">
+          <div class="metric"><strong>5~20 min</strong><span>장시간 AI 추론 작업을 callback/queue 구조로 처리</span></div>
+          <div class="metric"><strong>20% → 80%</strong><span>철강 자동배차 서비스 사용률 개선</span></div>
+          <div class="metric"><strong>900s → 1s</strong><span>복화 매칭 API 성능 개선</span></div>
+          <div class="metric"><strong>Air-gapped K8s</strong><span>사내 AI 서비스 운영 플랫폼 구축</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="summary" class="section section-muted">
+      <div class="container narrow">
+        <p class="section-kicker">Positioning</p>
+        <h2>백엔드 관점으로 다시 정리한 포트폴리오</h2>
+        <p>
+          이 포트폴리오는 프로젝트를 단순 나열하지 않습니다. 대신 제가 반복해서 해결해 온
+          백엔드 시스템 문제를 중심으로 구성했습니다. 핵심은 모델 개발 자체가 아니라,
+          모델·도메인 규칙·운영 환경을 안정적인 서비스 경계로 나누고 연결한 경험입니다.
+        </p>
+      </div>
+    </section>
+
+    <section id="capability" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Capability Map</p>
+          <h2>제가 해결해 온 백엔드 시스템 문제들</h2>
+        </div>
+        <div class="capability-grid">
+          <article class="capability-card"><h3>Long-running Job Processing</h3><p>5~20분이 걸리는 AI 추론을 동기 HTTP가 아닌 callback + queue 구조로 처리했습니다.</p><span>자동차선 적부 최적화</span></article>
+          <article class="capability-card"><h3>Scale-out State Management</h3><p>요청 pod와 응답 pod가 달라지는 문제를 공용 queue/store로 분리했습니다.</p><span>자동차선 적부 최적화</span></article>
+          <article class="capability-card"><h3>Multi-tenant Runtime Isolation</h3><p>사용자별 Agent 실행 환경, workspace, 로그를 격리하는 runtime 구조를 설계했습니다.</p><span>AI Agent Platform</span></article>
+          <article class="capability-card"><h3>Internal Platform Engineering</h3><p>폐쇄망 환경에서 AI 서비스를 배포·운영하기 위한 Kubernetes 플랫폼을 구성했습니다.</p><span>AI Service K8s</span></article>
+          <article class="capability-card"><h3>Domain Logic Abstraction</h3><p>영업소별 배차 규칙을 Scorer와 score matrix 구조로 모듈화했습니다.</p><span>Steel TMS MLOps</span></article>
+          <article class="capability-card"><h3>Production Operation</h3><p>CI/CD, 로그 집약, retention, 단위 테스트를 도입해 운영 안정성을 개선했습니다.</p><span>K8s · Steel TMS</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases" class="section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">Representative Case Studies</p>
+          <h2>대표 백엔드 Case Study</h2>
+        </div>
+
+        <article class="case-card" id="car-carrier">
+          <div class="case-header"><p class="case-number">Case 01</p><div><h3>자동차선 적부 최적화 Backend Service</h3><p>Long-running AI inference를 위한 callback/queue 기반 백엔드 구조</p></div></div>
+          <div class="case-grid">
+            <div><h4>Backend Problem</h4><ul><li>모델 추론 시간이 입력 난도에 따라 5~20분으로 편차가 큼</li><li>기존 사내 시스템의 요청/응답 흐름과 연결해야 함</li><li>Polling은 서버 자원 낭비가 크고, 동기 응답은 timeout 위험이 큼</li><li>Scale-out 시 요청을 받은 pod와 결과를 받는 pod가 달라질 수 있음</li></ul></div>
+            <div><h4>Key Design</h4><ul><li>API 서버와 engine 서버의 책임 분리</li><li>Request queue를 통한 요청 진입량 제어</li><li>Result store와 callback processor를 통한 비동기 응답</li><li>API/engine/외부 모델/기존 시스템을 연결하는 표준 데이터 모델 설계</li></ul></div>
+          </div>
+          <div class="diagram" aria-label="자동차선 적부 최적화 비동기 처리 구조"><span>Internal System</span><span>API Server</span><span>Request Queue</span><span>Engine Worker</span><span>Result Store</span><span>Callback</span></div>
+          <div class="adr-box"><strong>ADR · 동기 API 대신 callback + queue를 선택한 이유</strong><p>장시간 추론 작업에서 동기 응답은 timeout과 resource blocking 위험이 컸습니다. Queue를 도입해 엔진 서버 리소스를 보호하고, callback으로 기존 시스템에 결과를 반환하는 구조를 선택했습니다.</p></div>
+        </article>
+
+        <article class="case-card" id="agent-platform">
+          <div class="case-header"><p class="case-number">Case 02</p><div><h3>Personal AI Agent Runtime Platform</h3><p>사용자별 격리 runtime을 제공하는 Agent 실행 플랫폼</p></div></div>
+          <div class="case-grid">
+            <div><h4>Backend Problem</h4><ul><li>Agent는 stateless API가 아니라 사용자별 workspace와 실행 상태가 필요함</li><li>사용자별 파일, session, runtime, 로그가 섞이면 안 됨</li><li>공용 skill은 중앙 관리하되 실행 환경은 격리해야 함</li><li>오류 발생 시 사용자별 로그 추적이 가능해야 함</li></ul></div>
+            <div><h4>Key Design</h4><ul><li>Backend control layer가 runtime 상태를 관리</li><li>Kubernetes StatefulSet 기반 사용자별 runtime identity 구성</li><li>공용 skill registry와 사용자별 workspace 분리</li><li>Playwright 기반 E2E 테스트 자동화 검토</li></ul></div>
+          </div>
+          <div class="runtime-layout" aria-label="AI Agent runtime platform 구조"><div>User</div><div>Web / API</div><div>Agent Backend</div><div>Runtime Controller</div><div>User Runtime StatefulSet</div><div>Workspace · Skills · Logs</div></div>
+          <div class="adr-box"><strong>ADR · Deployment 대신 StatefulSet을 고려한 이유</strong><p>Agent runtime은 사용자별 고정 identity와 workspace 추적이 중요했습니다. Stateless workload 중심의 Deployment보다 StatefulSet이 사용자별 runtime 식별과 운영 추적에 적합하다고 판단했습니다.</p></div>
+        </article>
+
+        <article class="case-card" id="k8s-platform">
+          <div class="case-header"><p class="case-number">Case 03</p><div><h3>Internal Kubernetes Platform for AI Services</h3><p>폐쇄망 환경에서 AI 서비스를 배포·운영하기 위한 내부 플랫폼 구축</p></div></div>
+          <div class="case-grid">
+            <div><h4>Context</h4><ul><li>서버 발급과 세팅에 긴 행정 절차와 시간이 소요됨</li><li>관리형 K8s는 비용과 내부 절차 부담이 컸음</li><li>폐쇄망 환경이라 외부 registry/repository 접근이 제한됨</li><li>여러 AI 서비스를 독립적으로 배포하고 운영해야 했음</li></ul></div>
+            <div><h4>Platform Stack</h4><ul><li>RKE 기반 Kubernetes cluster</li><li>GitLab CI/CD Runner와 Harbor registry</li><li>Helm values 기반 설정 관리</li><li>Grafana, Prometheus, Loki, Alloy 기반 관측성</li><li>Longhorn, Istio, Gateway API 운영</li></ul></div>
+          </div>
+          <div class="diagram wide" aria-label="Kubernetes platform 구조"><span>Developer</span><span>GitLab CI/CD</span><span>Harbor</span><span>RKE Cluster</span><span>AI Services</span><span>Monitoring</span></div>
+          <div class="trouble-grid"><div><strong>Ingress 보안 리스크</strong><p>NGINX Ingress 취약점 및 지원 리스크에 대응해 Istio + Gateway API로 전환했습니다.</p></div><div><strong>1/4 확률 요청 성공</strong><p>노드 간 TCP 방화벽 누락을 원인으로 식별하고 통신 포트 조치로 해결했습니다.</p></div><div><strong>노드 메모리 증가</strong><p>SELinux audit logging 과다 발생을 확인하고 setroubleshootd disable로 안정화했습니다.</p></div></div>
+        </article>
+
+        <article class="case-card" id="steel-tms">
+          <div class="case-header"><p class="case-number">Case 04</p><div><h3>Steel TMS MLOps Backend</h3><p>ML 추론과 영업소별 도메인 규칙을 결합한 자동배차 백엔드</p></div></div>
+          <div class="case-grid">
+            <div><h4>Backend Problem</h4><ul><li>5개 영업소의 배차 규칙이 서로 다름</li><li>현업 인터뷰와 실제 배차 데이터가 불일치하는 경우가 존재</li><li>ML 예측값만으로는 공정배차 요구사항을 만족하기 어려움</li><li>사용자 피드백을 빠르게 반영하고 안정적으로 배포해야 함</li></ul></div>
+            <div><h4>Key Design</h4><ul><li>차량 유형을 target으로 하는 multi-class prediction 구성</li><li>영업소별 요구사항을 Scorer 객체로 모듈화</li><li>물량 N × 차량 M score matrix 계산 후 배차 수행</li><li>GitLab CI/CD, 로그 집약, retention, unit test 도입</li></ul></div>
+          </div>
+          <div class="diagram wide" aria-label="Steel TMS MLOps 구조"><span>Shipment Features</span><span>ML Prediction</span><span>Business Scorers</span><span>Score Matrix</span><span>Assignment</span><span>Monitoring</span></div>
+          <div class="result-grid"><div><strong>20% → 80%</strong><span>사용률 개선</span></div><div><strong>97%</strong><span>일부 영업소 사용률</span></div><div><strong>1 week</strong><span>요구사항 구현·테스트·배포 리드타임</span></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="performance" class="section">
+      <div class="container">
+        <div class="section-heading"><p class="section-kicker">Performance Note</p><h2>Freight Matching API Optimization</h2></div>
+        <article class="performance-card">
+          <div><h3>3초 응답 제한을 만족하기 위한 복화 매칭 API 최적화</h3><p>B2C 모바일 서비스에서 왕복 구간의 철강 물량을 빠르게 매칭해야 했습니다. 기존 로직은 50개 이상 entry에서 약 15분이 걸렸고, 단순 multiprocessing이나 chunking은 요구사항을 만족하지 못했습니다.</p><p>문제를 후보쌍 생성과 조건 필터링 문제로 재정의했습니다. 원본 테이블을 self-merge하여 후보쌍을 만든 뒤, 시간 조건과 불가능한 business logic을 boolean indexing으로 제거해 계산 시간을 약 900초에서 약 1초 수준으로 줄였습니다.</p></div>
+          <div class="perf-number"><strong>900s → 1s</strong><span>pandas self-merge + boolean indexing</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="stack" class="section section-muted">
+      <div class="container">
+        <div class="section-heading"><p class="section-kicker">Tech Stack</p><h2>실무 사용 중심 기술 스택</h2></div>
+        <div class="stack-table" role="table" aria-label="기술 스택">
+          <div role="row" class="stack-row header"><span>영역</span><span>실무 사용</span><span>경험 있음 / 검토</span></div>
+          <div role="row" class="stack-row"><span>Language</span><span>Python</span><span>C++, Java, CUDA</span></div>
+          <div role="row" class="stack-row"><span>Backend</span><span>FastAPI</span><span>Spring Boot, MongoDB</span></div>
+          <div role="row" class="stack-row"><span>ML/Data</span><span>PyTorch, pandas, numpy, scikit-learn, AutoGluon</span><span>TorchRL, MLflow, TensorFlow</span></div>
+          <div role="row" class="stack-row"><span>Infra/MLOps</span><span>Kubernetes, Docker, GitLab CI/CD, Harbor, Prometheus, Grafana, Loki</span><span>Istio, Longhorn, Airflow</span></div>
+          <div role="row" class="stack-row"><span>LLM</span><span>vLLM, Ollama, continue.dev</span><span>LangChain</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-column">
+        <div><p class="section-kicker">Appendix</p><h2>Publications & Patents</h2></div>
+        <div class="list-card"><ul><li><strong>AlphaRouter</strong> — Reinforcement Learning과 MCTS 기반 Vehicle Routing 연구, Entropy SCI Q2 게재</li><li><strong>자동배차 특허</strong> — 인공지능 모델 기반 자동배차 방법 및 자동배차 시스템</li><li><strong>물류 운송 자동배차 특허</strong> — 물류 운송을 위한 자동 배차 방법 및 장치, 출원 완료</li><li><strong>적재/양하 계획 특허</strong> — 화물 운송을 위한 적재/양하 계획 방법 및 장치, 출원 완료</li></ul></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><p>© 김원준 Backend Portfolio</p><p>AI Service Backend · Platform Engineering · MLOps</p></div></footer>
+</body>
+</html>
