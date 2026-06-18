@@ -175,6 +175,16 @@
             <li>새 모델 교체 시 하부 조합만 변경하면 됨</li>
           </ul>
         </article>
+        <article class="figure-card">
+          <h3>Lessons: 계약 정합성과 직렬화</h3>
+          <img src="../assets/figures/car-lessons-data-contract.png" alt="Pydantic validation, JSON 직렬화, producer-consumer 동시성 제어 관점을 정리한 도식" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>요청/응답 스키마는 운영 전 단계에서 검증해야 런타임 이슈가 줄어듭니다.</li>
+            <li>pickle 기반 전달은 버전 의존성이 커 JSON 계약으로 전환해 호환성을 확보했습니다.</li>
+            <li>consumer 동시성 제어는 멱등성 키와 상태 잠금으로 안정적으로 통합했습니다.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
