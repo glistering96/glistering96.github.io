@@ -1,0 +1,284 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal Kubernetes Platform for AI Services</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">김원준 | Logistics BE/ML Engineer</a>
+      <nav class="header-nav" aria-label="상단 네비게이션">
+        <a href="../index.html#capability">Capability Map</a>
+        <a href="../index.html#cases">Cases</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back-link" href="../index.html#cases">← 케이스 목록으로</a>
+
+    <section class="section hero">
+      <p class="eyebrow">Supporting Case</p>
+      <h1>Internal Kubernetes Platform for AI Services</h1>
+      <p class="hero-subtitle">제한된 네트워크 환경에서 AI 서비스를 서비스 단위로 배포·관찰·운영할 수 있는 내부 Kubernetes 플랫폼을 직접 구성하고 운영 체계를 정리했습니다.</p>
+      <div class="summary-grid">
+        <article class="summary-item">
+          <h3>기간</h3>
+          <p>2025-01 ~ 현재</p>
+        </article>
+        <article class="summary-item">
+          <h3>역할</h3>
+          <p>플랫폼 설계, 배포 파이프라인 운영, 장애 원인 분석/완화</p>
+        </article>
+        <article class="summary-item">
+          <h3>기술</h3>
+          <p>Rancher, Helm, GitLab CI/CD, Harbor, Grafana, Prometheus, Loki</p>
+        </article>
+        <article class="summary-item">
+          <h3>핵심 성과</h3>
+          <p>서비스 재사용성 향상, 보안 전환 대응, 장애 재발생 속도 감소</p>
+        </article>
+        <article class="summary-item">
+          <h3>운영 포인트</h3>
+          <p>Ingress 보안 대응, 노드 통신 이슈 정합, 셋업 자동화</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Context</span>
+      <h2>왜 내부 플랫폼이 필요한가</h2>
+      <p>
+        신규 서버 발급과 행정 절차에 시간이 많이 걸리고, 모델/서비스가 늘어나도 개별적으로 운영하면 운영 비용이 기하급수적으로 증가했습니다. 내부망에서는 인터넷 의존 툴을 바로 쓰기 어렵기 때문에, 배포/모니터링/보안 정책을 자체 플랫폼으로 통합할 필요가 있었습니다.
+      </p>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Backend Problem</span>
+      <h2>일반 서비스 운영만으로는 해결이 어려웠던 부분</h2>
+      <div class="content-grid">
+        <article class="card">
+          <h3>문제</h3>
+          <ul>
+            <li>서비스별 운영 표준이 서로 달라 장애 복구 속도가 느려짐</li>
+            <li>보안 취약점 대응과 라우팅 정책이 분산되어 문서화가 어려움</li>
+            <li>노드 간 통신 설정 누락 시 특정 경로만 실패하는 장애가 발생</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>해결 방향</h3>
+          <ul>
+            <li>클러스터 기본 템플릿(Helm)과 GitOps 흐름으로 플랫폼 일관성 확보</li>
+            <li>Gateway/Ingress, 노드 라우팅, 로그 집계를 표준 구성</li>
+            <li>장애 조치 패턴을 runbook로 정형화해 재발을 방지</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Architecture / Figure</span>
+      <h2>구조 요약</h2>
+      <div class="figure-grid">
+        <article class="figure-card">
+          <h3>K8s 플랫폼 개요</h3>
+          <img src="../assets/figures/k8s-overview.png" alt="제한된 네트워크 환경에서 AI 서비스를 배포하기 위한 클러스터/CI/CD/모니터링 구성" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>서비스, 네트워크, 관측성 파트를 공통 프레임으로 묶음</li>
+            <li>클러스터 재사용을 중심에 두고 AI 서비스는 런타임만 교체</li>
+            <li>내부망에서 필요한 바이너리와 바이패스 경로를 GitOps로 고정</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>장애/안정화 구성</h3>
+          <img src="../assets/figures/k8s-troubleshooting.png" alt="Ingress 보안 전환 및 노드 통신, 모니터링 조치가 반영된 트러블슈팅 표" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>Ingress NGINX CVE 대응을 위해 Gateway API + Istio로 전환</li>
+            <li>요청은 일부 노드로만 처리되던 경로를 노드 통신 정책으로 정합</li>
+            <li>SELinux 감사 로그 과다로 인한 자원 점유를 관측성 튜닝으로 억제</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Key Design Decisions (ADR)</span>
+      <h2>ADR 카드</h2>
+      <div class="decision-grid">
+        <article class="decision-card">
+          <h3>ADR-01</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>Rancher 기반 k8s를 선택하고 서비스 단위 운영 템플릿을 고정</dd>
+            <dt>Context</dt>
+            <dd>내부 인력 규모에 비해 관리 편의와 가시성이 부족한 상태</dd>
+            <dt>Why</dt>
+            <dd>다수 AI 서비스를 반복 운영하기 위한 공통 관리를 위해</dd>
+            <dt>Trade-off</dt>
+            <dd>운영 학습 곡선이 있지만 도입 후 운영 단순성이 상승</dd>
+          </dl>
+        </article>
+
+        <article class="decision-card">
+          <h3>ADR-02</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>Ingress NGINX에서 Istio + Gateway API로 전환</dd>
+            <dt>Context</dt>
+            <dd>보안 취약점 대응 및 라우팅 일관성 요구가 급증</dd>
+            <dt>Why</dt>
+            <dd>보안 업데이트 대응 속도와 트래픽 분산 안정성 확보</dd>
+            <dt>Trade-off</dt>
+            <dd>기존 라우팅 설정을 새 표준으로 재작성해야 했음</dd>
+          </dl>
+        </article>
+
+        <article class="decision-card">
+          <h3>ADR-03</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>모니터링 스택을 중앙화하고 로그/메트릭/알림을 운영 표준으로 통일</dd>
+            <dt>Context</dt>
+            <dd>장애 원인별 책임 구분이 느리고, 복구 이력 추적이 분산됨</dd>
+            <dt>Why</dt>
+            <dd>초기 진단시간을 줄이고 운영 인수인계를 단순화하기 위해</dd>
+            <dt>Trade-off</dt>
+            <dd>초기 계측 비용이 들고 탐지 룰 튜닝이 필요</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Implementation Details</span>
+      <h2>구현 포인트</h2>
+      <div class="content-grid">
+        <article class="info-panel">
+          <h3>API Boundary & Deployment</h3>
+          <ul>
+            <li>서비스별로 ingress, secret, config를 values 파일로 정의</li>
+            <li>GitLab CI에서 공통 이미지 태그 정책 및 배포 승인 단계 적용</li>
+            <li>Blue/Green 배포를 지원하기 위한 Helm 파라미터 구성</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Runtime & Security</h3>
+          <ul>
+            <li>네트워크 정책과 노드 포트 규칙을 코드로 관리</li>
+            <li>셋업 단계에서 shell script를 버전 관리해 재현 가능하게 유지</li>
+            <li>보안 감사 항목(SELinux audit 등)을 기준 점검 항목화</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Troubleshooting Operations</h3>
+          <ul>
+            <li>요청이 일부 노드로만 집중되는지 지표 기반으로 감시</li>
+            <li>Ingress 경로 실패율, gateway 5xx 급증 시 알림 룰 적용</li>
+            <li>장애 이력은 runbook와 링크로 연결해 운영자가 즉시 조치 가능</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Observability</h3>
+          <ul>
+            <li>로그는 서비스/네임스페이스/요청ID 기반으로 조회 가능</li>
+            <li>메트릭 임계치에서 자동 알림을 띄우고 조치 가이드를 연결</li>
+            <li>대시보드는 운영용과 개발용 화면으로 분리</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Troubleshooting / Operation</span>
+      <h2>운영 장애 대응</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>증상</th>
+              <th>원인</th>
+              <th>조치</th>
+              <th>결과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>일부 요청만 응답, 보안 업데이트 우려</td>
+              <td>NGINX ingress의 CVE 및 지원 종료 리스크</td>
+              <td>Istio + Gateway API로 라우팅 기준 이행</td>
+              <td>지원 정책 대응성과 라우팅 일관성이 개선됨</td>
+            </tr>
+            <tr>
+              <td>요청이 특정 node에서만 처리</td>
+              <td>노드 간 통신 차단/방화벽 포트 미설정</td>
+              <td>방화벽 규칙 및 포트 정책을 노드 공통 설정으로 정리</td>
+              <td>요청 분산이 안정화되고 응답 편차가 축소됨</td>
+            </tr>
+            <tr>
+              <td>특정 노드의 메모리/CPU 점유 비정상 증가</td>
+              <td>SELinux 감사 로그 과다 발생과 setroubleshootd 동작</td>
+              <td>불필요한 데몬 조정 및 로그량/수집 정책 최적화</td>
+              <td>노드 레벨 자원 압박이 완화되고 운영 알림이 정상화됨</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Results</span>
+      <h2>결과</h2>
+      <div class="result-grid">
+        <article class="result-item">
+          <strong>플랫폼 운영성</strong>
+          <p>서비스 단위의 배포와 모니터링 체계를 정규화해 운영 절차를 일관화했습니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>보안 대응 속도</strong>
+          <p>라우팅/인그레스 변경을 표준화해 취약점 대응과 정책 변경이 빠르게 반영됩니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>장애 재발 억제</strong>
+          <p>노드 통신 및 로그 과다 이슈가 체계적으로 처리되면서 유사 장애 반복 빈도가 하락했습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Lessons Learned</span>
+      <h2>교훈</h2>
+      <div class="result-grid">
+        <article class="result-item">
+          <strong>운영 표준의 가치</strong>
+          <p>작은 규칙(포트, 라우팅, 로그 태그)이 플랫폼 운영의 신뢰도를 만듭니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>보안은 사후 대응이 아닌 아키텍처</strong>
+          <p>Ingress 구조 전환은 보안 패치뿐 아니라 트래픽 일관성을 확보하는 운영 설계였습니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>장애의 원인 기록</strong>
+          <p>재발 가능성이 높은 이슈를 원인-조치-결과로 기록해야 팀 대응이 축적됩니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <nav class="cases-nav" aria-label="다음 케이스 이동">
+      <a href="steel-tms.html">다음 case: Steel TMS MLOps Backend</a>
+      <a href="../index.html#cases">모든 case 보기</a>
+    </nav>
+  </main>
+
+  <button id="toTop" class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+  <script src="../script.js"></script>
+</body>
+</html>

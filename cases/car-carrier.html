@@ -1,0 +1,365 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자동차선 적부 최적화 Backend Service</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">김원준 | Logistics BE/ML Engineer</a>
+      <nav class="header-nav" aria-label="상단 네비게이션">
+        <a href="../index.html#capability">Capability Map</a>
+        <a href="../index.html#cases">Cases</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back-link" href="../index.html#cases">← 케이스 목록으로</a>
+
+    <section class="section hero">
+      <p class="eyebrow">Main Case</p>
+      <h1>자동차선 적부 최적화 Backend Service</h1>
+      <p class="hero-subtitle">복잡한 선박 적재 도메인을 계산 가능한 graph/data model로 추상화하고, 5~20분 걸리던 장시간 AI 추론을 요청-응답이 단절되지 않는 운영 가능한 backend로 만들었습니다.</p>
+
+      <div class="summary-grid">
+        <article class="summary-item">
+          <h3>기간</h3>
+          <p>2024.01 ~ 2026.03</p>
+        </article>
+        <article class="summary-item">
+          <h3>역할</h3>
+          <p>기획/아키텍처 설계, 백엔드 구현, 운영 이력 관리, 장애 대응</p>
+        </article>
+        <article class="summary-item">
+          <h3>Stack</h3>
+          <p>Python, FastAPI, Redis, RabbitMQ, Kubernetes, Istio, Helm</p>
+        </article>
+        <article class="summary-item">
+          <h3>핵심 성과</h3>
+          <p>추론 처리 시간 5~20분 → 2~3분, scale-out 시 동시 처리 안정성 확보</p>
+        </article>
+        <article class="summary-item">
+          <h3>운영 포인트</h3>
+          <p>queue + callback, 상태 재처리, 관측성 로그, 모델 인터페이스 표준화</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Context</span>
+      <h2>왜 이 문제가 필요했는가</h2>
+      <p>
+        자동차선 선적은 단순히 빈칸을 채우는 문제가 아닙니다. 한 항차 안에서 선박의 높이, 선적지, 양하지, 차량 종류별 통행 경로가 서로 얽히기 때문에 선적 순서가 한 번만 틀려도 하역/출발이 지연됩니다. 또한 추론이 오래 걸리는 모델(5~20분) 특성상 기존 동기 API로는 호출 지연과 연결 유지 비용이 커서 실서비스 반영이 불가능했습니다.
+      </p>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Backend Problem</span>
+      <h2>왜 일반 CRUD/API만으로는 안 되었는가</h2>
+      <div class="content-grid">
+        <article class="card">
+          <h3>문제의 본질</h3>
+          <ul>
+            <li>동기형 요청은 장시간 연결 유지가 필요해 API 인스턴스 자원이 고정적으로 점유됩니다.</li>
+            <li>모델 처리 시간이 요청 난도별로 크게 달라 타임아웃·재시도 정책이 어렵습니다.</li>
+            <li>scale-out 환경에서 pod 상태를 로컬에 두면 callback이 다른 인스턴스로 도착해 상태 추적이 깨집니다.</li>
+            <li>도메인 데이터 형식이 모델, 엔진, 기존 사내 시스템마다 달라 계약 불일치가 발생합니다.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>해결 방향</h3>
+          <ul>
+            <li>요청 접수/검증/상태 기록/콜백 응답을 담당하는 API 레이어를 분리</li>
+            <li>장기 실행은 queue로 위임하고 완료 후 callback으로 최종 응답 전달</li>
+            <li>공용 상태(진행 단계, 재시도 카운트, callback 히스토리)를 Redis로 관리</li>
+            <li>사내 시스템-엔진-외부 모델 간 인터페이스를 내부 표준 모델로 통일</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Architecture / Figure</span>
+      <h2>구조를 기준으로 본 설계</h2>
+      <div class="figure-grid">
+        <article class="figure-card">
+          <h3>자동차선 내부/도메인 이해</h3>
+          <img src="../assets/figures/car-domain-overview.png" alt="자동차선 선박 내부에서 차량 적입 방식과 통행 경로 제약을 설명한 도식" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>공간은 단순 2차원 면적이 아니라 통행 순서가 포함된 제약 그래프입니다.</li>
+            <li>차량 적재는 높이/넓이 제약 뿐 아니라 작업 동선을 고려해야 합니다.</li>
+            <li>API로 넘기는 입력값은 이 제약을 반영해야 정확도가 높습니다.</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>선박 공간 Graph 추상화</h3>
+          <img src="../assets/figures/car-graph-model.png" alt="선박 공간을 노드/엣지로 분해한 그래프 추상화 도식" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>적재 가능한 구역을 node, 연결을 edge로 모델링</li>
+            <li>선박 타입과 층별 제약을 동일 패턴으로 관리</li>
+            <li>추가 선박 유형 확장 시 데이터 구조 변경 비용을 낮춤</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>4/5/6층 통행 예시</h3>
+          <img src="../assets/figures/car-floor-space-4-6.png" alt="층별 차량 통행 및 적재 구간 차이를 비교한 도식" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>층마다 이용 가능한 루트와 진입 포인트가 다릅니다.</li>
+            <li>높은 층일수록 통행 제약이 강해지는 조건을 반영했습니다.</li>
+            <li>같은 차량군도 층별 경로가 다르면 배치 결과가 달라집니다.</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>Hold / Deck / Vessel / Cargo 모델</h3>
+          <img src="../assets/figures/car-data-model.png" alt="선박, 홀드, 데크, 화물 구조를 연결한 데이터 모델 다이어그램" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>도메인 주체를 명시적으로 분리해 계산 단계 입력을 단순화</li>
+            <li>시스템별 포맷 차이는 엔진 호출 전후의 변환점에서만 처리</li>
+            <li>새 규격 모델 추가 시 데이터 모델만 확장하면 됨</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="figure-grid" style="margin-top: 12px;">
+        <article class="figure-card">
+          <h3>비동기 callback 구조</h3>
+          <img src="../assets/figures/car-callback-queue.png" alt="요청 API와 모델 추론 API, callback 경로가 분리된 비동기 흐름도" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>요청 API는 처리 완료 대기를 하지 않고 queue에 위임</li>
+            <li>모델 완료 후 callback을 별도 endpoint로 받아 상태 업데이트</li>
+            <li>폴링 기반 흐름 대비 자원 낭비를 크게 줄임</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>Scale-out AS-IS</h3>
+          <img src="../assets/figures/car-scaleout-asis.png" alt="요청 pod와 callback pod가 달라지며 상태가 유실되는 AS-IS 구조" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>요청 처리 pod와 callback 처리 pod가 분리될 가능성</li>
+            <li>pod-local 상태로는 scale-out에서 완전 보장 불가</li>
+            <li>요청 유실 및 중복 처리 위험이 존재</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>Scale-out TO-BE</h3>
+          <img src="../assets/figures/car-scaleout-tobe.png" alt="공유 queue와 Redis를 통해 요청 상태를 추적하는 TO-BE 구조" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>상태를 공용 스토어에 두어 어디서 들어온 callback도 동일 요청을 찾음</li>
+            <li>consumer 재처리 및 멱등성 키로 중복을 제어</li>
+            <li>장애 복구 시 장애 지점부터 재개 가능</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>표준 데이터 계약</h3>
+          <img src="../assets/figures/car-standard-data-model.png" alt="사내 시스템, 엔진 서버, 모델 간 표준 데이터 모델 중심 인터페이스 구조" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>API/엔진/모델 사이에 내부 계약 모델을 둠</li>
+            <li>형식 변환을 이 레이어에서 일괄 처리</li>
+            <li>새 모델 교체 시 하부 조합만 변경하면 됨</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Key Design Decisions (ADR)</span>
+      <h2>ADR 카드</h2>
+      <div class="decision-grid">
+        <article class="decision-card">
+          <h3>ADR-01</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>요청 처리와 모형 추론을 분리하고 callback API로 완료 신호를 수신</dd>
+            <dt>Context</dt>
+            <dd>요청 지연이 긴 추론을 웹 요청 스레드에서 직접 처리하면 인스턴스가 장기 점유됨</dd>
+            <dt>Why</dt>
+            <dd>폴링 비용을 줄이고 SLA를 안정화하기 위해</dd>
+            <dt>Trade-off</dt>
+            <dd>callback 상태 추적 시스템이 추가됨</dd>
+          </dl>
+        </article>
+
+        <article class="decision-card">
+          <h3>ADR-02</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>pod-local state 대신 Redis 기반 state store로 전환</dd>
+            <dt>Context</dt>
+            <dd>scale-out에서 callback이 원 요청 pod로 돌아오지 않는 현상 발생</dd>
+            <dt>Why</dt>
+            <dd>요청 연속성을 유지하고 재처리 가능하게 하려는 목적</dd>
+            <dt>Trade-off</dt>
+            <dd>Redis 운영 안정성(TTL, 장애 전환 정책)이 중요해짐</dd>
+          </dl>
+        </article>
+
+        <article class="decision-card">
+          <h3>ADR-03</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>내부 표준 모델을 기준으로 외부 시스템/모델 변환 레이어 구현</dd>
+            <dt>Context</dt>
+            <dd>요청 형식이 시스템별로 달라 계약 불일치가 잦았음</dd>
+            <dt>Why</dt>
+            <dd>도메인 변경이 생겨도 핵심 서비스가 흔들리지 않게 하기 위해</dd>
+            <dt>Trade-off</dt>
+            <dd>초기 개발 초기 비용은 올라가나 장기 유지보수 비용이 낮아짐</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Implementation Details</span>
+      <h2>구현 포인트</h2>
+      <div class="content-grid">
+        <article class="info-panel">
+          <h3>API Boundary</h3>
+          <ul>
+            <li>요청 API: 인증, 입력 검증, idempotency key 발급</li>
+            <li>결과 API: callback payload 검증, 상태 갱신, 완료 알림 생성</li>
+            <li>배치 API: 같은 선박의 동시 요청을 제한하거나 큐 우선순위 부여</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Queue / Callback</h3>
+          <ul>
+            <li>요청은 producer에서 queue에 저장 후 워커가 처리</li>
+            <li>callback은 결과 검증 후 상태 테이블 갱신 후 downstream 전달</li>
+            <li>재시도는 exponential backoff와 멱등성 키로 제어</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Data Model</h3>
+          <ul>
+            <li>Pydantic 기반 유효성 검사로 잘못된 입력 차단</li>
+            <li>내부 계약 모델에서 모델/엔진 요청/응답을 상호 변환</li>
+            <li>binary pickle 대신 JSON 직렬화 경로로 마이그레이션</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Runtime / CI & Monitoring</h3>
+          <ul>
+            <li>Kubernetes + Istio로 pod 상태/라우팅 정책 분리</li>
+            <li>헬름 values 파일로 환경별 배포를 템플릿화</li>
+            <li>요청 ID 전파 기반으로 로그/트레이싱의 상관관계 분석</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Troubleshooting / Operation</span>
+      <h2>운영 이슈와 조치</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>증상</th>
+              <th>원인</th>
+              <th>조치</th>
+              <th>결과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>장시간 요청이 들어오면 API 인스턴스 메모리가 고정 점유</td>
+              <td>동기 처리에서 추론 API를 그대로 기다림</td>
+              <td>요청 접수 후 queue 위임, callback 분리</td>
+              <td>서버 부하가 완화되고 처리량이 안정화됨</td>
+            </tr>
+            <tr>
+              <td>callback이 요청 pod가 아닌 다른 pod로 도착</td>
+              <td>scale-out 이후 pod-local 상태 사용</td>
+              <td>Redis 상태 키 기반 조회로 일원화</td>
+              <td>누락/지연이 크게 줄고 추적이 쉬워짐</td>
+            </tr>
+            <tr>
+              <td>직렬화 호환성 오류로 특정 데이터가 깨짐</td>
+              <td>pickle 기반 전달 + 라이브러리 버전 차이</td>
+              <td>Pydantic JSON 직렬화와 전용 커스텀 encoder 적용</td>
+              <td>호환성 이슈와 장애 재현 시간이 줄어듦</td>
+            </tr>
+            <tr>
+              <td>재처리 시 중복 실행 위험</td>
+              <td>consumer 동시성 제어 부재</td>
+              <td>consumer id, token, 상태 마이크로락 정책 적용</td>
+              <td>중복 계산이 감소하고 결과 정합성 개선</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Results</span>
+      <h2>결과</h2>
+      <div class="result-grid">
+        <article class="result-item">
+          <strong>추론 지연 단축</strong>
+          <p>5~20분이 걸리던 장시간 추론 처리 플로우를 2~3분 수준으로 개선</p>
+        </article>
+        <article class="result-item">
+          <strong>운영 안정성</strong>
+          <p>scale-out 콜백 추적 실패를 Redis 중심 상태로 수렴해 장애 대응이 단순화됨</p>
+        </article>
+        <article class="result-item">
+          <strong>교체 유연성</strong>
+          <p>모델과 엔진이 바뀌어도 내부 계약만 유지하면 인터페이스 파급을 줄일 수 있음</p>
+        </article>
+        <article class="result-item">
+          <strong>운영 협업</strong>
+          <p>API 경계와 로그 규칙을 고정해 운영 팀과 개발팀이 동일 뷰로 문제를 진단</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Lessons Learned</span>
+      <h2>교훈</h2>
+      <div class="result-grid">
+        <article class="result-item">
+          <strong>설계 우선순위</strong>
+          <p>알고리즘은 성능 개선에 필요하지만, 운영에서는 상태 설계와 API 계약이 핵심이라는 점을 재확인했습니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>검증 체계</strong>
+          <p>모델 추론 이전·이후의 validation을 먼저 설계하면 장애 전파를 크게 줄일 수 있었습니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>확장성</strong>
+          <p>scale-out 환경은 분산 상태를 가정한 설계를 요구하며, 이 점이 프로젝트 전체의 안정성 기준이었습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <nav class="cases-nav" aria-label="다음 케이스 이동">
+      <a href="agent-platform.html">다음 case: Personal AI Agent Runtime Platform</a>
+      <a href="../index.html#cases">모든 case 보기</a>
+    </nav>
+  </main>
+
+  <button id="toTop" class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+  <script src="../script.js"></script>
+</body>
+</html>

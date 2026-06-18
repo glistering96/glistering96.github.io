@@ -1,87 +1,204 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="김원준 Backend Portfolio — AI 서비스를 운영 가능한 백엔드 시스템으로 만드는 엔지니어" />
-  <title>김원준 Backend Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김원준 | Logistics BE/ML Engineer</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">본문으로 바로가기</a>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="김원준 Backend Portfolio home"><span class="brand-mark">WJ</span><span>김원준</span></a>
-      <nav class="nav" aria-label="주요 섹션"><a href="#focus">Focus</a><a href="#car">Car Carrier</a><a href="#agent">Agent</a><a href="#k8s">K8s</a><a href="#steel">Steel TMS</a><a href="#freight">Performance</a></nav>
+      <a class="brand" href="#top">
+        <span class="brand-highlight">김원준 | Logistics BE/ML Engineer</span>
+      </a>
+      <nav class="header-nav" aria-label="메인 네비게이션">
+        <a href="#capability">Capability Map</a>
+        <a href="#cases">Case Studies</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <main id="main">
-    <section id="top" class="hero">
-      <div class="container hero-layout">
-        <div class="hero-copy-block">
-          <p class="eyebrow">Backend Portfolio</p>
-          <h1>AI 서비스를<br />운영 가능한 백엔드로 만들어요.</h1>
-          <p class="hero-description">모델을 만드는 것에서 멈추지 않고, 요청을 받고, 상태를 관리하고, 장애를 관찰하고, 실제 사용자가 계속 쓸 수 있는 서비스 구조까지 설계해 왔습니다.</p>
-          <div class="hero-actions"><a class="btn btn-primary" href="#car">대표 사례 보기</a><a class="btn btn-secondary" href="#focus">역량 요약</a></div>
-        </div>
-        <aside class="hero-panel" aria-label="핵심 백엔드 경험">
-          <div class="panel-top"><span class="status-dot"></span><span>Production-minded Backend</span></div>
-          <div class="signal-list">
-            <div class="signal-item"><strong>5~20분</strong><span>장시간 AI 추론을 callback/queue 구조로 처리</span></div>
-            <div class="signal-item"><strong>Pod mismatch</strong><span>scale-out 상태 문제를 공용 queue/store로 분리</span></div>
-            <div class="signal-item"><strong>Runtime isolation</strong><span>사용자별 Agent 실행 환경과 로그 격리</span></div>
-            <div class="signal-item"><strong>900s → 1s</strong><span>복화 매칭 API 성능 개선</span></div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="focus" class="section">
+  <main id="top">
+    <section class="section hero">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Focus</p>
-          <h2>PPT의 figure와 설계 맥락을 웹 문서형으로 다시 풀었습니다.</h2>
-          <p>요약 카드가 아니라 PPT에서 직접 만들었던 핵심 도식을 웹용 figure로 재구성했습니다. 자동차선 graph 모델링, callback/queue, scale-out 상태 문제, 표준 데이터 모델, Agent runtime, K8s 운영 플랫폼, Steel TMS score matrix, 복화 self-merge 구조를 중심으로 보여줍니다.</p>
-        </div>
-        <div class="focus-grid">
-          <article class="focus-card"><span>01</span><h3>Long-running Job</h3><p>5~20분 걸리는 모델 추론을 동기 HTTP가 아닌 callback + queue 흐름으로 분리했습니다.</p></article>
-          <article class="focus-card"><span>02</span><h3>State Management</h3><p>scale-out 이후 pod local state에 의존하지 않도록 요청 상태와 결과를 외부 저장소로 분리했습니다.</p></article>
-          <article class="focus-card"><span>03</span><h3>Runtime Isolation</h3><p>AI Agent가 사용하는 workspace, session, logs를 사용자 단위로 격리하는 구조를 설계했습니다.</p></article>
-          <article class="focus-card"><span>04</span><h3>Production Operation</h3><p>CI/CD, monitoring, 운영 이슈 대응, unit test까지 포함해 운영 가능한 서비스로 개선했습니다.</p></article>
+        <p class="eyebrow">Backend Platform for Production AI</p>
+        <h1>AI 서비스를 운영 가능한 백엔드로 만들어요.</h1>
+        <p class="hero-subtitle">
+          AI/ML 모델과 복잡한 도메인 로직을 API, queue, data contract, runtime, observability로 연결해
+          실제 운영 가능한 서비스로 만드는 백엔드 엔지니어입니다.
+        </p>
+        <div class="metric-strip">
+          <article>
+            <strong>5~20분 → 2~3분</strong>
+            <span>자동차선 적부 추론 핵심 지연 시간</span>
+          </article>
+          <article>
+            <strong>900초 → 1초</strong>
+            <span>복화 매칭 후보 탐색 응답 시간</span>
+          </article>
+          <article>
+            <strong>Scale-out safe</strong>
+            <span>요청 추적 중심의 Queue + Redis 운영</span>
+          </article>
+          <article>
+            <strong>Internal AI Platform</strong>
+            <span>제한된 네트워크 환경용 Kubernetes 운영 플랫폼</span>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="car" class="section section-tinted deep-case">
+    <section id="capability" class="section">
       <div class="container">
-        <div class="case-hero"><p class="eyebrow">Case 01</p><h2>자동차선 적부 최적화 Backend Service</h2><p>차량용 운송 선박의 적부 계획 최적화 모델을 기존 업무 시스템에서 사용할 수 있도록, 선박 공간 데이터 모델, 장시간 추론 API, scale-out 상태 관리, 표준 interface를 설계했습니다.</p><div class="chip-group left"><span>FastAPI</span><span>Pydantic</span><span>Queue</span><span>Redis/MongoDB</span><span>Kubernetes</span></div></div>
-        <div class="detail-grid two">
-          <article class="bullet-panel"><h3>문제 정의</h3><ul><li>선박은 여러 층과 연결 통로로 구성되고, 각 층마다 적재 가능 공간과 연결 관계가 다릅니다.</li><li>차량은 높이, 선적지, 양하지, 용량이 다르고, 내리는 순서를 고려하지 않으면 불필요한 이동이 발생합니다.</li><li>현업 도면의 다각형 공간을 그대로 모델에 넣기 어렵기 때문에 계산 가능한 추상화가 필요했습니다.</li></ul></article>
-          <figure class="figure-card"><figcaption>Figure 1 · 선박 공간을 node/edge graph로 추상화</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><rect x="28" y="54" width="300" height="120" rx="18" fill="#eef6ff" stroke="#d1d6db"/><rect x="28" y="205" width="300" height="120" rx="18" fill="#f2f4f6" stroke="#d1d6db"/><text x="52" y="88" class="svg-title">4층 Deck</text><text x="52" y="238" class="svg-title">5층 Deck</text><rect x="62" y="108" width="72" height="42" rx="8" fill="#3182f6" opacity=".22"/><rect x="152" y="108" width="72" height="42" rx="8" fill="#3182f6" opacity=".22"/><rect x="242" y="108" width="50" height="42" rx="8" fill="#3182f6" opacity=".22"/><rect x="62" y="258" width="96" height="42" rx="8" fill="#3182f6" opacity=".16"/><rect x="178" y="258" width="114" height="42" rx="8" fill="#3182f6" opacity=".16"/><line x1="134" y1="129" x2="152" y2="129" stroke="#4e5968" stroke-width="3"/><line x1="224" y1="129" x2="242" y2="129" stroke="#4e5968" stroke-width="3"/><line x1="158" y1="279" x2="178" y2="279" stroke="#4e5968" stroke-width="3"/><path d="M292 150 C350 180 398 216 446 254" fill="none" stroke="#3182f6" stroke-width="4" stroke-linecap="round"/><circle cx="500" cy="112" r="36" fill="#3182f6" opacity=".16"/><circle cx="604" cy="112" r="36" fill="#3182f6" opacity=".16"/><circle cx="552" cy="218" r="36" fill="#3182f6" opacity=".16"/><circle cx="656" cy="286" r="36" fill="#3182f6" opacity=".16"/><line x1="536" y1="112" x2="568" y2="112" stroke="#3182f6" stroke-width="4"/><line x1="604" y1="148" x2="552" y2="182" stroke="#3182f6" stroke-width="4"/><line x1="580" y1="236" x2="628" y2="268" stroke="#3182f6" stroke-width="4"/><text x="482" y="118" class="svg-label">node</text><text x="588" y="118" class="svg-label">node</text><text x="532" y="224" class="svg-label">node</text><text x="632" y="292" class="svg-label">node</text><text x="454" y="358" class="svg-note">공간 = node · 통행 가능 관계 = edge</text></svg></figure>
+        <p class="eyebrow">Capability Map</p>
+        <h2>강점과 설계 역량</h2>
+        <div class="capability-grid">
+          <span class="capability-chip">Long-running Job Processing</span>
+          <span class="capability-chip">Scale-out State Management</span>
+          <span class="capability-chip">Multi-tenant Runtime Isolation</span>
+          <span class="capability-chip">Internal Platform Engineering</span>
+          <span class="capability-chip">Domain Logic Abstraction</span>
+          <span class="capability-chip">Production Operation</span>
         </div>
-        <div class="detail-grid two reversed">
-          <figure class="figure-card"><figcaption>Figure 2 · 5분 이상 추론을 위한 callback/queue 구조</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><rect x="36" y="160" width="130" height="72" rx="18" fill="#fff" stroke="#d1d6db"/><text x="68" y="201" class="svg-label">기존 시스템</text><rect x="226" y="96" width="140" height="70" rx="18" fill="#eef6ff" stroke="#3182f6"/><text x="262" y="137" class="svg-label">요청 API</text><rect x="226" y="250" width="140" height="70" rx="18" fill="#eef6ff" stroke="#3182f6"/><text x="262" y="291" class="svg-label">응답 API</text><rect x="432" y="96" width="116" height="70" rx="18" fill="#f2f4f6" stroke="#d1d6db"/><text x="468" y="137" class="svg-label">Queue</text><rect x="604" y="96" width="120" height="70" rx="18" fill="#fff" stroke="#d1d6db"/><text x="632" y="137" class="svg-label">Engine</text><rect x="604" y="250" width="120" height="70" rx="18" fill="#fff" stroke="#d1d6db"/><text x="632" y="291" class="svg-label">Callback</text><path d="M166 180 L226 132 M366 132 L432 132 M548 132 L604 132 M664 166 L664 250 M604 286 L366 286 M226 286 L166 214" stroke="#3182f6" stroke-width="3" fill="none"/><text x="82" y="274" class="svg-note">Polling 대신 완료 시점 callback</text><text x="430" y="58" class="svg-note">요청 진입량 제어</text></svg></figure>
-          <article class="bullet-panel"><h3>왜 비동기 구조인가?</h3><ul><li>입력 난도에 따라 모델 추론 시간이 5~20분으로 달라져 동기 API timeout을 예측하기 어렵습니다.</li><li>Polling은 서버 자원을 낭비하고, 엔진 서버는 고비용 리소스라 요청 진입량을 제한해야 했습니다.</li><li>API 서버는 검증·전처리·후처리·callback에 집중하고, engine 서버는 표준 입력을 받아 추론만 수행하도록 분리했습니다.</li></ul></article>
-        </div>
-        <div class="detail-grid two">
-          <article class="bullet-panel"><h3>Scale-out에서 생긴 문제</h3><p>API pod와 engine pod를 여러 개 띄우면 요청을 받은 pod와 결과가 돌아오는 pod가 달라질 수 있습니다. 그래서 pod local memory에 요청 상태를 두면 race-condition에 가까운 문제가 생깁니다.</p><div class="decision-box"><strong>Decision</strong><span>요청 상태와 결과를 공용 queue/store로 분리하고, pod는 stateless하게 동작하도록 설계했습니다.</span></div></article>
-          <figure class="figure-card"><figcaption>Figure 3 · AS-IS pod local state vs TO-BE shared queue/store</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><text x="70" y="48" class="svg-title">AS-IS</text><text x="460" y="48" class="svg-title">TO-BE</text><rect x="40" y="80" width="300" height="280" rx="22" fill="#fff" stroke="#d1d6db"/><rect x="420" y="80" width="300" height="280" rx="22" fill="#fff" stroke="#d1d6db"/><rect x="80" y="120" width="84" height="46" rx="12" fill="#eef6ff" stroke="#3182f6"/><text x="107" y="148" class="svg-small">Pod #1</text><rect x="198" y="120" width="84" height="46" rx="12" fill="#eef6ff" stroke="#3182f6"/><text x="225" y="148" class="svg-small">Pod #2</text><rect x="134" y="230" width="96" height="48" rx="12" fill="#fff0f0" stroke="#f04452"/><text x="160" y="260" class="svg-small">Result</text><path d="M122 166 C122 204 150 210 174 230" stroke="#f04452" stroke-width="3" fill="none"/><path d="M240 166 C240 210 210 218 190 230" stroke="#f04452" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="78" y="320" class="svg-note">결과가 다른 pod로 도착 가능</text><rect x="454" y="116" width="106" height="48" rx="12" fill="#eef6ff" stroke="#3182f6"/><text x="476" y="146" class="svg-small">Producer</text><rect x="586" y="116" width="100" height="48" rx="12" fill="#eef6ff" stroke="#3182f6"/><text x="612" y="146" class="svg-small">Worker</text><rect x="470" y="220" width="92" height="48" rx="12" fill="#f2f4f6" stroke="#d1d6db"/><text x="497" y="250" class="svg-small">Queue</text><rect x="590" y="220" width="92" height="48" rx="12" fill="#f2f4f6" stroke="#d1d6db"/><text x="611" y="250" class="svg-small">Store</text><path d="M506 164 L506 220 M562 244 L590 244 M636 164 L636 220" stroke="#3182f6" stroke-width="3"/><text x="468" y="320" class="svg-note">상태를 외부 레이어에 위임</text></svg></figure>
-        </div>
-        <figure class="figure-card full"><figcaption>Figure 4 · API 서버를 표준 데이터 모델의 경계로 둔 구조</figcaption><svg class="svg-figure wide" viewBox="0 0 1120 460"><rect x="430" y="160" width="260" height="120" rx="26" fill="#3182f6"/><text x="491" y="214" class="svg-label invert">표준 데이터 모델</text><text x="500" y="244" class="svg-small invert">validation · serialization · contract</text><rect x="64" y="90" width="220" height="88" rx="22" fill="#fff" stroke="#d1d6db"/><text x="112" y="142" class="svg-label">기존 업무 시스템</text><rect x="64" y="282" width="220" height="88" rx="22" fill="#fff" stroke="#d1d6db"/><text x="122" y="334" class="svg-label">API 서버</text><rect x="842" y="70" width="220" height="88" rx="22" fill="#fff" stroke="#d1d6db"/><text x="902" y="122" class="svg-label">엔진 서버</text><rect x="842" y="190" width="220" height="88" rx="22" fill="#fff" stroke="#d1d6db"/><text x="888" y="242" class="svg-label">외부 상용 모델</text><rect x="842" y="310" width="220" height="88" rx="22" fill="#fff" stroke="#d1d6db"/><text x="884" y="362" class="svg-label">내부 RL 모델</text><line x1="284" y1="134" x2="430" y2="192" stroke="#3182f6" stroke-width="4"/><line x1="284" y1="326" x2="430" y2="248" stroke="#3182f6" stroke-width="4"/><line x1="690" y1="202" x2="842" y2="114" stroke="#3182f6" stroke-width="4"/><line x1="690" y1="220" x2="842" y2="234" stroke="#3182f6" stroke-width="4"/><line x1="690" y1="248" x2="842" y2="354" stroke="#3182f6" stroke-width="4"/><text x="64" y="408" class="svg-note">외부 시스템 데이터 모델과 모델 입력 형식을 직접 결합하지 않음</text></svg></figure>
       </div>
     </section>
 
-    <section id="agent" class="section deep-case"><div class="container"><div class="case-hero"><p class="eyebrow">Case 02</p><h2>Personal AI Agent Runtime Platform</h2><p>개인별 Agent를 사용할 수 있도록 사용자 runtime을 격리하고, 공용 skill 중앙 관리, 로그 수집, 오류 추적, E2E 테스트 자동화를 고려한 플랫폼 구조를 설계했습니다.</p><div class="chip-group left"><span>Kubernetes</span><span>StatefulSet</span><span>Runtime Controller</span><span>Logging</span><span>Playwright</span></div></div><div class="detail-grid two"><figure class="figure-card"><figcaption>Figure 5 · 사용자별 Agent runtime 격리 구조</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><rect x="44" y="76" width="140" height="68" rx="18" fill="#fff" stroke="#d1d6db"/><text x="95" y="117" class="svg-label">User</text><rect x="244" y="76" width="150" height="68" rx="18" fill="#eef6ff" stroke="#3182f6"/><text x="279" y="117" class="svg-label">Web/API</text><rect x="454" y="76" width="190" height="68" rx="18" fill="#eef6ff" stroke="#3182f6"/><text x="493" y="117" class="svg-label">Agent Backend</text><rect x="72" y="230" width="168" height="76" rx="20" fill="#f2f4f6" stroke="#d1d6db"/><text x="102" y="275" class="svg-label">Runtime Controller</text><rect x="300" y="220" width="176" height="96" rx="24" fill="#3182f6" opacity=".12" stroke="#3182f6"/><text x="333" y="264" class="svg-label">StatefulSet</text><text x="342" y="290" class="svg-small">user-runtime-0</text><rect x="536" y="200" width="160" height="54" rx="16" fill="#fff" stroke="#d1d6db"/><text x="572" y="233" class="svg-small">Workspace</text><rect x="536" y="268" width="160" height="54" rx="16" fill="#fff" stroke="#d1d6db"/><text x="586" y="301" class="svg-small">Logs</text><rect x="536" y="336" width="160" height="54" rx="16" fill="#fff" stroke="#d1d6db"/><text x="578" y="369" class="svg-small">Skill Registry</text><path d="M184 110 L244 110 M394 110 L454 110 M549 144 L208 230 M240 268 L300 268 M476 268 L536 227 M476 268 L536 295 M476 268 L536 363" stroke="#3182f6" stroke-width="3" fill="none"/></svg></figure><article class="bullet-panel"><h3>Agent는 일반 API가 아니었습니다</h3><ul><li>사용자별 파일, session, 실행 상태, 로그가 섞이면 안 됩니다.</li><li>Skill은 공용으로 관리하되, 실행 runtime은 사용자별로 격리해야 합니다.</li><li>오류가 났을 때 어떤 사용자의 어떤 runtime에서 발생했는지 추적 가능해야 합니다.</li><li>UI에서 Agent 실행까지 이어지는 흐름은 단순 API 테스트보다 E2E 테스트가 더 적합했습니다.</li></ul><div class="decision-box"><strong>Decision</strong><span>사용자 runtime의 고정 identity와 workspace 추적을 위해 StatefulSet 기반 구조를 선택했습니다.</span></div></article></div></div></section>
+    <section id="cases" class="section">
+      <div class="container">
+        <p class="eyebrow">Case Studies</p>
+        <h2>대표 Case → 상세 페이지</h2>
+        <div class="case-list">
+          <a class="case-link" href="cases/car-carrier.html">
+            <article class="case-card">
+              <h3>자동차선 적부 최적화 Backend Service</h3>
+              <p class="case-summary">
+                <strong>문제</strong>
+                선박 적재 제약이 큰 최적화 과제를 5~20분 추론으로 운영 API에 바로 묶기 어려움.
+              </p>
+              <p class="case-summary">
+                <strong>설계</strong>
+                Domain data contract + 비동기 callback + queue/Redis로 장시간 작업 처리.
+              </p>
+              <p class="case-summary">
+                <strong>결과</strong>
+                추론 지연을 5~20분에서 2~3분으로 개선.
+              </p>
+              <span class="case-link-cta">사례 보기 →</span>
+            </article>
+          </a>
+          <a class="case-link" href="cases/agent-platform.html">
+            <article class="case-card">
+              <h3>Personal AI Agent Runtime Platform</h3>
+              <p class="case-summary">
+                <strong>문제</strong>
+                사용자별 코드 실행 환경과 공용 모델 스킬을 동시에 관리해야 했음.
+              </p>
+              <p class="case-summary">
+                <strong>설계</strong>
+                사용자별 runtime 격리 + 중앙 skill, 로그 관리 구조.
+              </p>
+              <p class="case-summary">
+                <strong>결과</strong>
+                운영 부담을 낮추고 런타임 신뢰성을 높임.
+              </p>
+              <span class="case-link-cta">사례 보기 →</span>
+            </article>
+          </a>
+          <a class="case-link" href="cases/k8s-platform.html">
+            <article class="case-card">
+              <h3>Internal Kubernetes Platform for AI Services</h3>
+              <p class="case-summary">
+                <strong>문제</strong>
+                서버 발급 지연과 분산 배포 한계로 AI 서비스 운영 병목이 지속.
+              </p>
+              <p class="case-summary">
+                <strong>설계</strong>
+                내부망 제약 환경에서 서비스 단위 배포/관찰 가능한 클러스터 구성.
+              </p>
+              <p class="case-summary">
+                <strong>결과</strong>
+                운영 안정성 체계와 장애 대응 프로세스 표준화.
+              </p>
+              <span class="case-link-cta">사례 보기 →</span>
+            </article>
+          </a>
+          <a class="case-link" href="cases/steel-tms.html">
+            <article class="case-card">
+              <h3>Steel TMS MLOps Backend</h3>
+              <p class="case-summary">
+                <strong>문제</strong>
+                각 영업소별 배차 규칙이 다르고, 신규 규칙 반영이 느림.
+              </p>
+              <p class="case-summary">
+                <strong>설계</strong>
+                multi-class 예측 + Scorer 기반 score matrix.
+              </p>
+              <p class="case-summary">
+                <strong>결과</strong>
+                사용률 20% → 80%, 일부 영업소 97%까지 개선.
+              </p>
+              <span class="case-link-cta">사례 보기 →</span>
+            </article>
+          </a>
+          <a class="case-link" href="cases/freight-matching.html">
+            <article class="case-card">
+              <h3>Freight Matching API Optimization</h3>
+              <p class="case-summary">
+                <strong>문제</strong>
+                복화 매칭 후보 계산이 900초 이상으로 3초 응답 제한 미달.
+              </p>
+              <p class="case-summary">
+                <strong>설계</strong>
+                기존 기능 API 분리 + self-merge + vectorized filtering.
+              </p>
+              <p class="case-summary">
+                <strong>결과</strong>
+                응답 900초 → 1초, 모바일 서비스 안정성 확보.
+              </p>
+              <span class="case-link-cta">사례 보기 →</span>
+            </article>
+          </a>
+        </div>
+      </div>
+    </section>
 
-    <section id="k8s" class="section section-tinted deep-case"><div class="container"><div class="case-hero"><p class="eyebrow">Case 03</p><h2>Internal Kubernetes Platform for AI Services</h2><p>서버 발급, 비용, 제한된 네트워크 환경, 관리형 K8s 제약을 우회하기 위해 AI 서비스 전용 Kubernetes 클러스터를 직접 구성하고 운영했습니다.</p><div class="chip-group left"><span>RKE</span><span>GitLab CI/CD</span><span>Harbor</span><span>Prometheus</span><span>Grafana</span><span>Loki</span><span>Istio</span><span>Longhorn</span></div></div><div class="detail-grid two"><article class="bullet-panel"><h3>왜 직접 클러스터를 만들었나?</h3><ul><li>서버 발급과 세팅에 시간이 오래 걸리고, 서비스마다 반복되는 환경 세팅 비용이 컸습니다.</li><li>제한된 네트워크 환경이라 외부 repository와 binary 사용이 어려워 재현 가능한 설치/배포 방식이 필요했습니다.</li><li>여러 AI 서비스를 독립적으로 띄우고, 로그와 metric을 한 곳에서 보고, 운영 이슈를 추적할 수 있어야 했습니다.</li></ul></article><figure class="figure-card"><figcaption>Figure 6 · AI Service Platform 운영 구조</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><rect x="38" y="72" width="126" height="58" rx="16" fill="#fff" stroke="#d1d6db"/><text x="72" y="107" class="svg-small">Developer</text><rect x="212" y="72" width="140" height="58" rx="16" fill="#eef6ff" stroke="#3182f6"/><text x="238" y="107" class="svg-small">GitLab CI/CD</text><rect x="400" y="72" width="126" height="58" rx="16" fill="#eef6ff" stroke="#3182f6"/><text x="443" y="107" class="svg-small">Harbor</text><rect x="574" y="72" width="140" height="58" rx="16" fill="#fff" stroke="#d1d6db"/><text x="614" y="107" class="svg-small">RKE Cluster</text><rect x="90" y="220" width="162" height="72" rx="20" fill="#f2f4f6" stroke="#d1d6db"/><text x="128" y="264" class="svg-small">AI Services</text><rect x="300" y="220" width="162" height="72" rx="20" fill="#f2f4f6" stroke="#d1d6db"/><text x="332" y="264" class="svg-small">Monitoring</text><rect x="510" y="220" width="162" height="72" rx="20" fill="#f2f4f6" stroke="#d1d6db"/><text x="552" y="264" class="svg-small">Storage</text><path d="M164 101 L212 101 M352 101 L400 101 M526 101 L574 101 M644 130 L171 220 M644 130 L381 220 M644 130 L591 220" stroke="#3182f6" stroke-width="3" fill="none"/><text x="114" y="335" class="svg-note">Helm values · GitOps · internal registry · log/metric 통합</text></svg></figure></div><div class="trouble-list"><article><strong>Ingress 운영 리스크 대응</strong><p>기존 annotation 중심 routing을 Gateway API 표준에 맞게 재구성하고 Istio 기반 ingress 구조로 전환했습니다.</p></article><article><strong>일부 요청만 성공하던 현상</strong><p>서비스 파드 위치에 따라 응답 성공률이 달라지는 현상을 추적해 노드 간 통신 설정 문제를 원인으로 좁혀 조치했습니다.</p></article><article><strong>노드 리소스 사용률 증가</strong><p>서비스 pod 사용량과 무관하게 특정 노드 리소스가 증가하는 현상을 추적해 감사 로그 프로세스의 과다 동작을 확인하고 안정화했습니다.</p></article></div></div></section>
-
-    <section id="steel" class="section deep-case"><div class="container"><div class="case-hero"><p class="eyebrow">Case 04</p><h2>Steel TMS MLOps Backend</h2><p>서로 다른 비즈니스 로직을 가진 5개 영업소의 철강 물류 배차를 위해, ML 예측값과 영업소별 Scorer를 score matrix로 결합하고 운영 가능한 MLOps 구조로 개선했습니다.</p><div class="chip-group left"><span>FastAPI</span><span>AutoGluon</span><span>pandas</span><span>GitLab CI/CD</span><span>Unit Test</span></div></div><div class="detail-grid two"><figure class="figure-card"><figcaption>Figure 7 · 현업 규칙과 데이터를 ML 문제로 바꾸기</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><rect x="36" y="72" width="180" height="110" rx="20" fill="#fff" stroke="#d1d6db"/><text x="76" y="110" class="svg-label">인터뷰</text><text x="64" y="142" class="svg-small">규칙 · 예외 · 메모</text><rect x="36" y="226" width="180" height="110" rx="20" fill="#fff" stroke="#d1d6db"/><text x="72" y="264" class="svg-label">배차 기록</text><text x="62" y="296" class="svg-small">실제 차량 유형 데이터</text><rect x="290" y="150" width="168" height="96" rx="24" fill="#eef6ff" stroke="#3182f6"/><text x="326" y="192" class="svg-label">Multi-class</text><text x="325" y="220" class="svg-small">vehicle type prediction</text><rect x="528" y="104" width="184" height="210" rx="22" fill="#fff" stroke="#d1d6db"/><text x="558" y="142" class="svg-label">확률값 출력</text><line x1="548" y1="170" x2="692" y2="170" stroke="#e5e8eb"/><text x="550" y="202" class="svg-small">25t 카고</text><rect x="628" y="184" width="50" height="22" rx="6" fill="#3182f6" opacity=".24"/><text x="642" y="201" class="svg-small">0.2</text><text x="550" y="238" class="svg-small">트레일러</text><rect x="628" y="220" width="24" height="22" rx="6" fill="#3182f6" opacity=".12"/><text x="638" y="237" class="svg-small">0</text><text x="550" y="274" class="svg-small">중측</text><rect x="628" y="256" width="88" height="22" rx="6" fill="#3182f6" opacity=".34"/><text x="654" y="273" class="svg-small">0.8</text><path d="M216 127 L290 185 M216 281 L290 205 M458 198 L528 198" stroke="#3182f6" stroke-width="3" fill="none"/><text x="236" y="352" class="svg-note">현업자가 설명하지 못하는 규칙도 데이터에서 학습</text></svg></figure><article class="bullet-panel"><h3>핵심은 모델보다 변경 가능한 구조였습니다</h3><ul><li>영업소마다 제품, 지역, 길이, 무게, 하차지, 메모에 따라 차량 유형 선택 규칙이 달랐습니다.</li><li>인터뷰 내용과 실제 배차 기록이 다른 경우가 있어 차량 유형을 target으로 하는 multi-class prediction으로 구성했습니다.</li><li>ML 예측값만으로는 부족하므로, 영업소별 요구사항을 Scorer로 분리해 score matrix에 반영했습니다.</li></ul></article></div><figure class="figure-card full"><figcaption>Figure 8 · ML prediction + Scorer + Score Matrix</figcaption><svg class="svg-figure wide" viewBox="0 0 1120 460"><rect x="50" y="150" width="180" height="82" rx="22" fill="#fff" stroke="#d1d6db"/><text x="86" y="200" class="svg-label">물량 Features</text><rect x="290" y="150" width="180" height="82" rx="22" fill="#eef6ff" stroke="#3182f6"/><text x="330" y="188" class="svg-label">ML Model</text><text x="332" y="214" class="svg-small">차량 유형 확률</text><rect x="530" y="90" width="180" height="68" rx="20" fill="#fff" stroke="#d1d6db"/><text x="574" y="132" class="svg-label">공통 Scorer</text><rect x="530" y="190" width="180" height="68" rx="20" fill="#fff" stroke="#d1d6db"/><text x="566" y="232" class="svg-label">영업소 Scorer</text><rect x="770" y="120" width="220" height="170" rx="26" fill="#f2f4f6" stroke="#d1d6db"/><text x="812" y="158" class="svg-label">Score Matrix</text><g transform="translate(820 180)"><rect width="120" height="84" rx="8" fill="#fff" stroke="#d1d6db"/><line x1="0" y1="28" x2="120" y2="28" stroke="#e5e8eb"/><line x1="0" y1="56" x2="120" y2="56" stroke="#e5e8eb"/><line x1="40" y1="0" x2="40" y2="84" stroke="#e5e8eb"/><line x1="80" y1="0" x2="80" y2="84" stroke="#e5e8eb"/><text x="13" y="20" class="svg-small">1.7</text><text x="53" y="20" class="svg-small">0.5</text><text x="93" y="20" class="svg-small">2.0</text><text x="13" y="48" class="svg-small">0.7</text><text x="53" y="48" class="svg-small">1.3</text><text x="93" y="48" class="svg-small">0.2</text><text x="13" y="76" class="svg-small">2.1</text><text x="53" y="76" class="svg-small">0.1</text><text x="93" y="76" class="svg-small">1.4</text></g><rect x="1020" y="150" width="68" height="82" rx="20" fill="#3182f6"/><text x="1038" y="198" class="svg-small invert">배차</text><path d="M230 191 L290 191 M470 191 L530 124 M470 191 L530 224 M710 124 L770 178 M710 224 L770 218 M990 191 L1020 191" stroke="#3182f6" stroke-width="4" fill="none"/><text x="64" y="356" class="svg-note">if-else 누적 대신 Scorer 모듈 조합으로 영업소별 규칙 변경을 흡수</text></svg></figure><div class="metric-grid"><div><strong>20% → 80%</strong><span>서비스 사용률 개선</span></div><div><strong>97%</strong><span>일부 영업소 사용률</span></div><div><strong>1 week</strong><span>요구사항 구현·테스트·배포 리드타임</span></div></div></div></section>
-
-    <section id="freight" class="section section-tinted deep-case"><div class="container"><div class="case-hero"><p class="eyebrow">Performance Note</p><h2>Freight Matching API Optimization</h2><p>B2C 모바일 서비스의 3초 응답 제한을 맞추기 위해 복화 후보 탐색을 brute-force loop가 아니라 self-merge와 boolean indexing 기반의 테이블 연산으로 재정의했습니다.</p><div class="chip-group left"><span>FastAPI</span><span>pandas</span><span>MSA</span><span>Docker/K8s</span></div></div><div class="detail-grid two"><article class="bullet-panel"><h3>기존 배차 기능을 API로 재사용</h3><ul><li>초기에는 기존 배차 모델 소스 코드를 git submodule로 가져와 재사용했습니다.</li><li>하지만 절대 경로, branch 분기, 수정 내역 반영 문제가 생겨 기능 단위 API로 분리하는 방향이 더 안정적이었습니다.</li><li>물량별 배차 가능 차량 추론, MEMO 납기일 추출, 복화 매칭을 독립 API로 나누어 재사용성을 높였습니다.</li></ul></article><figure class="figure-card"><figcaption>Figure 9 · Self-merge + boolean indexing 성능 개선</figcaption><svg class="svg-figure" viewBox="0 0 760 420"><rect x="54" y="84" width="170" height="82" rx="22" fill="#fff" stroke="#d1d6db"/><text x="92" y="134" class="svg-label">원본 물량</text><rect x="294" y="84" width="170" height="82" rx="22" fill="#eef6ff" stroke="#3182f6"/><text x="336" y="134" class="svg-label">Self-merge</text><rect x="536" y="84" width="170" height="82" rx="22" fill="#fff" stroke="#d1d6db"/><text x="574" y="122" class="svg-label">후보쌍</text><text x="576" y="148" class="svg-small">100 × 100</text><rect x="170" y="254" width="190" height="86" rx="24" fill="#f2f4f6" stroke="#d1d6db"/><text x="204" y="305" class="svg-label">조건 필터링</text><rect x="430" y="254" width="190" height="86" rx="24" fill="#3182f6"/><text x="480" y="292" class="svg-label invert">결과 반환</text><text x="482" y="318" class="svg-small invert">900s → 1s</text><path d="M224 125 L294 125 M464 125 L536 125 M621 166 C590 220 430 234 340 254 M360 297 L430 297" stroke="#3182f6" stroke-width="4" fill="none"/><text x="96" y="218" class="svg-note">loop 최적화가 아니라 문제 표현을 바꿈</text></svg></figure></div></div></section>
-
-    <section id="stack" class="section"><div class="container"><div class="section-head compact"><p class="eyebrow">Stack</p><h2>실무에서 사용한 기술</h2></div><div class="stack-list"><div class="stack-row"><span>Backend</span><p>FastAPI, Python, MongoDB, API interface design, callback/queue architecture</p></div><div class="stack-row"><span>ML / Data</span><p>PyTorch, pandas, numpy, scikit-learn, AutoGluon, TorchRL, Pydantic</p></div><div class="stack-row"><span>Infra / MLOps</span><p>Kubernetes, Docker, GitLab CI/CD, Harbor, Prometheus, Grafana, Loki, Longhorn, Istio</p></div><div class="stack-row"><span>LLM / Agent</span><p>vLLM, Ollama, LangChain, StatefulSet runtime, Playwright 기반 E2E 검토</p></div></div></div></section>
-    <section class="section closing-section"><div class="container closing-card"><p class="eyebrow">Closing</p><h2>모델과 서비스를 잇는 경계를 설계합니다.</h2><p>제가 잘하는 일은 복잡한 모델이나 도메인 로직을 실제 서비스가 이해할 수 있는 API, queue, data contract, runtime, observability로 바꾸는 것입니다.</p></div></section>
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Selected Works</p>
+        <h2>기타 대표 작업</h2>
+        <div class="summary-grid">
+          <article class="summary-item">
+            <h3>AlphaRouter</h3>
+            <p>RL + 검색 구조 실험 기반 경로 최적화 모델링과 벡터화 구현 경험.</p>
+          </article>
+          <article class="summary-item">
+            <h3>Code Assistant PoC</h3>
+            <p>사내 보안 제약 내에서 vLLM/Ollama 기반 AI 코딩 보조 실험 수행.</p>
+          </article>
+          <article class="summary-item">
+            <h3>Service Reliability</h3>
+            <p>Redis 상태 동기화, 로그 구조화, 장애 재현 및 조치 프로세스를 정형화.</p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer id="contact" class="footer">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <p>백엔드 취업 및 기술 협업 문의는 아래 채널로 가능합니다.</p>
+      <div class="contact-list">
+        <a href="mailto:youremail@example.com">youremail@example.com</a>
+        <a href="https://github.com/glistering96" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="toTop" class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
 </body>
 </html>

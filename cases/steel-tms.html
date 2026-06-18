@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steel TMS MLOps Backend</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">김원준 | Logistics BE/ML Engineer</a>
+      <nav class="header-nav" aria-label="상단 네비게이션">
+        <a href="../index.html#capability">Capability Map</a>
+        <a href="../index.html#cases">Cases</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a class="back-link" href="../index.html#cases">← 케이스 목록으로</a>
+
+    <section class="section hero">
+      <p class="eyebrow">Supporting Case</p>
+      <h1>Steel TMS MLOps Backend</h1>
+      <p class="hero-subtitle">사용자와 영업 조직의 운용 암묵지를 반영한 Scorer/Score Matrix 구조로 배차 예측과 API 운영을 연결해, 운영 가능한 MLOps 백엔드로 정비한 사례입니다.</p>
+
+      <div class="summary-grid">
+        <article class="summary-item">
+          <h3>프로젝트 요약</h3>
+          <p>현업 규칙 기반 배차 기준을 ML multi-class 예측과 정책 점수 행렬로 추상화해 의사결정 엔진을 정리했습니다.</p>
+        </article>
+        <article class="summary-item">
+          <h3>기간</h3>
+          <p>2024.02 ~ 2024.11 (고도화 운영 반영)</p>
+        </article>
+        <article class="summary-item">
+          <h3>역할</h3>
+          <p>도메인 규칙 정리, Scorer 설계, API 경계 분리, 운영 표준화</p>
+        </article>
+        <article class="summary-item">
+          <h3>기술 스택</h3>
+          <p>Python, FastAPI, pandas, Redis, GitLab CI/CD, Grafana/Prometheus, Helm</p>
+        </article>
+        <article class="summary-item">
+          <h3>정량 성과</h3>
+          <p>요건 반영 속도 개선: 1주 내 요구반영, 배차 사용률 20% → 80%, 일부 영업소 97% 도달</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Context</span>
+      <h2>왜 이 문제가 중요했는가</h2>
+      <p>
+        기존 배차 판단은 담당자별 규칙 지식에 의존해 일관성이 낮았고, 정책 변경 시 QA/릴리즈 부담이 컸습니다. 또한 영업소마다 운송 가능 차량군과 우선순위가 달라, 동일한 후보를 다르게 판단해야 하는 상황이 반복되어 운영 정책이 늘어졌습니다.
+      </p>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Backend Problem</span>
+      <h2>단순 API/CRUD로는 부족했던 이유</h2>
+      <div class="content-grid">
+        <article class="card">
+          <h3>주요 병목</h3>
+          <ul>
+            <li>규칙이 코드와 DB에 흩어져 운영자가 예측 경로를 빠르게 이해하기 어려움</li>
+            <li>요청마다 정책 계산이 분산되어 응답 스키마와 로그 규격이 일정하지 않음</li>
+            <li>재학습/재배포 주기가 느려 현업 요구 반영이 지연됨</li>
+            <li>관측성 규약이 없어 배차 실패 원인을 추적하는데 리소스 과다 소요</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>해결 포인트</h3>
+          <ul>
+            <li>예측값과 규칙 점수를 분리한 API boundary 정의</li>
+            <li>영업소별 정책을 score matrix로 정규화</li>
+            <li>예측 결과, 배차 규칙, 최종 스코어를 독립적으로 저장하고 추적 가능하게 구성</li>
+            <li>CI/CD와 모니터링을 붙여 변경 후 운영 영향의 가시화 확보</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Architecture / Figure</span>
+      <h2>Figure로 보는 핵심 구조</h2>
+      <div class="figure-grid">
+        <article class="figure-card">
+          <h3>차량 매핑 및 예측값 생산</h3>
+          <img src="../assets/figures/steel-vehicle-prediction.png" alt="제품별/차량군별 멀티클래스 예측 확률값과 후보군 산출 구조를 보여주는 도식" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>학습 예측값을 그대로 노출하지 않고 backend scoring 입력으로 표준화</li>
+            <li>예측 불확실성까지 로그에 남겨 모델 편차 분석에 반영</li>
+            <li>현업 정책 변경이 있어도 예측값 계층은 유지 가능</li>
+          </ul>
+        </article>
+
+        <article class="figure-card">
+          <h3>Scorer / Score Matrix</h3>
+          <img src="../assets/figures/steel-score-matrix.png" alt="영업소별 규칙, 차량 제약, 정책 가중치를 score matrix로 정렬해 배차를 선택하는 구조" />
+          <p class="figure-caption">이 그림에서 봐야 할 점</p>
+          <ul>
+            <li>예측 점수와 정책 점수를 분리해 조합 가중치를 명시적으로 관리</li>
+            <li>영업소별 요구를 행렬 구성 값으로 관리해 정책 교체를 단순화</li>
+            <li>문제 발생 시 정책 이력까지 재생성 가능해 운영 감사성이 좋아짐</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Key Design Decisions (ADR)</span>
+      <h2>ADR 카드</h2>
+      <div class="decision-grid">
+        <article class="decision-card">
+          <h3>ADR-01</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>multi-class 예측 API와 Scorer API를 분리</dd>
+            <dt>Context</dt>
+            <dd>둘 다 결과를 단일 응답으로 묶을 경우 계약 변경 충격이 커짐</dd>
+            <dt>Why</dt>
+            <dd>예측 변경과 운영 정책 변경을 독립적으로 배포하기 위함</dd>
+            <dt>Trade-off</dt>
+            <dd>조합 단계가 늘어나 초기 설계 오버헤드 증가</dd>
+          </dl>
+        </article>
+
+        <article class="decision-card">
+          <h3>ADR-02</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>영업소별 룰을 score matrix로 집중 관리</dd>
+            <dt>Context</dt>
+            <dd>코드 분기와 SQL 분기 방식으로 규칙 관리가 누적됨</dd>
+            <dt>Why</dt>
+            <dd>운영 정책 변경 반영 시간을 줄이고 감사 이력을 남기기 위함</dd>
+            <dt>Trade-off</dt>
+            <dd>초기에는 행렬 스키마 설계와 관리 체계가 필요</dd>
+          </dl>
+        </article>
+
+        <article class="decision-card">
+          <h3>ADR-03</h3>
+          <dl>
+            <dt>Decision</dt>
+            <dd>GitLab CI/CD와 모니터링 파이프라인을 강제 경로로 고정</dd>
+            <dt>Context</dt>
+            <dd>수동 배포 방식은 정책 변경 시 영향 분석이 늦어졌음</dd>
+            <dt>Why</dt>
+            <dd>1주 내 요구 반영이라는 운영 SLA를 지키기 위함</dd>
+            <dt>Trade-off</dt>
+            <dd>빌드/배포 자동화 규칙이 생기면서 파이프라인 유지보수 비용이 상승</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Implementation Details</span>
+      <h2>구현 포인트</h2>
+      <div class="content-grid">
+        <article class="info-panel">
+          <h3>API Boundary</h3>
+          <ul>
+            <li>배차 후보 생성, 후보 필터링, 최종 점수 산정 API를 분리</li>
+            <li>예측 결과와 규칙 적용 결과를 다른 코드 경로로 추적 가능하도록 응답 스키마 분리</li>
+            <li>요청별 idempotency 키로 중복 점수 계산을 방지</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Data Model & 계약</h3>
+          <ul>
+            <li>예측 점수, 규칙 점수, 최종 점수 DTO를 구분해 내부 계약 고정</li>
+            <li>영업소별 score matrix 버전 정보를 헤더에 포함해 재현성 확보</li>
+            <li>업로드 규칙 변경은 데이터 계약 버전 업데이트로 반영</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>CI/CD</h3>
+          <ul>
+            <li>매우 작은 규칙 변경도 PR→CI→스테이징 자동화로 일괄 반영</li>
+            <li>캐시된 예측 모델 버전과 matrix 버전을 별도 태그로 관리</li>
+            <li>회귀 확인 항목으로 사용률 KPI와 실패율을 PR 게이트에 반영</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Monitoring</h3>
+          <ul>
+            <li>요청 처리 지연, 매칭 후보 수, 실패 사유를 KPI로 집계</li>
+            <li>score matrix 버전별 선택율을 추적해 정책 성능 편차를 점검</li>
+            <li>에러/경고를 사용자/영업소 단위로 분리 집계해 대응 우선순위 정립</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Troubleshooting / Operation</span>
+      <h2>운영 이슈 정리</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>증상</th>
+              <th>원인</th>
+              <th>조치</th>
+              <th>결과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>요청 지연이 간헐적으로 증가</td>
+              <td>후보 생성/필터 단계가 서로 다른 코드경로에서 중복 실행</td>
+              <td>API 레이어를 후보 생성-필터-채점으로 단계화하고 캐시 적용</td>
+              <td>피크 타임 안정화 및 대기열 증가 억제</td>
+            </tr>
+            <tr>
+              <td>점수 산정 이유를 추적하기 어려움</td>
+              <td>예측값, 규칙 값, 최종 스코어 로그 규격 분리 미흡</td>
+              <td>요청 trace id 기반 3단계 점수 로그로 구조화</td>
+              <td>장애 조치 시간이 짧아지고 규칙 검증이 쉬워짐</td>
+            </tr>
+            <tr>
+              <td>영업소 요구사항 반영이 지연</td>
+              <td>규칙 반영이 코드 수정 + 수동 배포에 의존</td>
+              <td>score matrix와 규칙을 운영 저장소에서 버전 관리</td>
+              <td>1주 이내 반영이 가능한 운영 루틴 확립</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Results</span>
+      <h2>결과</h2>
+      <div class="result-grid">
+        <article class="result-item">
+          <strong>운영 안정성</strong>
+          <p>규칙과 모델을 분리해 정책 변경 시 배차 응답 안정성이 유지됨</p>
+        </article>
+        <article class="result-item">
+          <strong>반영 속도</strong>
+          <p>요구사항 반영 주기를 1주 내로 단축해 팀 협업 속도를 개선</p>
+        </article>
+        <article class="result-item">
+          <strong>성과</strong>
+          <p>사용률 20% → 80%, 일부 영업소는 97%에 도달</p>
+        </article>
+        <article class="result-item">
+          <strong>유지보수성</strong>
+          <p>예측 모델 변경과 정책 변경의 경로가 분리되어 위험도가 낮아짐</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section detail-section">
+      <span class="subheading">Lessons Learned</span>
+      <h2>교훈</h2>
+      <div class="result-grid">
+        <article class="result-item">
+          <strong>운영 중심 설계</strong>
+          <p>정책이 자주 바뀌는 도메인은 모델 성능보다 계약과 반영 절차가 먼저 성패를 좌우합니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>서비스 추적성</strong>
+          <p>예측, 정책, 최종 결과를 분리 로그로 남기면 현업 이슈에 대한 설득력이 크게 올라갑니다.</p>
+        </article>
+        <article class="result-item">
+          <strong>확장 전략</strong>
+          <p>동일 API에서 다중 규칙을 처리하기보다 matrix 기반으로 확장시키는 편이 운영 위험이 적습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <nav class="cases-nav" aria-label="다음 케이스 이동">
+      <a href="freight-matching.html">다음 case: Freight Matching API Optimization</a>
+      <a href="../index.html#cases">모든 case 보기</a>
+    </nav>
+  </main>
+
+  <button id="toTop" class="to-top" type="button" aria-label="맨 위로 이동">↑</button>
+  <script src="../script.js"></script>
+</body>
+</html>
+
