@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>김원준 | Logistics BE/ML Engineer</title>
+  <meta name="description" content="김원준 Production AI Backend / ML Engineering Portfolio" />
+  <title>김원준 | Production AI Backend Portfolio</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top">김원준 <span>Logistics BE/ML Engineer</span></a>
+      <a class="brand" href="#top" aria-label="맨 위로 이동">
+        <span class="brand-mark">WJ</span>
+        <span class="brand-text">김원준</span>
+        <small>Production AI Backend</small>
+      </a>
       <nav class="site-nav" aria-label="포트폴리오 섹션">
         <a href="#problems">Problems</a>
         <a href="#auto-stowage">Auto-stowage</a>
@@ -22,332 +27,411 @@
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-copy">
-        <p class="eyebrow">Backend / ML / Production AI</p>
-        <h1>복잡한 물류 최적화 문제를<br>운영 가능한 AI 서비스로 만듭니다.</h1>
-        <p class="hero-text">
-          Python, FastAPI, Pandas, PyTorch, Kubernetes를 기반으로 물류 도메인의 최적화 모델과 AI 서비스를
-          사내 시스템에서 호출 가능한 백엔드 API와 운영 인프라로 구체화했습니다.
-        </p>
-        <div class="hero-actions">
-          <a class="primary-action" href="#problems">문제 유형 보기</a>
-          <a class="secondary-action" href="#auto-stowage">대표 사례 보기</a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">AI Backend / Applied AI / Logistics Optimization</p>
+          <h1>연구형 AI 모델을<br />업무 시스템에서 동작하는 서비스로 바꿨습니다.</h1>
+          <p class="hero-text">
+            모델을 호출하는 API 하나를 만드는 데서 끝내지 않고, 오래 걸리는 추론 작업, callback, scale-out 상태 관리,
+            도메인 데이터 계약, 폐쇄망 Kubernetes 배포까지 운영 서비스에 필요한 백엔드 경계를 설계했습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#auto-stowage">대표 사례 읽기</a>
+            <a class="secondary-action" href="#problems">문제 구조 보기</a>
+          </div>
         </div>
+
+        <aside class="hero-panel" aria-label="엔지니어링 포지션 요약">
+          <p class="panel-label">Engineering Position</p>
+          <h2>모델 성능과 제품 요구사항 사이의 백엔드 경계를 설계합니다.</h2>
+          <dl class="focus-list">
+            <div>
+              <dt>Domain → Contract</dt>
+              <dd>업무 데이터를 API contract와 내부 표준 모델로 고정</dd>
+            </div>
+            <div>
+              <dt>Model → Pipeline</dt>
+              <dd>장기 실행 모델을 queue, worker, callback 흐름으로 운영화</dd>
+            </div>
+            <div>
+              <dt>Runtime → Platform</dt>
+              <dd>사용자별 실행 환경과 skill, PVC, routing을 Kubernetes 리소스로 분리</dd>
+            </div>
+            <div>
+              <dt>Operation → Reliability</dt>
+              <dd>상태 저장소, 재처리, 로그와 지표 기준으로 장애 범위를 추적</dd>
+            </div>
+          </dl>
+        </aside>
       </div>
     </section>
 
-    <section id="problems" class="section">
+    <section id="problems" class="section section-problems">
       <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">AI Backend Engineering Problems</p>
-          <h2>AI 백엔드 엔지니어로서 반복해서 풀어온 문제</h2>
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Problem-first Portfolio</p>
+            <h2>프로젝트가 아니라, 반복해서 풀어온 백엔드 문제로 묶었습니다.</h2>
+          </div>
           <p>
-            여러 서비스에서 공통적으로 마주한 문제는 모델을 직접 호출하는 화면을 만드는 것이 아니라,
-            모델과 운영 시스템 사이의 안정적인 백엔드 경계를 설계하는 일이었습니다.
-            오래 걸리는 작업을 비동기 파이프라인으로 분리하고, scale-out 환경에서 요청 상태를 일관되게 관리하며,
-            도메인 데이터를 API contract와 내부 표준 모델로 고정하는 일이 핵심이었습니다.
+            제 경험의 공통점은 모델을 연구 결과로 남기지 않고, 현업 시스템이 요청하고 회수할 수 있는 서비스 단위로 만드는 일이었습니다.
+            아래 문제들이 각 케이스의 기준점입니다.
           </p>
         </div>
 
-        <div class="problem-outline">
-          <article>
+        <div class="problem-grid">
+          <article class="problem-card">
             <span>01</span>
-            <div>
-              <h3>장기 실행 모델을 API 서비스로 운영화</h3>
-              <p>동기 request-response로 처리하기 어려운 추론 작업을 callback, queue, worker 기반 비동기 처리 흐름으로 분리했습니다.</p>
-            </div>
+            <h3>장기 실행 모델 운영화</h3>
+            <p>동기 HTTP 호출로 처리하기 어려운 최적화 모델을 callback, queue, worker 기반 흐름으로 분리했습니다.</p>
             <em>Auto-stowage</em>
           </article>
-          <article>
+          <article class="problem-card">
             <span>02</span>
-            <div>
-              <h3>Scale-out 환경의 상태 관리</h3>
-              <p>pod-local memory에 요청 상태를 두지 않고 Redis와 공용 queue를 기준으로 상태 조회, 재처리, callback 처리를 일관화했습니다.</p>
-            </div>
+            <h3>Scale-out 상태 관리</h3>
+            <p>요청 상태를 pod-local memory에 두지 않고 Redis와 공용 queue를 기준으로 일관화했습니다.</p>
             <em>Auto-stowage</em>
           </article>
-          <article>
+          <article class="problem-card">
             <span>03</span>
-            <div>
-              <h3>도메인 규칙의 데이터 모델화</h3>
-              <p>선박 구조, 화물 속성, 배차 기준을 특정 모델 입력이 아니라 백엔드 내부 API contract와 표준 데이터 모델로 정리했습니다.</p>
-            </div>
+            <h3>도메인 규칙의 모델화</h3>
+            <p>선박 구조, 화물 속성, 배차 기준을 모델 입력이 아니라 백엔드 내부 표준 모델로 정리했습니다.</p>
             <em>Auto-stowage / Steel</em>
           </article>
-          <article>
+          <article class="problem-card">
             <span>04</span>
-            <div>
-              <h3>AI 서비스 실행 환경의 격리와 운영</h3>
-              <p>사용자별 runtime, skill, log, lifecycle을 Kubernetes 리소스와 platform backend 책임으로 분리했습니다.</p>
-            </div>
+            <h3>사용자별 Runtime 격리</h3>
+            <p>Agent runtime, workspace, skill, log, lifecycle을 Kubernetes 리소스와 platform backend 책임으로 나눴습니다.</p>
             <em>Personal AI Agent</em>
           </article>
-          <article>
+          <article class="problem-card">
             <span>05</span>
-            <div>
-              <h3>조합 탐색 문제의 계산 구조 재정의</h3>
-              <p>API 응답 시간을 맞추기 위해 복화 후보 탐색을 brute-force loop가 아니라 dataframe join/filtering 연산으로 바꿨습니다.</p>
-            </div>
+            <h3>계산 구조 재정의</h3>
+            <p>복화 후보 탐색을 brute-force loop가 아니라 dataframe join/filtering 연산으로 바꿨습니다.</p>
             <em>Steel Logistics</em>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section muted">
+    <section class="section selected-work">
       <div class="container">
         <div class="section-heading compact">
-          <p class="eyebrow">Representative Impact</p>
-          <h2>대표 사례 요약</h2>
+          <p class="eyebrow">Selected Work</p>
+          <h2>대표 작업</h2>
         </div>
 
-        <div class="impact-table">
-          <div>
+        <div class="work-grid">
+          <a class="work-card featured" href="#auto-stowage">
             <strong>Auto-stowage Backend Service</strong>
             <p>자동차선 적부 최적화 모델 앞단에 API contract, async pipeline, queue/Redis 기반 상태 관리 계층을 설계했습니다.</p>
-          </div>
-          <div>
+            <span>대표 케이스</span>
+          </a>
+          <a class="work-card" href="#agent">
             <strong>Personal AI Agent Runtime Platform</strong>
-            <p>사용자별 runtime을 Kubernetes 리소스로 분리하고, provisioning, routing, skill 동기화 책임을 platform backend로 정리했습니다.</p>
-          </div>
-          <div>
+            <p>사용자별 runtime을 Kubernetes 리소스로 분리하고 provisioning, routing, skill 동기화 책임을 backend로 정리했습니다.</p>
+            <span>플랫폼 케이스</span>
+          </a>
+          <a class="work-card" href="#steel">
             <strong>Steel Logistics Optimization</strong>
-            <p>복화 매칭 API의 병목을 dataframe 연산으로 줄이고, 자동배차 로직은 scorer와 score matrix 기반으로 모듈화했습니다.</p>
-          </div>
-          <div>
+            <p>복화 매칭 병목을 dataframe 연산으로 줄이고, 자동배차 로직은 scorer와 score matrix 기반으로 모듈화했습니다.</p>
+            <span>최적화 케이스</span>
+          </a>
+          <a class="work-card" href="#k8s">
             <strong>AI Service Kubernetes Foundation</strong>
-            <p>폐쇄망에서 AI API/모델 서버를 배포, routing, scaling, monitoring할 수 있는 Kubernetes 운영 기반을 구성했습니다.</p>
+            <p>폐쇄망에서 AI API와 모델 서버를 배포, routing, scaling, monitoring할 수 있는 Kubernetes 운영 기반을 구성했습니다.</p>
+            <span>운영 기반</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="auto-stowage" class="case-section primary-case">
+      <div class="container">
+        <div class="case-shell">
+          <div class="case-header split-heading">
+            <div>
+              <p class="eyebrow">Main Case Study 01</p>
+              <h2>자동차선 적부 계획 최적화 서비스</h2>
+              <p>
+                자동차선 적부 최적화 모델을 기존 사내 시스템에서 호출 가능한 백엔드 API로 감싸고,
+                장기 실행 추론을 처리하기 위한 비동기 파이프라인과 분산 상태 관리 구조를 설계했습니다.
+              </p>
+            </div>
+            <aside class="case-meta" aria-label="자동차선 적부 계획 최적화 서비스 역할 요약">
+              <dl>
+                <div>
+                  <dt>Role</dt>
+                  <dd>API/Backend 설계 · 데이터 모델링 · 모델 연동 · K8s 배포</dd>
+                </div>
+                <div>
+                  <dt>Scope</dt>
+                  <dd>요청 검증, 표준 데이터 모델, Engine orchestration, callback 처리, 상태 관리</dd>
+                </div>
+                <div>
+                  <dt>Stack</dt>
+                  <dd>Python, FastAPI, Redis, Queue, Kubernetes, Istio</dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
+
+          <div class="story-grid">
+            <article class="story-card">
+              <span>Problem</span>
+              <h3>모델보다 먼저 API 경계가 불안정했습니다.</h3>
+              <p>
+                기존 시스템, API 서버, Engine 서버, 외부 최적화 모델이 서로 다른 데이터 형식을 요구했습니다.
+                모델 입력 형식에 서비스 전체가 종속되면 모델 교체와 선박 확장 시 변경 범위가 커질 수 있었습니다.
+              </p>
+              <ul>
+                <li>장기 추론 모델은 동기 HTTP 호출로 처리하기 어려웠습니다.</li>
+                <li>API 서버 scale-out 시 callback이 원 요청 pod로 돌아온다는 보장이 없었습니다.</li>
+                <li>후처리 결과를 기존 시스템이 이해하는 응답 형태로 변환해야 했습니다.</li>
+              </ul>
+            </article>
+            <article class="story-card">
+              <span>Action</span>
+              <h3>요청, 실행, 상태, 결과 회수를 분리했습니다.</h3>
+              <p>
+                API 서버는 요청 검증과 표준 데이터 모델 변환을 맡고, Engine 서버는 모델 실행 orchestration과 callback 결과 처리를 맡도록 나눴습니다.
+                Redis와 queue를 기준으로 pod와 무관한 상태 조회 흐름을 만들었습니다.
+              </p>
+              <ul>
+                <li>기존 시스템 입력과 모델 입력을 adapter처럼 변환했습니다.</li>
+                <li>job id 기준으로 Redis 상태를 생성하고 callback 처리에 활용했습니다.</li>
+                <li>API pod와 Engine pod를 producer/consumer 구조로 분리했습니다.</li>
+              </ul>
+            </article>
+            <article class="story-card">
+              <span>Result</span>
+              <h3>운영 시스템이 모델 세부 구현을 몰라도 요청할 수 있게 됐습니다.</h3>
+              <p>
+                요청 생성, 상태 조회, 추론 실행, callback 처리, 후처리 책임이 분리되면서 장기 실행 모델을 운영 API처럼 다룰 수 있게 됐습니다.
+              </p>
+              <ul>
+                <li>pod-local state 의존을 제거해 scale-out 이후 callback routing 문제를 완화했습니다.</li>
+                <li>처리 중, 완료, 실패 상태를 job id와 Redis 기준으로 추적했습니다.</li>
+                <li>모델 교체와 선박 확장 시 변경 범위를 adapter 계층으로 제한했습니다.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="decision-note">
+            <strong>설계 판단</strong>
+            <p>
+              단순 polling이나 pod memory 기반 상태 관리는 scale-out, 장애 복구, 장기 실행 작업에 취약했습니다.
+              그래서 요청 수신과 결과 회수를 분리하고, Redis를 전역 상태 기준점으로 두는 구조를 선택했습니다.
+            </p>
+          </div>
+
+          <div class="figure-stack">
+            <figure class="embedded-figure">
+              <div class="model-interface-diagram" role="img" aria-label="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 데이터 인터페이스">
+                <div class="system-node legacy">
+                  <span>기존 사내 시스템</span>
+                  <small>업무 요청 / 결과 수신</small>
+                </div>
+                <div class="interface-arrow">request</div>
+                <div class="system-node api">
+                  <span>API 서버</span>
+                  <small>검증 · 변환 · 상태 관리</small>
+                </div>
+                <div class="standard-model">
+                  <b>표준 데이터 모델</b>
+                  <ul>
+                    <li>Vessel / Deck / Hold</li>
+                    <li>Cargo / Port / Height</li>
+                    <li>Capacity / Constraint</li>
+                  </ul>
+                </div>
+                <div class="interface-arrow">normalized input</div>
+                <div class="system-node engine">
+                  <span>Engine 서버</span>
+                  <small>전처리 · 후처리 · 모델 호출</small>
+                </div>
+                <div class="model-stack">
+                  <div>외부 상용 모델</div>
+                  <div>내부 강화학습 모델</div>
+                </div>
+              </div>
+              <figcaption>
+                <strong>표준 데이터 모델 인터페이스</strong>
+                기존 시스템, API 서버, 엔진 서버, 외부 모델이 각자 다른 형식에 끌려가지 않도록 내부 표준 모델을 기준으로 입출력을 변환했습니다.
+              </figcaption>
+            </figure>
+
+            <figure class="embedded-figure">
+              <img src="assets/source/problem_solving_be_pptx_extract/figures/car-async-callback-architecture.png" alt="장기 추론 모델을 위한 비동기 callback 구조" loading="lazy" />
+              <figcaption>
+                <strong>비동기 callback 구조</strong>
+                요청 수신과 결과 수신을 분리해 장시간 실행 모델을 timeout과 polling 의존 없이 기존 시스템과 연동했습니다.
+              </figcaption>
+            </figure>
+
+            <figure class="embedded-figure">
+              <img src="assets/source/problem_solving_be_pptx_extract/figures/car-scaleout-queue-redis-architecture-white.png?v=20260620-white" alt="Queue와 Redis 기반 scale-out safe 상태 관리 구조" loading="lazy" />
+              <figcaption>
+                <strong>Queue + Redis 기반 scale-out 구조</strong>
+                모든 API pod가 동일한 queue와 Redis 상태를 참조하도록 바꿔 callback routing 문제를 해결했습니다.
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="auto-stowage" class="case-section">
+    <section id="agent" class="case-section alt-case">
       <div class="container">
-        <div class="case-title">
-          <p class="eyebrow">Main Case Study 01</p>
-          <h2>자동차선 적부 계획 최적화 서비스</h2>
-          <p>
-            자동차선 적부 최적화 모델을 기존 사내 시스템에서 호출 가능한 백엔드 API로 감싸고,
-            장기 실행 추론을 처리하기 위한 비동기 작업 파이프라인과 분산 상태 관리 구조를 설계했습니다.
-            핵심은 모델을 직접 실행하는 것이 아니라, 운영 시스템이 안정적으로 요청하고 결과를 회수할 수 있는 backend boundary를 만드는 일이었습니다.
-          </p>
-        </div>
+        <div class="case-shell">
+          <div class="case-header split-heading">
+            <div>
+              <p class="eyebrow">Main Case Study 02</p>
+              <h2>Personal AI Agent Runtime Platform</h2>
+              <p>
+                개인 AI Agent 서비스의 핵심 백엔드 문제는 LLM 호출 자체보다 사용자별 실행 환경을 어떻게 격리하고 운영할 것인가였습니다.
+                profile, workspace, skill, log, runtime lifecycle이 사용자 사이에서 섞이지 않도록 구조를 분리했습니다.
+              </p>
+            </div>
+            <aside class="case-meta" aria-label="Personal AI Agent Runtime Platform 역할 요약">
+              <dl>
+                <div>
+                  <dt>Role</dt>
+                  <dd>Platform backend 설계 · runtime lifecycle · service routing</dd>
+                </div>
+                <div>
+                  <dt>Scope</dt>
+                  <dd>사용자별 StatefulSet/PVC/Service, provisioning 상태, 공용 skill 동기화</dd>
+                </div>
+                <div>
+                  <dt>Stack</dt>
+                  <dd>Kubernetes, StatefulSet, PVC, Service, GitLab CI/CD</dd>
+                </div>
+              </dl>
+            </aside>
+          </div>
 
-        <div class="case-outline detail">
-          <div>
-            <h3>문제</h3>
+          <div class="story-grid two-col">
+            <article class="story-card">
+              <span>Problem</span>
+              <h3>단일 runtime은 사용자 상태와 장애 범위를 섞었습니다.</h3>
+              <p>
+                하나의 runtime에 여러 사용자의 workspace, profile, 파일, 로그를 함께 두면 격리 기준이 흐려졌습니다.
+                runtime 장애도 특정 사용자 문제가 아니라 전체 Agent 서비스 장애처럼 번질 수 있었습니다.
+              </p>
+              <ul>
+                <li>사용자별 실행 디렉터리와 profile을 분리할 기준점이 필요했습니다.</li>
+                <li>runtime 생성, 재시작, 삭제를 서비스 lifecycle로 관리해야 했습니다.</li>
+                <li>공용 skill 배포와 사용자 runtime 실행 흐름을 분리해야 했습니다.</li>
+              </ul>
+            </article>
+            <article class="story-card">
+              <span>Action / Result</span>
+              <h3>사용자별 runtime을 Kubernetes 리소스 단위로 고정했습니다.</h3>
+              <p>
+                platform backend가 user id 기준으로 StatefulSet, PVC, Service를 만들고,
+                채팅 요청은 해당 사용자의 runtime service로 routing하도록 구성했습니다.
+              </p>
+              <ul>
+                <li>workspace와 profile 저장소를 runtime 단위로 격리했습니다.</li>
+                <li>runtime 장애나 재시작의 영향을 특정 사용자 범위로 제한했습니다.</li>
+                <li>공용 skill PVC와 sync job으로 skill 업데이트 영향을 줄였습니다.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="decision-note">
+            <strong>설계 판단</strong>
             <p>
-              백엔드 관점에서 가장 먼저 풀어야 했던 문제는 도메인 복잡도를 API contract로 고정하는 일이었습니다.
-              기존 시스템, API 서버, Engine 서버, 외부 최적화 모델이 서로 다른 데이터 형식을 요구했기 때문에,
-              특정 모델 입력 형식에 서비스 전체가 종속되면 모델 교체와 선박 확장이 어려워질 수 있었습니다.
+              Agent를 단일 프로세스형 도구로 보지 않고, 사용자별로 독립 실행되는 backend runtime으로 보았습니다.
+              그래서 기능 구현보다 먼저 runtime identity, storage, routing, lifecycle의 소유권을 backend에 두었습니다.
             </p>
-            <ul>
-              <li>선적지, 양하지, 차량 높이, deck/hold 구조, 통행 가능 경로를 요청 데이터로 안정적으로 표현해야 했습니다.</li>
-              <li>장기 추론 모델은 동기 HTTP 호출로 처리하기 어려워 timeout, polling, connection 점유 문제가 발생했습니다.</li>
-              <li>API 서버를 scale-out하면 callback 요청이 원 요청을 받은 pod가 아닌 다른 pod로 들어올 수 있었습니다.</li>
-              <li>요청 상태가 pod memory에 있으면 callback 처리, 실패 추적, 재처리 흐름이 불안정해졌습니다.</li>
-              <li>모델 결과를 기존 사내 시스템이 이해하는 응답 형태로 변환하는 후처리 계층이 필요했습니다.</li>
-            </ul>
           </div>
 
           <figure class="embedded-figure">
-            <div class="model-interface-diagram" role="img" aria-label="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 데이터 인터페이스">
-              <div class="system-node legacy">
-                <span>기존 사내 시스템</span>
-                <small>업무 요청 / 결과 수신</small>
-              </div>
-              <div class="interface-arrow">request</div>
-              <div class="system-node api">
-                <span>API 서버</span>
-                <small>검증 · 변환 · 상태 관리</small>
-              </div>
-              <div class="standard-model">
-                <b>표준 데이터 모델</b>
-                <ul>
-                  <li>Vessel / Deck / Hold</li>
-                  <li>Cargo / Port / Height</li>
-                  <li>Capacity / Constraint</li>
-                </ul>
-              </div>
-              <div class="interface-arrow">normalized input</div>
-              <div class="system-node engine">
-                <span>Engine 서버</span>
-                <small>전처리 · 후처리 · 모델 호출</small>
-              </div>
-              <div class="model-stack">
-                <div>외부 상용 모델</div>
-                <div>내부 강화학습 모델</div>
-              </div>
-            </div>
-            <figcaption>
-              <strong>표준 데이터 모델 인터페이스</strong>
-              기존 시스템, API 서버, 엔진 서버, 외부 모델이 각자 다른 형식에 끌려가지 않도록 내부 표준 모델을 기준으로 입출력을 변환했습니다.
-            </figcaption>
-          </figure>
-
-          <div>
-            <h3>해결</h3>
-            <p>
-              API 서버, Engine 서버, 모델 서버의 책임을 분리했습니다.
-              API 서버는 요청 검증, 표준 데이터 모델 변환, 요청 상태 생성을 담당하고,
-              Engine 서버는 모델 실행 orchestration과 callback 결과 처리를 담당하도록 나눴습니다.
-              모델 서버는 추론 책임만 갖도록 두어 백엔드 계층에서 운영 제어가 가능하게 했습니다.
-            </p>
-            <ul>
-              <li>서비스 내부 표준 데이터 모델을 두고 기존 시스템 입력과 모델 입력을 각각 adapter처럼 변환했습니다.</li>
-              <li>요청 수신 시 job id와 상태를 생성하고, 추론 요청은 queue에 넣어 API thread가 장시간 점유되지 않게 했습니다.</li>
-              <li>모델 완료 결과는 callback으로 수신하고, job id 기준으로 Redis에서 상태를 조회해 후처리하도록 구성했습니다.</li>
-              <li>공용 request queue와 engine queue를 두어 API pod와 Engine pod를 producer/consumer 구조로 분리했습니다.</li>
-              <li>Redis를 전역 상태 저장소로 사용해 어떤 pod가 callback을 받아도 동일한 요청 상태를 조회할 수 있게 했습니다.</li>
-            </ul>
-          </div>
-
-          <figure class="embedded-figure wide-figure">
-            <img src="assets/source/problem_solving_be_pptx_extract/figures/car-async-callback-architecture.png" alt="장기 추론 모델을 위한 비동기 callback 구조" loading="lazy" />
-            <figcaption>
-              <strong>비동기 callback 구조</strong>
-              요청 수신과 결과 수신을 분리해 장시간 실행 모델을 timeout과 polling 의존 없이 기존 시스템과 연동했습니다.
-            </figcaption>
-          </figure>
-
-          <figure class="embedded-figure wide-figure wide-diagram">
-            <img src="assets/source/problem_solving_be_pptx_extract/figures/car-scaleout-queue-redis-architecture-white.png?v=20260620-white" alt="Queue와 Redis 기반 scale-out safe 상태 관리 구조" loading="lazy" />
-            <figcaption>
-              <strong>Queue + Redis 기반 scale-out 구조</strong>
-              모든 API pod가 동일한 queue와 Redis 상태를 참조하도록 바꿔 callback routing 문제를 해결했습니다.
-            </figcaption>
-          </figure>
-
-          <div>
-            <h3>결과</h3>
-            <p>
-              결과적으로 모델 실행 자체보다 운영 시스템과 모델 사이의 백엔드 계약이 명확해졌습니다.
-              요청 생성, 상태 조회, 추론 실행, callback 처리, 결과 후처리가 분리되면서 장기 실행 모델을 운영 API처럼 다룰 수 있게 됐습니다.
-            </p>
-            <ul>
-              <li>기존 사내 시스템은 모델 세부 구현을 몰라도 표준 API로 적부 최적화 요청을 보낼 수 있게 됐습니다.</li>
-              <li>pod-local state 의존을 제거해 scale-out 이후 callback routing 문제를 완화했습니다.</li>
-              <li>job id와 Redis 상태를 기준으로 처리 중, 완료, 실패 상태를 추적할 수 있게 했습니다.</li>
-              <li>모델 호출 분산과 routing 개선으로 추론 시간을 약 10분에서 2~3분 수준으로 줄였습니다.</li>
-              <li>표준 데이터 모델을 기준으로 모델 교체와 선박 확장 시 변경 범위를 백엔드 adapter 계층으로 제한했습니다.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="agent" class="case-section muted">
-      <div class="container">
-        <div class="case-title">
-          <p class="eyebrow">Main Case Study 02</p>
-          <h2>Personal AI Agent Runtime Platform</h2>
-          <p>
-            개인 AI Agent 서비스의 핵심 백엔드 문제는 LLM 호출 자체보다 사용자별 실행 환경을 어떻게 격리하고 운영할 것인가였습니다.
-            profile, workspace, skill, log, runtime lifecycle이 사용자 사이에서 섞이지 않도록 Kubernetes 리소스와 platform backend의 책임을 분리했습니다.
-          </p>
-        </div>
-
-        <div class="case-outline detail">
-          <div>
-            <h3>문제</h3>
-            <p>
-              단일 runtime에 여러 사용자의 실행 상태를 함께 두면 workspace, profile, 파일, 로그가 섞일 수 있었습니다.
-              또한 runtime 장애가 특정 사용자 문제로 격리되지 않고 전체 Agent 서비스 장애처럼 번질 수 있었습니다.
-            </p>
-            <ul>
-              <li>사용자별 실행 디렉터리와 profile을 분리할 backend 기준점이 필요했습니다.</li>
-              <li>Agent runtime 생성, 재시작, 삭제를 서비스 lifecycle로 관리해야 했습니다.</li>
-              <li>공용 skill 배포와 사용자별 runtime 실행 흐름이 서로 영향을 주지 않아야 했습니다.</li>
-              <li>채팅 요청을 user id 기준으로 올바른 runtime endpoint에 routing해야 했습니다.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>해결</h3>
-            <p>
-              platform backend가 사용자별 runtime의 control plane 역할을 맡도록 설계했습니다.
-              사용자가 Agent를 실행하면 backend가 user id 기준으로 StatefulSet, PVC, Service를 생성하고,
-              이후 채팅 요청은 해당 사용자의 runtime service로 전달하도록 구성했습니다.
-            </p>
-            <ul>
-              <li>사용자별 StatefulSet/PVC를 두어 workspace와 profile 저장소를 runtime 단위로 격리했습니다.</li>
-              <li>runtime provisioning, endpoint 조회, lifecycle 제어를 platform backend 책임으로 고정했습니다.</li>
-              <li>공용 skill PVC와 sync job으로 skill 배포 흐름을 사용자 runtime 실행 흐름과 분리했습니다.</li>
-              <li>사용자별 service routing을 통해 동일한 Web/Chat UI에서 각자의 Agent runtime으로 요청을 전달했습니다.</li>
-            </ul>
-          </div>
-
-          <figure class="embedded-figure wide-figure">
             <img src="assets/source/original_images/AI Agent Platform Figure (2).png" alt="Kubernetes 기반 사용자별 격리 AI Agent Platform 구조" loading="lazy" />
             <figcaption>
               <strong>사용자별 격리 Agent runtime 구조</strong>
               공통 Web/Chat UI와 platform backend를 기준으로 사용자별 runtime, PVC, service routing, 공용 skill 관리 흐름을 분리했습니다.
             </figcaption>
           </figure>
-
-          <div>
-            <h3>결과</h3>
-            <p>
-              Agent 서비스를 단일 프로세스형 도구가 아니라 사용자별로 독립 실행되는 backend runtime 플랫폼으로 정리했습니다.
-              실행 상태와 파일 시스템이 사용자 단위로 분리되면서 장애 범위, 로그 추적, runtime lifecycle 관리가 명확해졌습니다.
-            </p>
-            <ul>
-              <li>사용자별 Agent 실행 환경을 Kubernetes 리소스 단위로 격리했습니다.</li>
-              <li>runtime 장애나 재시작의 영향을 특정 사용자 범위로 제한할 수 있는 구조를 확보했습니다.</li>
-              <li>skill 업데이트와 runtime 실행을 분리해 운영 중 변경 영향을 줄였습니다.</li>
-              <li>platform backend가 runtime 생성부터 routing까지 제어하는 구조를 만들었습니다.</li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
 
     <section id="steel" class="case-section">
       <div class="container">
-        <div class="case-title">
-          <p class="eyebrow">Supporting Case Study</p>
-          <h2>Steel Logistics Optimization</h2>
-          <p>
-            철강 물류에서는 두 종류의 백엔드 문제가 있었습니다.
-            하나는 복화 후보 탐색을 API 응답 시간 안에 끝내는 계산 구조 문제였고,
-            다른 하나는 영업소별로 달라지는 자동배차 기준을 유지보수 가능한 도메인 로직으로 분리하는 문제였습니다.
-          </p>
-        </div>
-
-        <div class="subcase-block">
-          <div class="subcase-title">
-            <p class="eyebrow">Steel Case 01</p>
-            <h3>복화 운송 매칭 성능 개선</h3>
-            <p>조합 탐색 문제를 dataframe join/filtering 문제로 재정의해 계산 시간을 약 900초에서 약 1초 수준으로 줄였습니다.</p>
+        <div class="case-shell">
+          <div class="case-header split-heading">
+            <div>
+              <p class="eyebrow">Supporting Case Study</p>
+              <h2>Steel Logistics Optimization</h2>
+              <p>
+                철강 물류에서는 복화 후보 탐색을 API 응답 시간 안에 끝내는 계산 구조 문제와,
+                영업소별로 달라지는 자동배차 기준을 유지보수 가능한 도메인 로직으로 분리하는 문제가 있었습니다.
+              </p>
+            </div>
+            <aside class="case-meta" aria-label="Steel Logistics Optimization 역할 요약">
+              <dl>
+                <div>
+                  <dt>Role</dt>
+                  <dd>데이터 처리 구조 개선 · 배차 scoring pipeline 설계</dd>
+                </div>
+                <div>
+                  <dt>Scope</dt>
+                  <dd>복화 후보 생성, rule filtering, 차량 유형 예측, 영업소별 scorer</dd>
+                </div>
+                <div>
+                  <dt>Stack</dt>
+                  <dd>Python, Pandas, NumPy, ML model, Backend API</dd>
+                </div>
+              </dl>
+            </aside>
           </div>
 
-          <div class="case-outline detail">
-            <div>
-              <h3>문제</h3>
+          <div class="subcase-grid">
+            <article class="subcase-card">
+              <p class="eyebrow">Steel Case 01</p>
+              <h3>복화 운송 매칭 성능 개선</h3>
               <p>
-                복화 매칭은 출발지와 도착지, 상하차 가능 시간, 차량 유형, 불가능한 조합 조건을 함께 만족하는 왕복 후보를 찾아야 했습니다.
+                출발지와 도착지, 상하차 가능 시간, 차량 유형, 제외 조건을 함께 만족하는 왕복 후보를 찾아야 했습니다.
                 brute-force loop로 모든 조합을 검사하면 물량이 늘어날수록 API 응답 시간 요구사항을 맞추기 어려웠습니다.
               </p>
-              <ul>
-                <li>50개 이상 물량에서 후보 탐색 시간이 약 15분까지 늘어났습니다.</li>
-                <li>B2C 성격의 화면에서는 수 초 안에 후보를 반환해야 했습니다.</li>
-                <li>multiprocessing, batch 분할, C++ 전환은 운영 복잡도와 변환 비용이 컸습니다.</li>
-              </ul>
-            </div>
-            <div>
-              <h3>해결</h3>
+              <div class="subcase-flow">
+                <span>Loop 탐색</span>
+                <b>→</b>
+                <span>Self-merge</span>
+                <b>→</b>
+                <span>Boolean filtering</span>
+              </div>
               <p>
-                후보 탐색을 Python loop가 아니라 dataframe 연산 문제로 바꿨습니다.
-                원본 물량 테이블을 self-merge해 가능한 왕복 후보군을 먼저 만들고,
-                business rule은 boolean indexing 조건으로 한 번에 필터링했습니다.
+                원본 물량 테이블을 self-merge해 가능한 왕복 후보군을 먼저 만들고, business rule은 boolean mask로 한 번에 필터링했습니다.
+                복화 후보 계산 시간은 약 900초에서 약 1초 수준으로 줄었습니다.
               </p>
-              <ul>
-                <li>self-merge로 상행/하행 후보 조합을 vectorized operation으로 생성했습니다.</li>
-                <li>시간 조건, 출발지/도착지 조건, 차량 유형 조건, 제외 조건을 boolean mask로 구성했습니다.</li>
-                <li>후보군 생성과 필터링을 pandas 연산으로 밀어 넣어 API 병목을 줄였습니다.</li>
-              </ul>
-            </div>
+            </article>
 
+            <article class="subcase-card">
+              <p class="eyebrow">Steel Case 02</p>
+              <h3>철강 자동배차 구조 개선</h3>
+              <p>
+                자동배차는 제품, 차량 유형, 영업소별 선호도, 현장 제약이 함께 들어가는 도메인 로직 문제였습니다.
+                if/else 중심으로 구현하면 변경이 누적될수록 판단 근거를 설명하기 어려워졌습니다.
+              </p>
+              <div class="subcase-flow">
+                <span>차량 유형 예측</span>
+                <b>→</b>
+                <span>영업소별 scorer</span>
+                <b>→</b>
+                <span>Score matrix</span>
+              </div>
+              <p>
+                영업소별 규칙을 scorer 단위로 분리하고, 각 scorer가 산출한 점수를 score matrix로 합성해 배차 판단을 만들도록 구조를 바꿨습니다.
+                일부 영업소에서는 자동배차 사용률을 80~97% 수준까지 높였습니다.
+              </p>
+            </article>
+          </div>
+
+          <div class="figure-grid two-col">
             <figure class="embedded-figure">
               <img src="assets/source/problem_solving_be_pptx_extract/figures/freight-self-merge-filtering.png" alt="복화 후보를 self-merge와 boolean indexing으로 생성하는 구조" loading="lazy" />
               <figcaption>
@@ -356,54 +440,6 @@
               </figcaption>
             </figure>
 
-            <div>
-              <h3>결과</h3>
-              <p>
-                복화 매칭 병목을 알고리즘 구현 방식이 아니라 데이터 처리 구조 관점에서 해결했습니다.
-                서비스 응답 시간 안에서 후보를 반환할 수 있게 되었고, 조건 추가도 boolean rule 단위로 확장할 수 있게 됐습니다.
-              </p>
-              <ul>
-                <li>복화 후보 계산 시간을 약 900초에서 약 1초 수준으로 단축했습니다.</li>
-                <li>API 응답 시간 요구사항을 만족할 수 있는 계산 구조를 확보했습니다.</li>
-                <li>추가 business rule을 dataframe filter 조건으로 반영할 수 있게 했습니다.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="subcase-block">
-          <div class="subcase-title">
-            <p class="eyebrow">Steel Case 02</p>
-            <h3>철강 자동배차 구조 개선</h3>
-            <p>영업소별로 다른 배차 기준을 scorer와 score matrix 구조로 분리해 변경 대응성과 판단 근거 추적성을 높였습니다.</p>
-          </div>
-
-          <div class="case-outline detail">
-            <div>
-              <h3>문제</h3>
-              <p>
-                자동배차는 제품, 차량 유형, 영업소별 선호도, 현장 제약이 함께 들어가는 도메인 로직 문제였습니다.
-                영업소마다 요구사항이 달라 if/else 중심으로 구현하면 변경이 누적될수록 배차 판단 근거를 설명하기 어려워졌습니다.
-              </p>
-              <ul>
-                <li>제품별로 배차 가능한 차량 유형이 달라 사전 분류 기준이 필요했습니다.</li>
-                <li>영업소별 배차 기준이 계속 바뀌어 로직을 빠르게 교체할 수 있어야 했습니다.</li>
-                <li>배차 결과가 왜 선택됐는지 score 단위로 추적할 수 있는 구조가 필요했습니다.</li>
-              </ul>
-            </div>
-            <div>
-              <h3>해결</h3>
-              <p>
-                제품별 배차 가능 차량 유형을 먼저 예측하고, 영업소별 business logic은 scorer 객체로 분리했습니다.
-                각 scorer가 산출한 점수를 score matrix로 합성해 배차 판단을 만들도록 구조를 바꿨습니다.
-              </p>
-              <ul>
-                <li>제품 속성 기반 차량 유형 분류를 multi-class prediction 문제로 정리했습니다.</li>
-                <li>영업소별 규칙을 scorer 단위로 분리해 조건 추가와 교체 범위를 줄였습니다.</li>
-                <li>score matrix로 후보별 판단 근거를 남겨 디버깅과 현업 설명이 가능하게 했습니다.</li>
-              </ul>
-            </div>
-
             <figure class="embedded-figure">
               <img src="assets/source/problem_solving_be_pptx_extract/figures/dispatch-product-vehicle-mapping-flow.png" alt="제품별 배차 가능 차량 유형 매핑과 score matrix 구성 흐름" loading="lazy" />
               <figcaption>
@@ -411,101 +447,96 @@
                 영업소별 business logic을 scorer로 분리하고, 제품별 배차 가능 차량 유형 예측값과 함께 score matrix로 합성했습니다.
               </figcaption>
             </figure>
-
-            <div>
-              <h3>결과</h3>
-              <p>
-                자동배차 로직을 단일 조건문 덩어리가 아니라 교체 가능한 scoring pipeline으로 정리했습니다.
-                현업 요구사항 변경 시 전체 배차 흐름을 흔들지 않고 scorer 단위로 대응할 수 있는 구조를 확보했습니다.
-              </p>
-              <ul>
-                <li>영업소별 business rule을 scorer 단위로 모듈화했습니다.</li>
-                <li>제품별 차량 유형 예측값과 도메인 score를 함께 사용하는 배차 구조를 만들었습니다.</li>
-                <li>일부 영업소에서 자동배차 사용률을 80~97% 수준까지 높였습니다.</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="k8s" class="case-section muted">
+    <section id="k8s" class="case-section alt-case">
       <div class="container">
-        <div class="case-title">
-          <p class="eyebrow">Supporting Case Study</p>
-          <h2>AI Service Kubernetes Foundation</h2>
-          <p>
-            AI 모델을 운영 서비스로 만들려면 API 코드만으로는 부족했습니다.
-            폐쇄망 환경에서 이미지 배포, 내부 registry, traffic routing, storage, monitoring을 직접 구성해 여러 AI 서비스를 같은 기준으로 운영할 수 있는 기반을 만들었습니다.
-          </p>
-        </div>
-
-        <div class="case-outline detail">
-          <div>
-            <h3>문제</h3>
-            <p>
-              서버 발급과 클라우드 사용 절차가 느리고, 외부 repository 접근이 제한된 폐쇄망 환경이었습니다.
-              AI API와 모델 서버를 계속 늘리려면 매번 수동 서버 구성에 의존하지 않는 내부 운영 기반이 필요했습니다.
-            </p>
-            <ul>
-              <li>이미지 빌드, registry push, 배포 흐름을 폐쇄망 안에서 해결해야 했습니다.</li>
-              <li>서비스별 ingress, routing, network 정책을 일관되게 관리해야 했습니다.</li>
-              <li>모델 서버 장애와 API 장애를 로그와 metric 기준으로 관측할 수 있어야 했습니다.</li>
-            </ul>
-          </div>
-          <div>
-            <h3>해결</h3>
-            <p>
-              RKE 기반 Kubernetes 클러스터를 구성하고, AI 서비스 배포에 필요한 registry, CI/CD, storage, monitoring 계층을 함께 정리했습니다.
-              서비스 traffic은 Gateway/Istio 기준으로 관리하고, 운영 지표와 로그는 Prometheus, Grafana, Loki로 수집하도록 구성했습니다.
-            </p>
-            <ul>
-              <li>GitLab CI/CD, Harbor, Helm으로 API 서버와 모델 서버 이미지를 독립 배포할 수 있게 했습니다.</li>
-              <li>Istio Gateway 기반 routing으로 서비스별 traffic 경계를 정리했습니다.</li>
-              <li>Longhorn, Prometheus, Grafana, Loki를 이용해 저장소와 관측 기반을 구성했습니다.</li>
-            </ul>
+        <div class="case-shell">
+          <div class="case-header split-heading">
+            <div>
+              <p class="eyebrow">Supporting Case Study</p>
+              <h2>AI Service Kubernetes Foundation</h2>
+              <p>
+                AI 모델을 운영 서비스로 만들려면 API 코드만으로는 부족했습니다.
+                폐쇄망 환경에서 이미지 배포, 내부 registry, traffic routing, storage, monitoring을 직접 구성해 여러 AI 서비스를 같은 기준으로 운영할 수 있는 기반을 만들었습니다.
+              </p>
+            </div>
+            <aside class="case-meta" aria-label="AI Service Kubernetes Foundation 역할 요약">
+              <dl>
+                <div>
+                  <dt>Role</dt>
+                  <dd>Kubernetes 운영 기반 구성 · 배포/routing/관측 표준화</dd>
+                </div>
+                <div>
+                  <dt>Scope</dt>
+                  <dd>CI/CD, 내부 registry, Gateway/Istio routing, storage, monitoring</dd>
+                </div>
+                <div>
+                  <dt>Stack</dt>
+                  <dd>Kubernetes, GitLab CI/CD, Helm, Istio, Longhorn, Prometheus, Grafana, Loki</dd>
+                </div>
+              </dl>
+            </aside>
           </div>
 
-          <figure class="embedded-figure wide-figure">
+          <div class="story-grid two-col">
+            <article class="story-card">
+              <span>Problem</span>
+              <h3>AI 서비스를 매번 수동 서버 구성으로 늘릴 수 없었습니다.</h3>
+              <p>
+                서버 발급과 클라우드 사용 절차가 느리고, 외부 repository 접근이 제한된 폐쇄망 환경이었습니다.
+                AI API와 모델 서버를 계속 늘리려면 반복 가능한 내부 운영 기반이 필요했습니다.
+              </p>
+              <ul>
+                <li>이미지 빌드, registry push, 배포 흐름을 폐쇄망 안에서 해결해야 했습니다.</li>
+                <li>서비스별 ingress, routing, network 정책을 일관되게 관리해야 했습니다.</li>
+                <li>모델 서버 장애와 API 장애를 로그와 metric 기준으로 관측해야 했습니다.</li>
+              </ul>
+            </article>
+            <article class="story-card">
+              <span>Action / Result</span>
+              <h3>배포, routing, 관측 기준을 Kubernetes 위에 표준화했습니다.</h3>
+              <p>
+                RKE 기반 Kubernetes 클러스터 위에서 AI 서비스 배포에 필요한 registry, CI/CD, storage, monitoring 계층을 정리했습니다.
+                서비스 traffic은 Gateway/Istio 기준으로 관리하고, 운영 지표와 로그는 Prometheus, Grafana, Loki로 수집했습니다.
+              </p>
+              <ul>
+                <li>신규 AI API와 모델 서버를 반복 가능한 배포 단위로 만들었습니다.</li>
+                <li>여러 AI 서비스를 같은 클러스터 안에서 독립적으로 운영할 수 있게 했습니다.</li>
+                <li>pod 상태, API 로그, 모델 서버 로그, 장애 징후를 추적할 수 있게 했습니다.</li>
+              </ul>
+            </article>
+          </div>
+
+          <figure class="embedded-figure">
             <img src="assets/source/problem_solving_be_pptx_extract/figures/k8s-ai-service-platform-overview.png" alt="Kubernetes 기반 AI 서비스 운영 플랫폼 개요" loading="lazy" />
             <figcaption>
               <strong>Kubernetes 기반 AI 서비스 운영 플랫폼</strong>
               여러 AI 서비스를 같은 클러스터 안에서 배포, 확장, 관측, 운영하기 위한 내부 기반입니다.
             </figcaption>
           </figure>
-
-          <div>
-            <h3>결과</h3>
-            <p>
-              AI 서비스를 일회성 서버 배포가 아니라 반복 가능한 Kubernetes 운영 단위로 다룰 수 있게 됐습니다.
-              신규 AI API나 모델 서버를 추가할 때 배포, routing, 관측 기준을 재사용할 수 있는 내부 기반을 확보했습니다.
-            </p>
-            <ul>
-              <li>폐쇄망 환경에서 AI 서비스 이미지를 빌드, 저장, 배포하는 흐름을 만들었습니다.</li>
-              <li>여러 AI 서비스를 같은 클러스터 안에서 독립적으로 운영할 수 있게 했습니다.</li>
-              <li>pod 상태, API 로그, 모델 서버 로그, 장애 징후를 추적할 수 있는 관측 체계를 구성했습니다.</li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-heading compact">
-          <p class="eyebrow">Research / Publications</p>
-          <h2>Research & Tech Stack</h2>
+    <section class="section final-section">
+      <div class="container final-grid">
+        <div>
+          <p class="eyebrow">Research / Technical Base</p>
+          <h2>연구와 운영 구현을 함께 가져갑니다.</h2>
         </div>
-
         <div class="final-outline">
-          <div>
+          <article>
             <h3>AlphaRouter</h3>
             <p>강화학습 기반 조합최적화 연구에서 entropy-based selective MCTS와 vectorized environment 구현을 수행했습니다.</p>
-          </div>
-          <div>
+          </article>
+          <article>
             <h3>Backend / ML / Infra</h3>
             <p>Python, FastAPI, Pandas, NumPy, PyTorch, Redis, RabbitMQ, Kubernetes, Istio, Helm, GitLab CI/CD, Prometheus, Grafana, Loki</p>
-          </div>
+          </article>
         </div>
       </div>
     </section>
