@@ -1,0 +1,692 @@
+[
+  {
+    "slide": 1,
+    "file": "figures/slide01_fig01_group_2021-2026.png",
+    "kind": "group",
+    "label": "2021-2026",
+    "left": 59.5,
+    "top": 122.3,
+    "width": 520.9,
+    "height": 151.9
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig01_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 93.4,
+    "top": 83.1,
+    "width": 200.1,
+    "height": 90.3
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig02_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 325,
+    "top": 119.3,
+    "width": 319.4,
+    "height": 139.6
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig03_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 327.9,
+    "top": 307,
+    "width": 291.7,
+    "height": 59.5
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig04_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 658.6,
+    "top": 119.1,
+    "width": 184.1,
+    "height": 60.7
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig05_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 658.6,
+    "top": 261.2,
+    "width": 190.7,
+    "height": 151.6
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig06_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 658.6,
+    "top": 174.3,
+    "width": 220.6,
+    "height": 60.7
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig08_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 327.9,
+    "top": 460.9,
+    "width": 291.7,
+    "height": 41.4
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig09_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 327.9,
+    "top": 366.5,
+    "width": 312.4,
+    "height": 41.4
+  },
+  {
+    "slide": 2,
+    "file": "figures/slide02_fig10_group_Work-Experience.png",
+    "kind": "group",
+    "label": "Work Experience",
+    "left": 327.9,
+    "top": 416.6,
+    "width": 297.5,
+    "height": 41.4
+  },
+  {
+    "slide": 4,
+    "file": "figures/slide04_fig01_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 64,
+    "width": 461,
+    "height": 145.6
+  },
+  {
+    "slide": 5,
+    "file": "figures/slide05_fig01_picture_AI-서비스-kubernetes-클러스터-자체-구성.png",
+    "kind": "picture",
+    "label": "AI 서비스 kubernetes 클러스터 자체 구성",
+    "left": 50.6,
+    "top": 55.9,
+    "width": 838.1,
+    "height": 471.7
+  },
+  {
+    "slide": 6,
+    "file": "figures/slide06_fig01_group_K8s-클러스터를-굳이-공부하고-선택한-여러-이유들.png",
+    "kind": "group",
+    "label": "K8s 클러스터를 굳이 공부하고 선택한 여러 이유들",
+    "left": 54.7,
+    "top": 104.6,
+    "width": 667.4,
+    "height": 201.6
+  },
+  {
+    "slide": 6,
+    "file": "figures/slide06_fig02_group_K8s-클러스터를-굳이-공부하고-선택한-여러-이유들.png",
+    "kind": "group",
+    "label": "K8s 클러스터를 굳이 공부하고 선택한 여러 이유들",
+    "left": 54.7,
+    "top": 306.3,
+    "width": 693.1,
+    "height": 201.6
+  },
+  {
+    "slide": 7,
+    "file": "figures/slide07_fig01_group_K8s-클러스터를-굳이-공부하고-선택한-여러-이유들.png",
+    "kind": "group",
+    "label": "K8s 클러스터를 굳이 공부하고 선택한 여러 이유들",
+    "left": 54.7,
+    "top": 104.6,
+    "width": 755.3,
+    "height": 201.6
+  },
+  {
+    "slide": 8,
+    "file": "figures/slide08_fig01_group_클러스터-장애-대응-및-안정화-조치.png",
+    "kind": "group",
+    "label": "클러스터 장애 대응 및 안정화 조치",
+    "left": 54.7,
+    "top": 357,
+    "width": 755.3,
+    "height": 85.2
+  },
+  {
+    "slide": 8,
+    "file": "figures/slide08_fig02_group_클러스터-장애-대응-및-안정화-조치.png",
+    "kind": "group",
+    "label": "클러스터 장애 대응 및 안정화 조치",
+    "left": 54.7,
+    "top": 109.7,
+    "width": 755.3,
+    "height": 114.3
+  },
+  {
+    "slide": 8,
+    "file": "figures/slide08_fig03_group_클러스터-장애-대응-및-안정화-조치.png",
+    "kind": "group",
+    "label": "클러스터 장애 대응 및 안정화 조치",
+    "left": 54.7,
+    "top": 241,
+    "width": 755.3,
+    "height": 85.2
+  },
+  {
+    "slide": 10,
+    "file": "figures/slide10_fig01_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 64,
+    "width": 407.3,
+    "height": 111.7
+  },
+  {
+    "slide": 10,
+    "file": "figures/slide10_fig02_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 299.6,
+    "width": 461,
+    "height": 213.4
+  },
+  {
+    "slide": 11,
+    "file": "figures/slide11_fig01_picture_우선-자동차선에-차를-넣는다는-것은.png",
+    "kind": "picture",
+    "label": "우선, 자동차선에 차를 넣는다는 것은?",
+    "left": 94.8,
+    "top": 144.5,
+    "width": 427.9,
+    "height": 284.9
+  },
+  {
+    "slide": 12,
+    "file": "figures/slide12_fig02_group_선박-내-차량을-적재하는-구조를-어떻게-자료구조로-표현-하는가.png",
+    "kind": "group",
+    "label": "선박 내 차량을 적재하는 구조를 어떻게 자료구조로 표현 하는가",
+    "left": 87.3,
+    "top": 316.7,
+    "width": 332.6,
+    "height": 192.8
+  },
+  {
+    "slide": 13,
+    "file": "figures/slide13_fig04_diagram_차량-통행-graph-예시.png",
+    "kind": "diagram",
+    "label": "차량 통행 graph 예시",
+    "left": 269.9,
+    "top": 199.7,
+    "width": 402.6,
+    "height": 246.9
+  },
+  {
+    "slide": 14,
+    "file": "figures/slide14_fig01_group_시스템과-인터페이싱-하기-위한-데이터-모델.png",
+    "kind": "group",
+    "label": "시스템과 인터페이싱 하기 위한 데이터 모델",
+    "left": 180.4,
+    "top": 128.8,
+    "width": 724.9,
+    "height": 350.1
+  },
+  {
+    "slide": 15,
+    "file": "figures/slide15_fig01_group_결과를-기존-시스템에-어떻게-쏴줄-것인가.png",
+    "kind": "group",
+    "label": "결과를 기존 시스템에 어떻게 쏴줄 것인가?",
+    "left": 103.8,
+    "top": 141,
+    "width": 787.5,
+    "height": 264.8
+  },
+  {
+    "slide": 15,
+    "file": "figures/slide15_fig02_group_결과를-기존-시스템에-어떻게-쏴줄-것인가.png",
+    "kind": "group",
+    "label": "결과를 기존 시스템에 어떻게 쏴줄 것인가?",
+    "left": 90.4,
+    "top": 413.8,
+    "width": 686.3,
+    "height": 87.3
+  },
+  {
+    "slide": 16,
+    "file": "figures/slide16_fig01_group_Scale-out-시-문제점.png",
+    "kind": "group",
+    "label": "Scale-out 시 문제점",
+    "left": 125.8,
+    "top": 185.4,
+    "width": 689.8,
+    "height": 277.9
+  },
+  {
+    "slide": 17,
+    "file": "figures/slide17_fig01_group_Scale-out-시-문제점.png",
+    "kind": "group",
+    "label": "Scale-out 시 문제점",
+    "left": 231,
+    "top": 262.9,
+    "width": 116.3,
+    "height": 210
+  },
+  {
+    "slide": 17,
+    "file": "figures/slide17_fig02_group_Scale-out-시-문제점.png",
+    "kind": "group",
+    "label": "Scale-out 시 문제점",
+    "left": 497.2,
+    "top": 262.9,
+    "width": 116,
+    "height": 210
+  },
+  {
+    "slide": 17,
+    "file": "figures/slide17_fig03_group_Scale-out-시-문제점.png",
+    "kind": "group",
+    "label": "Scale-out 시 문제점",
+    "left": 771.6,
+    "top": 262.9,
+    "width": 116,
+    "height": 210
+  },
+  {
+    "slide": 17,
+    "file": "figures/slide17_fig04_diagram_Scale-out-TO-BE-queue-Redis-구조.png",
+    "kind": "diagram",
+    "label": "Scale-out TO-BE queue Redis 구조",
+    "left": 69.4,
+    "top": 127.9,
+    "width": 818.2,
+    "height": 387.6
+  },
+  {
+    "slide": 18,
+    "file": "figures/slide18_fig02_diagram_표준-데이터-모델-인터페이스-구조.png",
+    "kind": "diagram",
+    "label": "표준 데이터 모델 인터페이스 구조",
+    "left": 118.6,
+    "top": 122.8,
+    "width": 753.6,
+    "height": 405.7
+  },
+  {
+    "slide": 20,
+    "file": "figures/slide20_fig01_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 69.4,
+    "top": 120.4,
+    "width": 738.1,
+    "height": 319.4
+  },
+  {
+    "slide": 22,
+    "file": "figures/slide22_fig01_group_사내-AI-Agent-Platform-개발.png",
+    "kind": "group",
+    "label": "사내 AI Agent Platform 개발",
+    "left": 64.9,
+    "top": 68.8,
+    "width": 699.6,
+    "height": 115.9
+  },
+  {
+    "slide": 23,
+    "file": "figures/slide23_fig01_picture_사내-AI-Agent-Platform-개발.png",
+    "kind": "picture",
+    "label": "사내 AI Agent Platform 개발",
+    "left": 35.2,
+    "top": 91.2,
+    "width": 719.6,
+    "height": 405
+  },
+  {
+    "slide": 27,
+    "file": "figures/slide27_fig01_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 64,
+    "width": 440.2,
+    "height": 213.4
+  },
+  {
+    "slide": 27,
+    "file": "figures/slide27_fig02_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 318.4,
+    "width": 372,
+    "height": 144.8
+  },
+  {
+    "slide": 28,
+    "file": "figures/slide28_fig02_group_제품-별-배차-가능-차량-매핑.png",
+    "kind": "group",
+    "label": "제품 별 배차 가능 차량 매핑",
+    "left": 35.5,
+    "top": 351.6,
+    "width": 325.7,
+    "height": 108.4
+  },
+  {
+    "slide": 28,
+    "file": "figures/slide28_fig03_group_제품-별-배차-가능-차량-매핑.png",
+    "kind": "group",
+    "label": "제품 별 배차 가능 차량 매핑",
+    "left": 355.3,
+    "top": 151.7,
+    "width": 266,
+    "height": 350.9
+  },
+  {
+    "slide": 29,
+    "file": "figures/slide29_fig01_group_제품-별-배차-가능-차량-매핑.png",
+    "kind": "group",
+    "label": "제품 별 배차 가능 차량 매핑",
+    "left": 54.7,
+    "top": 175.1,
+    "width": 297.5,
+    "height": 223.3
+  },
+  {
+    "slide": 29,
+    "file": "figures/slide29_fig02_group_제품-별-배차-가능-차량-매핑.png",
+    "kind": "group",
+    "label": "제품 별 배차 가능 차량 매핑",
+    "left": 439.1,
+    "top": 114,
+    "width": 482.2,
+    "height": 380.5
+  },
+  {
+    "slide": 30,
+    "file": "figures/slide30_fig01_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 69.4,
+    "top": 101.8,
+    "width": 382.1,
+    "height": 86.8
+  },
+  {
+    "slide": 30,
+    "file": "figures/slide30_fig02_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 69.4,
+    "top": 189.4,
+    "width": 482.6,
+    "height": 144.9
+  },
+  {
+    "slide": 30,
+    "file": "figures/slide30_fig03_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 69.4,
+    "top": 351.2,
+    "width": 525.6,
+    "height": 144.9
+  },
+  {
+    "slide": 30,
+    "file": "figures/slide30_fig04_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 572.4,
+    "top": 108.1,
+    "width": 372.3,
+    "height": 290.3
+  },
+  {
+    "slide": 32,
+    "file": "figures/slide32_fig01_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 64,
+    "width": 372,
+    "height": 247.4
+  },
+  {
+    "slide": 32,
+    "file": "figures/slide32_fig02_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 355.4,
+    "width": 414,
+    "height": 111.7
+  },
+  {
+    "slide": 33,
+    "file": "figures/slide33_fig01_diagram_복화-서비스-API-재사용-구조-As-Is-To-Be.png",
+    "kind": "diagram",
+    "label": "복화 서비스 API 재사용 구조 As-Is To-Be",
+    "left": 65.9,
+    "top": 153.4,
+    "width": 820,
+    "height": 351.9
+  },
+  {
+    "slide": 34,
+    "file": "figures/slide34_fig02_table_3초-응답시간-제한을-만족하기.png",
+    "kind": "table",
+    "label": "3초 응답시간 제한을 만족하기",
+    "left": 320.9,
+    "top": 281.6,
+    "width": 212.7,
+    "height": 206
+  },
+  {
+    "slide": 36,
+    "file": "figures/slide36_fig01_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 64,
+    "width": 450,
+    "height": 179.5
+  },
+  {
+    "slide": 36,
+    "file": "figures/slide36_fig02_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 299.6,
+    "width": 420,
+    "height": 184.4
+  },
+  {
+    "slide": 37,
+    "file": "figures/slide37_fig01_picture_논문-요약.png",
+    "kind": "picture",
+    "label": "논문 요약",
+    "left": 92.3,
+    "top": 137.7,
+    "width": 775.3,
+    "height": 210.5
+  },
+  {
+    "slide": 38,
+    "file": "figures/slide38_fig01_picture_빠른-계산을-위해-python을-배제하고-tensor-matrix-vecto.png",
+    "kind": "picture",
+    "label": "빠른 계산을 위해 python을 배제하고 tensor/matrix/vector만",
+    "left": 54.7,
+    "top": 194.4,
+    "width": 427,
+    "height": 209.5
+  },
+  {
+    "slide": 38,
+    "file": "figures/slide38_fig02_diagram_vectorized-environment-계산-구조.png",
+    "kind": "diagram",
+    "label": "vectorized environment 계산 구조",
+    "left": 52.2,
+    "top": 154.1,
+    "width": 879,
+    "height": 333
+  },
+  {
+    "slide": 39,
+    "file": "figures/slide39_fig01_picture_Environment-구현할-때-16bit로-써볼까.png",
+    "kind": "picture",
+    "label": "Environment 구현할 때 16bit로 써볼까?",
+    "left": 138,
+    "top": 288.3,
+    "width": 266.8,
+    "height": 222.9
+  },
+  {
+    "slide": 39,
+    "file": "figures/slide39_fig02_picture_Environment-구현할-때-16bit로-써볼까.png",
+    "kind": "picture",
+    "label": "Environment 구현할 때 16bit로 써볼까?",
+    "left": 69.8,
+    "top": 112.7,
+    "width": 642.8,
+    "height": 148.7
+  },
+  {
+    "slide": 39,
+    "file": "figures/slide39_fig03_diagram_16bit-실험-결과-figure.png",
+    "kind": "diagram",
+    "label": "16bit 실험 결과 figure",
+    "left": 69.8,
+    "top": 112.7,
+    "width": 856.2,
+    "height": 398.5
+  },
+  {
+    "slide": 40,
+    "file": "figures/slide40_fig01_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 69.4,
+    "top": 108.6,
+    "width": 784.6,
+    "height": 144.9
+  },
+  {
+    "slide": 40,
+    "file": "figures/slide40_fig02_group_Lessons-Learned-및-To-Do.png",
+    "kind": "group",
+    "label": "Lessons Learned 및 To-Do",
+    "left": 69.4,
+    "top": 266.1,
+    "width": 784.6,
+    "height": 115.9
+  },
+  {
+    "slide": 42,
+    "file": "figures/slide42_fig01_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 64,
+    "width": 450,
+    "height": 179.5
+  },
+  {
+    "slide": 42,
+    "file": "figures/slide42_fig02_group_개요.png",
+    "kind": "group",
+    "label": "개요",
+    "left": 466,
+    "top": 299.6,
+    "width": 420,
+    "height": 179.5
+  },
+  {
+    "slide": 43,
+    "file": "figures/slide43_fig01_picture_서비스-구조.png",
+    "kind": "picture",
+    "label": "서비스 구조",
+    "left": 480,
+    "top": 149.2,
+    "width": 81,
+    "height": 81
+  },
+  {
+    "slide": 43,
+    "file": "figures/slide43_fig02_picture_서비스-구조.png",
+    "kind": "picture",
+    "label": "서비스 구조",
+    "left": 117.4,
+    "top": 201.6,
+    "width": 185.8,
+    "height": 61.9
+  },
+  {
+    "slide": 43,
+    "file": "figures/slide43_fig03_picture_서비스-구조.png",
+    "kind": "picture",
+    "label": "서비스 구조",
+    "left": 714.1,
+    "top": 164.9,
+    "width": 194.9,
+    "height": 105.1
+  },
+  {
+    "slide": 43,
+    "file": "figures/slide43_fig04_diagram_사내-코드-생성-AI-서비스-구조.png",
+    "kind": "diagram",
+    "label": "사내 코드 생성 AI 서비스 구조",
+    "left": 86.2,
+    "top": 149.2,
+    "width": 854.1,
+    "height": 344.3
+  },
+  {
+    "slide": 45,
+    "file": "figures/slide45_fig01_group_LLM으로-하고-싶은-것들.png",
+    "kind": "group",
+    "label": "LLM으로 하고 싶은 것들",
+    "left": 525.8,
+    "top": 320.4,
+    "width": 387.4,
+    "height": 201.1
+  },
+  {
+    "slide": 46,
+    "file": "figures/slide46_fig01_group_끝까지-봐주셔서-감사합니다-어제-보다-더-나은-엔지니어가-되기-위해-노력하겠.png",
+    "kind": "group",
+    "label": "끝까지 봐주셔서 감사합니다. 어제 보다 더 나은 엔지니어가 되기 위해 노력하겠습니다.",
+    "left": 290.4,
+    "top": 121.8,
+    "width": 374.5,
+    "height": 175.1
+  },
+  {
+    "slide": 28,
+    "file": "figures/slide28_fig07_diagram_figure.png",
+    "kind": "diagram-crop",
+    "label": "제품 별 배차 가능 차량 매핑 흐름",
+    "left": 34.6,
+    "top": 151.7,
+    "width": 872.3,
+    "height": 350.9
+  },
+  {
+    "slide": 34,
+    "file": "figures/slide34_fig03_diagram_self-merge.png",
+    "kind": "diagram-crop",
+    "label": "self-merge 기반 복화 후보 생성 구조",
+    "left": 69.4,
+    "top": 248.9,
+    "width": 850.2,
+    "height": 279.6
+  }
+]
