@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Lessons: 계약 정합성과 직렬화</title>
+  <desc id="desc">Pydantic validation, JSON 직렬화, producer-consumer 동시성 제어 포인트를 정리한 lessons 다이어그램</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.card{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.good{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.warn{fill:#fff;stroke:#d6dee6;stroke-width:2}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 21px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 15px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">운영에서 드러난 계약·직렬화·동시성 Lesson</text>
+  <text class="cap" x="96" y="154">요청 스키마, 메시지 포맷, consumer 제어를 명시하지 않으면 런타임 장애가 반복됩니다.</text>
+
+  <rect class="card" x="100" y="244" width="276" height="250" rx="26"/><text class="h" x="150" y="292">1. Contract Validation</text><text class="s" x="136" y="334">Pydantic schema로 요청/응답을</text><text class="s" x="136" y="360">운영 전 단계에서 검증</text><rect class="good" x="134" y="398" width="208" height="54" rx="18"/><text class="tag" x="178" y="432">fail fast</text>
+  <rect class="card" x="462" y="244" width="276" height="250" rx="26"/><text class="h" x="528" y="292">2. Serialization</text><text class="s" x="498" y="334">pickle 의존성 대신 JSON 계약으로</text><text class="s" x="498" y="360">버전·언어 호환성 확보</text><rect class="good" x="496" y="398" width="208" height="54" rx="18"/><text class="tag" x="548" y="432">portable</text>
+  <rect class="card" x="824" y="244" width="276" height="250" rx="26"/><text class="h" x="878" y="292">3. Concurrency</text><text class="s" x="860" y="334">producer-consumer 중복 실행은</text><text class="s" x="860" y="360">lock/token/idempotency로 통제</text><rect class="good" x="858" y="398" width="208" height="54" rx="18"/><text class="tag" x="898" y="432">safe retry</text>
+  <path class="arrow" d="M376 370 H462"/><path class="arrow" d="M738 370 H824"/>
+  <rect class="warn" x="212" y="548" width="776" height="64" rx="22"/><text class="h" x="312" y="588">결론: 모델 연동 안정성은 알고리즘 밖의 API 계약과 실행 제어에서 결정됩니다.</text>
+  <text class="s" x="350" y="640">request/response schema · JSON message · Redis lock · idempotency key</text>
+</svg>
