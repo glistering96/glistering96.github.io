@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">표준 데이터 모델 기반 인터페이스</title>
+  <desc id="desc">기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 변환 책임을 나타내는 SVG 다이어그램</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.11"/></filter>
+  </defs>
+  <style>
+    .bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.box{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.core{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.adapter{fill:#fff;stroke:#d8e8ff;stroke-width:2}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.back{stroke:#6b7684;stroke-width:3;fill:none;stroke-dasharray:8 8;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 21px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 15px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.m{font:800 16px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}
+  </style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">표준 데이터 모델을 중심에 둔 시스템 경계</text>
+  <text class="cap" x="96" y="154">각 시스템의 형식 차이를 adapter에 격리하고, 내부에서는 하나의 계약 모델로 처리합니다.</text>
+
+  <rect class="box" x="96" y="292" width="178" height="118" rx="20"/>
+  <text class="h" x="129" y="336">기존 사내</text><text class="h" x="147" y="364">시스템</text><text class="s" x="122" y="392">요청 / 결과 수신</text>
+  <rect class="adapter" x="314" y="246" width="166" height="74" rx="18"/><text class="m" x="343" y="290">Request Adapter</text>
+  <rect class="box" x="520" y="244" width="180" height="120" rx="20"/>
+  <text class="h" x="561" y="290">API Server</text><text class="s" x="552" y="320">검증 · job 생성</text>
+  <rect class="core" x="456" y="414" width="288" height="118" rx="24"/>
+  <text class="h" x="512" y="462">Standard Data Model</text><text class="s" x="520" y="493">Vessel · Deck · Cargo · Job</text>
+  <rect class="box" x="794" y="244" width="180" height="120" rx="20"/>
+  <text class="h" x="837" y="290">Engine</text><text class="s" x="825" y="320">orchestration</text>
+  <rect class="box" x="1010" y="292" width="126" height="118" rx="20"/>
+  <text class="h" x="1032" y="340">외부</text><text class="h" x="1030" y="368">모델</text>
+  <rect class="adapter" x="768" y="454" width="186" height="78" rx="18"/><text class="m" x="801" y="501">Model Adapter</text>
+  <rect class="adapter" x="314" y="454" width="166" height="78" rx="18"/><text class="m" x="346" y="501">Result Adapter</text>
+
+  <path class="arrow" d="M274 335 H314"/><path class="arrow" d="M480 284 H520"/><path class="arrow" d="M700 304 H794"/><path class="arrow" d="M974 304 H1010"/>
+  <path class="arrow" d="M884 364 C884 394 874 424 862 454"/>
+  <path class="arrow" d="M768 492 H744"/>
+  <path class="arrow" d="M456 492 H480" transform="rotate(180 468 492)"/>
+  <path class="back" d="M1010 390 C886 610 350 610 184 410"/>
+
+  <text class="s" x="309" y="225">외부 입력 형식</text><text class="s" x="514" y="558">내부 표준 계약</text><text class="s" x="775" y="558">모델 입력 형식</text><text class="s" x="570" y="626">callback/result는 다시 표준 모델을 거쳐 기존 시스템 응답으로 변환</text>
+</svg>
