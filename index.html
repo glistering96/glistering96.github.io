@@ -37,7 +37,7 @@
           </p>
           <div class="hero-actions">
             <a class="primary-action" href="#auto-stowage">대표 사례 읽기</a>
-            <a class="secondary-action" href="#problems">주요 경험 보기</a>
+            <a class="secondary-action" href="#problems">프로젝트 보기</a>
           </div>
         </div>
 
@@ -67,82 +67,66 @@
       </div>
     </section>
 
-    <section id="problems" class="section section-problems">
+    <section id="problems" class="section narrative-section">
       <div class="container">
         <div class="section-heading split-heading">
           <div>
-            <p class="eyebrow">Portfolio Overview</p>
-            <h2>모델 실행과 사용자별 Runtime을 서비스로 구현한 경험</h2>
+            <p class="eyebrow">Featured Case Studies</p>
+            <h2>운영 가능한 AI 백엔드 서비스 구축 경험</h2>
           </div>
           <p>
-            장기 실행 모델 연동, 사용자별 실행 환경 격리, 분산 상태 관리, 데이터 모델링, Kubernetes 운영까지
-            AI 서비스를 실제 제품 환경에서 운영하기 위한 백엔드 영역을 중심으로 경험을 쌓았습니다.
+            장기 실행 모델 연동, 사용자별 실행 환경 격리, 분산 상태 관리, 데이터 모델링,
+            Kubernetes 운영까지 실제 서비스 개발에 필요한 백엔드 영역을 다뤘습니다.
           </p>
         </div>
 
-        <div class="problem-grid">
-          <article class="problem-card">
-            <span>01</span>
-            <h3>장기 실행 모델 운영화</h3>
-            <p>동기 HTTP 호출로 처리하기 어려운 최적화 모델을 callback, queue, worker 기반 흐름으로 분리했습니다.</p>
-            <em>Auto-stowage</em>
-          </article>
-          <article class="problem-card">
-            <span>02</span>
-            <h3>Scale-out 상태 관리</h3>
-            <p>요청 상태를 pod-local memory에 두지 않고 Redis와 공용 queue를 기준으로 일관화했습니다.</p>
-            <em>Auto-stowage</em>
-          </article>
-          <article class="problem-card">
-            <span>03</span>
-            <h3>도메인 규칙의 모델화</h3>
-            <p>선박 구조, 화물 속성, 배차 기준을 모델 입력이 아니라 백엔드 내부 표준 모델로 정리했습니다.</p>
-            <em>Auto-stowage / Steel</em>
-          </article>
-          <article class="problem-card">
-            <span>04</span>
-            <h3>사용자별 Runtime 격리</h3>
-            <p>Agent runtime, workspace, skill, log, lifecycle을 Kubernetes 리소스와 platform backend 책임으로 나눴습니다.</p>
-            <em>Personal AI Agent</em>
-          </article>
-          <article class="problem-card">
-            <span>05</span>
-            <h3>계산 구조 재정의</h3>
-            <p>복화 후보 탐색을 brute-force loop가 아니라 dataframe join/filtering 연산으로 바꿨습니다.</p>
-            <em>Steel Logistics</em>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section selected-work">
-      <div class="container">
-        <div class="section-heading compact">
-          <p class="eyebrow">Selected Work</p>
-          <h2>대표 작업</h2>
-        </div>
-
-        <div class="work-grid">
-          <a class="work-card featured" href="#auto-stowage">
+        <div class="main-story-grid">
+          <a class="main-story-card" href="#auto-stowage">
+            <span>Main Case Study 01</span>
+            <h3>Auto-stowage Backend Service</h3>
+            <p>
+              자동차선 적부 최적화 모델을 사내 시스템에서 호출 가능한 API 서비스로 전환했습니다.
+              긴 추론 시간, callback routing, pod-local state, 모델 입력 형식 차이를 백엔드 구조로 흡수했습니다.
+            </p>
+            <ul>
+              <li>선박 공간 graph 추상화와 표준 데이터 모델 설계</li>
+              <li>Async callback, Queue, Redis 기반 상태 관리</li>
+              <li>모델 호출 분산과 routing 개선으로 10분 → 2~3분</li>
+            </ul>
             <strong>Auto-stowage Backend Service</strong>
-            <p>자동차선 적부 최적화 모델 앞단에 API contract, async pipeline, queue/Redis 기반 상태 관리 계층을 설계했습니다.</p>
-            <span>대표 케이스</span>
           </a>
-          <a class="work-card" href="#agent">
+
+          <a class="main-story-card" href="#agent">
+            <span>Main Case Study 02</span>
+            <h3>Personal AI Agent Runtime Platform</h3>
+            <p>
+              사용자별 AI 실행 환경을 Kubernetes 리소스 단위로 분리하고,
+              runtime, workspace, skill, log, lifecycle을 플랫폼 백엔드에서 관리하도록 설계했습니다.
+            </p>
+            <ul>
+              <li>사용자별 StatefulSet, PVC, Service 기반 runtime 격리</li>
+              <li>공용 skill 중앙 관리와 runtime 동기화 흐름 분리</li>
+              <li>user, runtime, execution 기준 로그와 오류 추적</li>
+            </ul>
             <strong>Personal AI Agent Runtime Platform</strong>
-            <p>사용자별 AI 실행 환경을 Kubernetes 리소스로 분리하고 provisioning, routing, skill 동기화 책임을 backend로 정리했습니다.</p>
-            <span>메인 케이스</span>
           </a>
-          <a class="work-card" href="#steel">
-            <strong>Steel Logistics Optimization</strong>
-            <p>복화 매칭 병목을 dataframe 연산으로 줄이고, 자동배차 로직은 scorer와 score matrix 기반으로 모듈화했습니다.</p>
-            <span>최적화 케이스</span>
-          </a>
-          <a class="work-card" href="#k8s">
-            <strong>AI Service Kubernetes Foundation</strong>
-            <p>폐쇄망에서 AI API와 모델 서버를 배포, routing, scaling, monitoring할 수 있는 Kubernetes 운영 기반을 구성했습니다.</p>
-            <span>운영 기반</span>
-          </a>
+        </div>
+
+        <div class="supporting-proof">
+          <div class="supporting-proof-heading">
+            <p class="eyebrow">Supporting Work</p>
+            <h2>성능 개선과 운영 인프라 경험</h2>
+          </div>
+          <div class="supporting-proof-grid">
+            <a class="supporting-proof-card" href="#steel">
+              <span>Steel Logistics Optimization</span>
+              <p>복화 매칭을 self-merge/filtering 문제로 재정의하고, 자동배차 로직은 scorer와 score matrix 구조로 정리했습니다.</p>
+            </a>
+            <a class="supporting-proof-card" href="#k8s">
+              <span>AI Service Kubernetes Foundation</span>
+              <p>폐쇄망에서 AI API와 모델 서버를 반복 배포하고, routing, storage, monitoring을 같은 기준으로 운영할 수 있는 기반을 구성했습니다.</p>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -384,6 +368,43 @@
               <h3>로그와 실행 상태 추적</h3>
               <p>user, runtime, execution 기준으로 오류와 실행 흐름을 확인할 수 있는 구조를 잡았습니다.</p>
             </article>
+          </div>
+
+          <div class="harness-panel">
+            <div class="harness-heading">
+              <p class="eyebrow">Agent Harness Engineering</p>
+              <h3>역할 기반 agent harness를 팀 표준 작업 흐름으로 실험했습니다.</h3>
+              <p>
+                팀 내 FE/BE 개발 역량 편차를 줄이고 반복적인 개발, 검토, 문서화 작업을 표준화하기 위해
+                Main PM과 역할별 manager, specialist agent로 구성된 문서 기반 harness를 설계했습니다.
+              </p>
+            </div>
+            <div class="harness-grid">
+              <article>
+                <span>Orchestration</span>
+                <h4>Main PM → Manager → Specialist Agent</h4>
+                <p>
+                  Main PM이 모호한 요청을 분석해 planner, developer, reviewer, QA, security, document manager에 위임하고,
+                  각 manager는 backend, frontend, refactoring 등 역할별 agent를 관리하도록 구성했습니다.
+                </p>
+              </article>
+              <article>
+                <span>Working Protocol</span>
+                <h4>board.md 기반 작업 상태 공유</h4>
+                <p>
+                  공통 board.md에는 현재 목표, 진행 중인 작업, 관련 task.md 위치를 기록했습니다.
+                  명시적 보고 시점에는 manager가 결과 문서를 작성하고 PM이 이를 읽어 다음 작업을 판단하도록 했습니다.
+                </p>
+              </article>
+              <article>
+                <span>Applied Cases</span>
+                <h4>K8s 이관과 강화학습 agent 실험</h4>
+                <p>
+                  K8s 이관 코드와 인프라 리소스 작성, secret hardcoding 여부 점검에 활용했고,
+                  auto-stowage에서는 env 설계, 모델 알고리즘 작성, 학습, 평가, 기록을 수행하는 강화학습 agent로 확장했습니다.
+                </p>
+              </article>
+            </div>
           </div>
 
           <div class="decision-note">

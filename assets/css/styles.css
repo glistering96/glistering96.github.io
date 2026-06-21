@@ -320,6 +320,7 @@ figcaption {
   border-bottom: 1px solid var(--line);
 }
 
+.narrative-section,
 .selected-work,
 .alt-case,
 .final-section {
@@ -387,6 +388,106 @@ figcaption {
   font-size: 14px;
   font-style: normal;
   font-weight: 750;
+}
+
+.main-story-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.main-story-card {
+  display: flex;
+  min-height: 420px;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--white);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.main-story-card:hover,
+.supporting-proof-card:hover {
+  transform: translateY(-3px);
+  border-color: #b9d7ff;
+  box-shadow: var(--shadow);
+}
+
+.main-story-card span,
+.supporting-proof-card span {
+  display: inline-flex;
+  margin-bottom: 16px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.main-story-card h3 {
+  max-width: 520px;
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.main-story-card p {
+  margin-bottom: 22px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.main-story-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0 0 24px;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.main-story-card strong {
+  margin-top: auto;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.supporting-proof {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.supporting-proof-heading h2 {
+  margin-bottom: 0;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.supporting-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.supporting-proof-card {
+  display: block;
+  min-height: 180px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.supporting-proof-card p {
+  margin-bottom: 0;
+  color: var(--text);
+  line-height: 1.68;
 }
 
 .work-grid {
@@ -543,6 +644,63 @@ figcaption {
   font-size: 12px;
   font-weight: 850;
   letter-spacing: 0.04em;
+}
+
+.harness-panel {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 18px;
+  padding: 24px;
+  border: 1px solid #cfe4ff;
+  border-radius: 22px;
+  background: var(--blue-weak);
+}
+
+.harness-heading h3 {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+.harness-heading p:last-child {
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+.harness-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.harness-grid article {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+}
+
+.harness-grid span {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.harness-grid h4 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.harness-grid p {
+  margin-bottom: 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.62;
 }
 
 .story-card ul {
@@ -826,6 +984,14 @@ figcaption strong {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .main-story-grid,
+  .supporting-proof,
+  .supporting-proof-grid,
+  .harness-panel,
+  .harness-grid {
+    grid-template-columns: 1fr;
+  }
+
   .story-grid,
   .story-grid.two-col,
   .evidence-grid,
@@ -903,6 +1069,15 @@ figcaption strong {
     min-height: auto;
   }
 
+  .main-story-card,
+  .supporting-proof-card {
+    min-height: auto;
+  }
+
+  .main-story-card h3 {
+    font-size: 25px;
+  }
+
   .case-shell {
     padding: 22px;
     border-radius: 24px;
@@ -952,6 +1127,8 @@ figcaption strong {
   .hero-panel,
   .problem-card,
   .work-card,
+  .main-story-card,
+  .supporting-proof-card,
   .story-card,
   .evidence-card,
   .subcase-card,
