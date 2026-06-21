@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Scale-out AS-IS 문제</title>
+  <desc id="desc">요청 pod와 callback 처리 pod가 다를 때 pod-local state를 찾지 못해 상태가 유실되는 AS-IS 구조</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.lb{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.pod{fill:#fff;stroke:#d6dee6;stroke-width:2}.bad{fill:#fff4f4;stroke:#e15b5b;stroke-width:3}.state{fill:#f8fafb;stroke:#d6dee6;stroke-width:2;stroke-dasharray:7 6}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.badline{stroke:#e15b5b;stroke-width:4;fill:none;stroke-dasharray:9 7;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 20px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 14px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.err{font:900 18px Pretendard,'Noto Sans KR',sans-serif;fill:#e15b5b}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">AS-IS: Pod-local 상태에 묶인 Callback</text>
+  <text class="cap" x="96" y="154">scale-out 이후 callback이 원 요청 pod가 아닌 다른 pod로 들어오면 로컬 상태를 찾지 못합니다.</text>
+
+  <rect class="lb" x="92" y="290" width="164" height="96" rx="22"/><text class="h" x="128" y="330">Load</text><text class="h" x="118" y="358">Balancer</text>
+  <rect class="pod" x="352" y="226" width="178" height="116" rx="22"/><text class="h" x="397" y="272">API Pod A</text><text class="s" x="386" y="302">request accepted</text>
+  <rect class="state" x="374" y="358" width="134" height="62" rx="16"/><text class="s" x="396" y="395">local state</text>
+  <rect class="pod" x="352" y="472" width="178" height="116" rx="22"/><text class="h" x="397" y="518">API Pod B</text><text class="s" x="394" y="548">callback landed</text>
+  <rect class="bad" x="638" y="290" width="178" height="116" rx="22"/><text class="h" x="690" y="336">Engine</text><text class="s" x="674" y="366">long running job</text>
+  <rect class="pod" x="916" y="290" width="164" height="96" rx="22"/><text class="h" x="966" y="330">Model</text><text class="s" x="952" y="358">completed result</text>
+
+  <path class="arrow" d="M256 338 C300 288 326 274 352 282"/><text class="tag" x="270" y="288">1. request</text>
+  <path class="arrow" d="M530 282 H638"/><text class="tag" x="550" y="262">2. execute</text>
+  <path class="arrow" d="M816 338 H916"/><text class="tag" x="840" y="318">3. call</text>
+  <path class="badline" d="M998 386 C920 548 552 552 530 532"/><text class="err" x="650" y="560">4. callback hits Pod B</text>
+  <path class="badline" d="M530 532 C580 434 560 386 508 386"/><text class="err" x="542" y="430">state not found</text>
+  <text class="err" x="116" y="620">문제: 요청 상태가 pod-local memory에 있어 callback routing이 비결정적이면 추적과 재처리가 어려워집니다.</text>
+</svg>
