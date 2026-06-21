@@ -300,15 +300,15 @@
               <div class="par-flow">
                 <div>
                   <strong>Problem</strong>
-                  <p>단일 runtime에 여러 사용자의 workspace, profile, 파일, 로그가 섞이면 격리 기준과 장애 범위가 흐려졌습니다.</p>
+                  <p>Hermes agent runtime은 디스크의 profile과 사용자 workspace를 폴더 단위로 나눠 격리하고 있었고, 단일 디스크 안에 여러 사용자의 실행 공간이 함께 놓이면 격리 기준과 장애 범위가 흐려질 수 있었습니다.</p>
                 </div>
                 <div>
                   <strong>Action</strong>
-                  <p>user id 기준으로 StatefulSet, PVC, Service를 생성하고 채팅 요청은 해당 사용자의 runtime service로 routing했습니다.</p>
+                  <p>회원가입 시 user id 기준으로 고유 Hermes pod를 할당하고, StatefulSet, PVC, Service를 생성해 채팅 요청이 해당 사용자의 runtime service 안에서만 처리되도록 routing했습니다.</p>
                 </div>
                 <div>
                   <strong>Result</strong>
-                  <p>workspace와 profile을 사용자 runtime 단위로 분리하고, 장애나 재시작 영향을 특정 사용자 범위로 제한했습니다.</p>
+                  <p>단일 디스크에서 여러 profile 폴더를 구분하던 방식보다 안전하게 사용자 공간을 격리했고, 장애 범위를 줄이면서 사용자별 runtime을 손쉽게 확장할 수 있는 구조로 바꿨습니다.</p>
                 </div>
               </div>
             </article>
