@@ -86,8 +86,8 @@
             <span>Main Case Study 01</span>
             <h3>Auto-stowage Backend Service</h3>
             <p>
-              자동차선 적부 최적화 모델을 사내 시스템에서 호출 가능한 API 서비스로 전환했습니다.
-              긴 추론 시간, callback routing, pod-local state, 모델 입력 형식 차이를 백엔드 구조로 흡수했습니다.
+              자동차선 적부 최적화 서비스를 만들었습니다.
+              선박 공간 graph, 모델 입력 기준, 비동기 callback, Queue/Redis 상태 관리, Kubernetes 배포와 routing 개선까지 설계하고 구현했습니다.
             </p>
             <ul>
               <li>선박 공간 graph 추상화와 모델 입력 기준 정리</li>
@@ -121,11 +121,11 @@
           <div class="supporting-proof-grid">
             <a class="supporting-proof-card" href="#steel">
               <span>Steel Logistics Optimization</span>
-              <p>복화 매칭을 self-merge/filtering 문제로 재정의하고, 자동배차 로직은 scorer와 score matrix 구조로 정리했습니다.</p>
+              <p>복화 매칭 최적화와 자동배차 ML 모델을 배차 서비스에 적용하는 MLOps 흐름을 만들었습니다.</p>
             </a>
             <a class="supporting-proof-card" href="#k8s">
               <span>AI Service Kubernetes Foundation</span>
-              <p>폐쇄망에서 AI API와 모델 서버를 반복 배포하고, routing, storage, monitoring을 같은 기준으로 운영할 수 있는 기반을 구성했습니다.</p>
+              <p>Kubernetes 노드를 직접 구성하고 GitLab CI/CD와 내부 registry를 연동해 AI API와 모델 서버 배포 기반을 만들었습니다.</p>
             </a>
           </div>
         </div>
@@ -140,8 +140,9 @@
               <p class="eyebrow">Main Case Study 01</p>
               <h2>자동차선 적부 계획 최적화 서비스</h2>
               <p>
-                자동차선 적부 최적화 모델을 기존 사내 시스템에서 호출 가능한 백엔드 API로 감싸고,
-                장기 실행 추론을 처리하기 위한 비동기 파이프라인과 분산 상태 관리 구조를 설계했습니다.
+                자동차선 적부 최적화 서비스를 만들었습니다.
+                기존 사내 시스템에서 모델을 호출할 수 있도록 API, Engine 연동, 비동기 callback,
+                Queue/Redis 상태 관리, Kubernetes 배포와 routing 구조를 설계하고 구현했습니다.
               </p>
             </div>
             <aside class="case-meta" aria-label="자동차선 적부 계획 최적화 서비스 역할 요약">
@@ -394,19 +395,19 @@
               <p class="eyebrow">Supporting Case Study</p>
               <h2>Steel Logistics Optimization</h2>
               <p>
-                철강 물류에서는 복화 후보 탐색을 API 응답 시간 안에 끝내는 계산 구조 문제와,
-                영업소별로 달라지는 자동배차 기준을 유지보수 가능한 도메인 로직으로 분리하는 문제가 있었습니다.
+                철강 물류에서는 복화 후보 탐색을 API 응답 시간 안에 끝내야 했고,
+                자동배차에서는 ML 예측값과 영업소별 판단 기준을 실제 배차 서비스에 적용하는 MLOps 흐름이 필요했습니다.
               </p>
             </div>
             <aside class="case-meta" aria-label="Steel Logistics Optimization 역할 요약">
               <dl>
                 <div>
                   <dt>Role</dt>
-                  <dd>데이터 처리 구조 개선 · 배차 scoring pipeline 설계</dd>
+                  <dd>복화 매칭 최적화 · 자동배차 MLOps/scoring pipeline 설계</dd>
                 </div>
                 <div>
                   <dt>Scope</dt>
-                  <dd>복화 후보 생성, rule filtering, 차량 유형 예측, 영업소별 scorer</dd>
+                  <dd>복화 후보 생성, rule filtering, 차량 유형 예측, scorer 운영 흐름</dd>
                 </div>
                 <div>
                   <dt>Stack</dt>
@@ -490,18 +491,19 @@
               <h2>AI Service Kubernetes Foundation</h2>
               <p>
                 AI 모델을 운영 서비스로 만들려면 API 코드만으로는 부족했습니다.
-                폐쇄망 환경에서 이미지 배포, 내부 registry, traffic routing, storage, monitoring을 직접 구성해 여러 AI 서비스를 같은 기준으로 운영할 수 있는 기반을 만들었습니다.
+                폐쇄망 환경에서 Kubernetes 노드를 직접 구성하고, 내부 registry와 GitLab CI/CD 파이프라인,
+                traffic routing, storage, monitoring을 연결해 여러 AI 서비스를 같은 기준으로 배포·운영할 수 있는 기반을 만들었습니다.
               </p>
             </div>
             <aside class="case-meta" aria-label="AI Service Kubernetes Foundation 역할 요약">
               <dl>
                 <div>
                   <dt>Role</dt>
-                  <dd>Kubernetes 운영 기반 구성 · 배포/routing/관측 표준화</dd>
+                  <dd>Kubernetes 노드/클러스터 구성 · GitLab CI/CD 파이프라인 · 배포/routing/관측 표준화</dd>
                 </div>
                 <div>
                   <dt>Scope</dt>
-                  <dd>CI/CD, 내부 registry, Gateway/Istio routing, storage, monitoring</dd>
+                  <dd>노드 구성, CI/CD, 내부 registry, Gateway/Istio routing, storage, monitoring</dd>
                 </div>
                 <div>
                   <dt>Stack</dt>
@@ -524,7 +526,7 @@
                 </div>
                 <div>
                   <strong>Action</strong>
-                  <p>RKE 기반 Kubernetes 클러스터에 내부 registry, GitLab CI/CD, Helm 배포 흐름을 구성했습니다.</p>
+                  <p>RKE 기반 Kubernetes 노드와 클러스터를 직접 구성하고, 내부 registry, GitLab CI/CD, Helm 배포 흐름을 연결했습니다.</p>
                 </div>
                 <div>
                   <strong>Result</strong>
