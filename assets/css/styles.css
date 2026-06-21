@@ -1021,33 +1021,46 @@ body.has-lightbox {
 
 .final-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 0.58fr) minmax(0, 1fr);
-  gap: 44px;
+  grid-template-columns: minmax(260px, 0.48fr) minmax(0, 1fr);
+  gap: 56px;
   align-items: start;
 }
 
 .final-outline {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
 }
 
 .final-outline article {
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--white);
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+
+.final-outline h3 {
+  margin: 2px 0 0;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: 0;
 }
 
 .profile-list {
   display: grid;
-  gap: 16px;
+  gap: 14px;
   margin: 0;
 }
 
 .profile-list div {
   display: grid;
-  gap: 4px;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
 }
 
 .profile-list dt {
@@ -1061,7 +1074,7 @@ body.has-lightbox {
   margin: 0;
   color: var(--text);
   font-size: 15px;
-  font-weight: 650;
+  font-weight: 620;
   line-height: 1.62;
 }
 
@@ -1278,8 +1291,18 @@ body.has-lightbox {
   .story-card,
   .evidence-card,
   .subcase-card,
-  .case-meta,
-  .final-outline article {
+  .case-meta {
     padding: 20px;
+  }
+
+  .final-outline article {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 22px 0;
+  }
+
+  .profile-list div {
+    grid-template-columns: 1fr;
+    gap: 5px;
   }
 }
