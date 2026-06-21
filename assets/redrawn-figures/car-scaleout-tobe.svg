@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Scale-out TO-BE 구조</title>
+  <desc id="desc">공용 queue와 Redis 상태 저장으로 여러 API pod와 worker가 일관되게 job 상태를 공유하는 TO-BE 구조</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.lb{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.pod{fill:#fff;stroke:#d6dee6;stroke-width:2}.core{fill:#eef6ff;stroke:#1d4ed8;stroke-width:3}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.dash{stroke:#6b7684;stroke-width:3;fill:none;stroke-dasharray:8 8;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 20px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 14px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">TO-BE: 공용 Queue와 Redis 기준 상태 일관성</text>
+  <text class="cap" x="96" y="154">어떤 pod가 요청·callback을 처리해도 job id 기준으로 동일한 상태를 조회하고 갱신합니다.</text>
+
+  <rect class="lb" x="92" y="292" width="144" height="94" rx="22"/><text class="h" x="126" y="330">Load</text><text class="h" x="116" y="358">Balancer</text>
+  <rect class="pod" x="318" y="224" width="154" height="78" rx="18"/><text class="h" x="350" y="270">API Pod A</text>
+  <rect class="pod" x="318" y="326" width="154" height="78" rx="18"/><text class="h" x="350" y="372">API Pod B</text>
+  <rect class="pod" x="318" y="428" width="154" height="78" rx="18"/><text class="h" x="350" y="474">API Pod C</text>
+  <rect class="core" x="556" y="226" width="174" height="96" rx="22"/><text class="h" x="604" y="266">Queue</text><text class="s" x="590" y="294">pending / retry</text>
+  <rect class="core" x="556" y="400" width="174" height="96" rx="22"/><text class="h" x="604" y="440">Redis</text><text class="s" x="592" y="468">state · lock · result</text>
+  <rect class="pod" x="810" y="224" width="154" height="78" rx="18"/><text class="h" x="842" y="270">Worker A</text>
+  <rect class="pod" x="810" y="326" width="154" height="78" rx="18"/><text class="h" x="842" y="372">Worker B</text>
+  <rect class="pod" x="810" y="428" width="154" height="78" rx="18"/><text class="h" x="842" y="474">Worker C</text>
+
+  <path class="arrow" d="M236 338 C268 254 294 254 318 263"/><path class="arrow" d="M236 338 H318"/><path class="arrow" d="M236 338 C268 468 294 468 318 467"/>
+  <path class="arrow" d="M472 263 H556"/><path class="arrow" d="M472 365 C510 338 522 298 556 274"/><path class="arrow" d="M472 467 C506 452 522 448 556 448"/>
+  <path class="arrow" d="M730 274 H810"/><path class="arrow" d="M730 274 C768 306 780 344 810 365"/><path class="arrow" d="M730 448 H810"/>
+  <path class="dash" d="M964 264 C1048 596 342 614 394 506"/><text class="tag" x="546" y="620">callback/result update → Redis → any API pod can answer</text>
+  <text class="s" x="96" y="610">효과: 노드 장애와 callback routing 변동이 있어도 중앙 상태 저장소 기준으로 재처리 경로가 명확해집니다.</text>
+</svg>
