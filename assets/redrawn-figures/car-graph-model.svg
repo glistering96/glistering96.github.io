@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">선박 내부 구획 Graph 데이터 모델</title>
+  <desc id="desc">선박 내부 구획을 node와 edge로 추상화하고 edge weight와 restriction을 데이터 모델로 표현한 그림</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.box{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.node{fill:#3182f6;stroke:#fff;stroke-width:5}.node2{fill:#1d4ed8;stroke:#fff;stroke-width:5}.edge{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.muted{stroke:#6b7684;stroke-width:3;fill:none;stroke-dasharray:8 8}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 20px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 15px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">선박 공간 Graph Data Model</text>
+  <text class="cap" x="96" y="154">구역을 node로, 인접 이동·통행 가능성을 edge로 표현해 선박 확장을 데이터 추가 문제로 바꿉니다.</text>
+
+  <rect class="box" x="92" y="220" width="236" height="124" rx="22"/><text class="h" x="150" y="266">Space Node</text><text class="s" x="124" y="296">id, deck, hold, polygon</text><text class="s" x="124" y="322">capacity, clearance</text>
+  <rect class="box" x="92" y="390" width="236" height="124" rx="22"/><text class="h" x="158" y="436">Edge Rule</text><text class="s" x="124" y="466">from, to, weight</text><text class="s" x="124" y="492">direction, blockage</text>
+
+  <path class="edge" d="M470 274 C548 224 630 224 708 274"/><path class="edge" d="M470 274 C440 350 450 432 520 474"/><path class="edge" d="M708 274 C754 350 748 432 680 474"/><path class="edge" d="M520 474 C570 506 630 506 680 474"/><path class="edge" d="M520 474 C568 396 628 350 708 274"/>
+  <circle class="node2" cx="470" cy="274" r="34"/><text class="h" x="456" y="282">N1</text>
+  <circle class="node" cx="708" cy="274" r="34"/><text class="h" x="694" y="282">N2</text>
+  <circle class="node" cx="520" cy="474" r="34"/><text class="h" x="506" y="482">N3</text>
+  <circle class="node2" cx="680" cy="474" r="34"/><text class="h" x="666" y="482">N4</text>
+  <text class="tag" x="488" y="214">edge weight: 이동 비용</text><text class="tag" x="634" y="548">restriction: 방향/차단/높이</text>
+
+  <rect class="box" x="840" y="250" width="260" height="94" rx="20"/><text class="h" x="900" y="290">Vessel Type A</text><text class="s" x="878" y="318">nodes + edges + constraints</text>
+  <rect class="box" x="840" y="388" width="260" height="94" rx="20"/><text class="h" x="900" y="428">Vessel Type B</text><text class="s" x="874" y="456">same schema, different data</text>
+  <path class="muted" d="M742 300 H840"/><path class="muted" d="M742 452 H840"/>
+  <text class="s" x="92" y="612">모델 로직은 graph schema를 읽고, 선박별 차이는 node/edge 데이터와 제한값으로 표현합니다.</text>
+</svg>
