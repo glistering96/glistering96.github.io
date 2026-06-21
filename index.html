@@ -277,11 +277,11 @@
               <dl>
                 <div>
                   <dt>Role</dt>
-                  <dd>Platform backend 설계 · runtime lifecycle · service routing</dd>
+                  <dd>Platform backend 설계 · 사용자 runtime 격리 · webapp 배포 파이프라인</dd>
                 </div>
                 <div>
                   <dt>Scope</dt>
-                  <dd>사용자별 StatefulSet/PVC/Service, provisioning 상태, 공용 skill 동기화</dd>
+                  <dd>사용자별 StatefulSet/PVC/Service, GitLab CI/CD, webapp skill, 접근 제어 proxy</dd>
                 </div>
                 <div>
                   <dt>Stack</dt>
@@ -316,20 +316,20 @@
             <article class="topic-flow-card">
               <header>
                 <span>Topic 02</span>
-                <h3>runtime lifecycle과 실행 추적</h3>
+                <h3>채팅 기반 webapp 배포 파이프라인</h3>
               </header>
               <div class="par-flow">
                 <div>
                   <strong>Problem</strong>
-                  <p>runtime 생성, 재시작, 삭제가 임시 작업처럼 흩어지면 사용자의 실행 환경 상태와 오류 원인을 추적하기 어려웠습니다.</p>
+                  <p>현업 사용자가 AI 코딩 도구로 만든 서비스를 다른 사람에게 공유하고 싶어 했지만, 임시 개발 서버에 올린 서비스는 재기동 시 포트와 주소가 바뀌고 로그 확인과 재배포를 우리 팀에 다시 요청해야 했습니다.</p>
                 </div>
                 <div>
                   <strong>Action</strong>
-                  <p>platform backend에서 provisioning 상태, runtime identity, service routing, execution log를 사용자 기준으로 관리했습니다.</p>
+                  <p>채팅으로 webapp을 만들고 배포하는 표준 skill을 만들고, 사용자 id별 GitLab subgroup과 repo를 자동 생성해 Dockerfile과 CI/CD로 Kubernetes에 배포되도록 구성했습니다. 서비스별 내부 proxy를 두어 인가된 사용자만 접근하도록 했습니다.</p>
                 </div>
                 <div>
                   <strong>Result</strong>
-                  <p>user, runtime, execution 기준으로 실행 흐름과 오류를 확인할 수 있어 운영 가능한 backend resource처럼 다룰 수 있게 됐습니다.</p>
+                  <p>사용자는 채팅으로 만든 webapp을 안정적인 주소로 배포하고 공유할 수 있었고, 재배포와 로그 확인, 리소스 연결을 Kubernetes와 GitLab CI/CD 기반 흐름으로 표준화했습니다.</p>
                 </div>
               </div>
             </article>
