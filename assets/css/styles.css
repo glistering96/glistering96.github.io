@@ -817,10 +817,6 @@ figcaption {
   max-height: 520px;
 }
 
-.topic-proof-card .model-interface-diagram {
-  min-width: 920px;
-}
-
 .decision-note {
   display: grid;
   grid-template-columns: 160px minmax(0, 1fr);
@@ -883,103 +879,6 @@ figcaption strong {
   display: block;
   margin-bottom: 4px;
   color: var(--ink);
-}
-
-.model-interface-diagram {
-  display: grid;
-  grid-template-columns: minmax(140px, 1fr) 72px minmax(150px, 1fr) minmax(230px, 1.2fr) 110px minmax(150px, 1fr);
-  gap: 14px;
-  align-items: center;
-  padding: 28px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--white);
-}
-
-.system-node,
-.standard-model,
-.model-stack > div {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--white);
-}
-
-.system-node {
-  display: grid;
-  align-content: center;
-  min-height: 116px;
-  padding: 18px;
-}
-
-.system-node span {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--ink);
-  font-size: 17px;
-  font-weight: 850;
-}
-
-.system-node small {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 750;
-  line-height: 1.5;
-}
-
-.system-node.api,
-.standard-model {
-  border-color: #b9d7ff;
-  background: var(--blue-weak);
-}
-
-.standard-model {
-  padding: 18px;
-}
-
-.standard-model b {
-  display: block;
-  margin-bottom: 12px;
-  color: var(--blue);
-  font-size: 17px;
-}
-
-.standard-model ul {
-  display: grid;
-  gap: 7px;
-  margin: 0;
-  padding-left: 18px;
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 750;
-}
-
-.interface-arrow {
-  color: var(--muted);
-  text-align: center;
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1.3;
-}
-
-.interface-arrow::after {
-  display: block;
-  height: 1px;
-  margin-top: 8px;
-  background: var(--line-strong);
-  content: "";
-}
-
-.model-stack {
-  display: grid;
-  gap: 10px;
-}
-
-.model-stack > div {
-  padding: 18px;
-  color: var(--text);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 850;
 }
 
 .subcase-grid {
@@ -1210,17 +1109,12 @@ figcaption strong {
     overflow-x: auto;
   }
 
-  .embedded-figure img,
-  .model-interface-diagram {
+  .embedded-figure img {
     min-width: 720px;
   }
 
   .topic-proof-card .embedded-figure img {
     min-width: 0;
-  }
-
-  .topic-proof-card .model-interface-diagram {
-    min-width: 720px;
   }
 
   .to-top {

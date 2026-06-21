@@ -9,7 +9,6 @@ This folder contains SVG redraws of the portfolio figure assets. The goal is to 
 | Source figure/reference | Redrawn SVG |
 | --- | --- |
 | `assets/source/problem_solving_be_pptx_extract/figures/car-passage-graph-example.png` | `car-passage-graph-example.svg` |
-| HTML/CSS `.model-interface-diagram` figure | `model-interface-diagram.svg` |
 | `assets/source/problem_solving_be_pptx_extract/figures/car-async-callback-architecture.png` | `car-async-callback-architecture.svg` |
 | `assets/source/problem_solving_be_pptx_extract/figures/car-scaleout-queue-redis-architecture-white.png` | `car-scaleout-queue-redis-architecture-white.svg` |
 | `assets/source/original_images/AI Agent Platform Figure (2).png` | `ai-agent-platform-runtime.svg` |

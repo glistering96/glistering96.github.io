@@ -89,7 +89,7 @@
               긴 추론 시간, callback routing, pod-local state, 모델 입력 형식 차이를 백엔드 구조로 흡수했습니다.
             </p>
             <ul>
-              <li>선박 공간 graph 추상화와 표준 데이터 모델 설계</li>
+              <li>선박 공간 graph 추상화와 모델 입력 기준 정리</li>
               <li>Async callback, Queue, Redis 기반 상태 관리</li>
               <li>모델 호출 분산과 routing 개선으로 10분 → 2~3분</li>
             </ul>
@@ -151,7 +151,7 @@
                 </div>
                 <div>
                   <dt>Scope</dt>
-                  <dd>요청 검증, 표준 데이터 모델, Engine orchestration, callback 처리, 상태 관리</dd>
+                  <dd>요청 검증, Engine orchestration, callback 처리, 상태 관리</dd>
                 </div>
                 <div>
                   <dt>Stack</dt>
@@ -196,36 +196,6 @@
               <div class="topic-flow-card">
                 <header>
                   <span>Topic 02</span>
-                  <h3>시스템 간 데이터 경계 분리</h3>
-                </header>
-                <div class="par-flow">
-                  <div>
-                    <strong>Problem</strong>
-                    <p>기존 시스템, API 서버, Engine 서버, 외부 모델이 서로 다른 데이터 형식을 요구해 변경 영향이 커질 수 있었습니다.</p>
-                  </div>
-                  <div>
-                    <strong>Action</strong>
-                    <p>서비스 내부의 표준 데이터 모델을 두고 각 시스템과 모델은 adapter 계층에서 입출력을 변환하도록 설계했습니다.</p>
-                  </div>
-                  <div>
-                    <strong>Result</strong>
-                    <p>운영 시스템이 모델 세부 구현을 몰라도 요청할 수 있고, 모델 교체 시 변경 범위를 변환 계층으로 제한했습니다.</p>
-                  </div>
-                </div>
-              </div>
-              <figure class="embedded-figure topic-figure">
-                <img src="assets/redrawn-figures/model-interface-diagram.svg?v=20260621-redraw" alt="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 adapter 기반 데이터 인터페이스" loading="lazy" />
-                <figcaption>
-                  <strong>표준 데이터 모델 인터페이스</strong>
-                  기존 시스템, API 서버, 엔진 서버, 외부 모델이 각자 다른 형식에 끌려가지 않도록 내부 표준 모델을 기준으로 입출력을 변환했습니다.
-                </figcaption>
-              </figure>
-            </article>
-
-            <article class="topic-proof-card">
-              <div class="topic-flow-card">
-                <header>
-                  <span>Topic 03</span>
                   <h3>장기 추론과 scale-out 상태 관리</h3>
                 </header>
                 <div class="par-flow">
@@ -264,7 +234,7 @@
             <article class="topic-proof-card text-only">
               <div class="topic-flow-card">
                 <header>
-                  <span>Topic 04</span>
+                  <span>Topic 03</span>
                   <h3>모델 호출 분산과 추론 시간 단축</h3>
                 </header>
                 <div class="par-flow">
