@@ -214,34 +214,7 @@
                 </div>
               </div>
               <figure class="embedded-figure topic-figure">
-                <div class="model-interface-diagram" role="img" aria-label="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 데이터 인터페이스">
-                  <div class="system-node legacy">
-                    <span>기존 사내 시스템</span>
-                    <small>업무 요청 / 결과 수신</small>
-                  </div>
-                  <div class="interface-arrow">request</div>
-                  <div class="system-node api">
-                    <span>API 서버</span>
-                    <small>검증 · 변환 · 상태 관리</small>
-                  </div>
-                  <div class="standard-model">
-                    <b>표준 데이터 모델</b>
-                    <ul>
-                      <li>Vessel / Deck / Hold</li>
-                      <li>Cargo / Port / Height</li>
-                      <li>Capacity / Constraint</li>
-                    </ul>
-                  </div>
-                  <div class="interface-arrow">normalized input</div>
-                  <div class="system-node engine">
-                    <span>Engine 서버</span>
-                    <small>전처리 · 후처리 · 모델 호출</small>
-                  </div>
-                  <div class="model-stack">
-                    <div>외부 상용 모델</div>
-                    <div>내부 강화학습 모델</div>
-                  </div>
-                </div>
+                <img src="assets/redrawn-figures/model-interface-diagram.svg?v=20260621-redraw" alt="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 adapter 기반 데이터 인터페이스" loading="lazy" />
                 <figcaption>
                   <strong>표준 데이터 모델 인터페이스</strong>
                   기존 시스템, API 서버, 엔진 서버, 외부 모델이 각자 다른 형식에 끌려가지 않도록 내부 표준 모델을 기준으로 입출력을 변환했습니다.
