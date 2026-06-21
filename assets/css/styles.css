@@ -142,15 +142,12 @@ button {
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.62fr);
-  gap: 56px;
-  align-items: center;
-  padding: 108px 0 92px;
+  display: block;
+  padding: 70px 0 48px;
 }
 
 .hero-copy {
-  max-width: 760px;
+  max-width: 1040px;
 }
 
 .eyebrow,
@@ -170,19 +167,19 @@ p {
 }
 
 h1 {
-  margin-bottom: 24px;
-  font-size: clamp(42px, 5.8vw, 68px);
+  margin-bottom: 22px;
+  font-size: 60px;
   font-weight: 850;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  line-height: 1.16;
+  letter-spacing: 0;
 }
 
 h2 {
   margin-bottom: 16px;
-  font-size: clamp(30px, 3.4vw, 44px);
+  font-size: 40px;
   font-weight: 850;
   line-height: 1.25;
-  letter-spacing: -0.018em;
+  letter-spacing: 0;
 }
 
 h3 {
@@ -190,7 +187,7 @@ h3 {
   font-size: 20px;
   font-weight: 850;
   line-height: 1.35;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .hero-text,
@@ -200,6 +197,7 @@ h3 {
 .work-card p,
 .story-card p,
 .story-card li,
+.evidence-card p,
 .subcase-card p,
 .case-meta dd,
 .decision-note p,
@@ -209,10 +207,10 @@ figcaption {
 }
 
 .hero-text {
-  max-width: 760px;
-  margin-bottom: 30px;
-  font-size: 19px;
-  line-height: 1.72;
+  max-width: 780px;
+  margin-bottom: 26px;
+  font-size: 18px;
+  line-height: 1.7;
 }
 
 .hero-actions {
@@ -243,17 +241,20 @@ figcaption {
   color: var(--ink);
 }
 
-.hero-panel {
-  padding: 28px;
-  border: 1px solid #d8e8ff;
-  border-radius: 24px;
-  background: linear-gradient(180deg, var(--blue-weak), var(--white));
+.hero-results {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+  margin-top: 54px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
 }
 
-.hero-panel h2 {
-  margin-bottom: 22px;
-  font-size: 27px;
-  line-height: 1.34;
+.hero-results h2 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.25;
 }
 
 .focus-list {
@@ -262,11 +263,26 @@ figcaption {
   margin: 0;
 }
 
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
 .focus-list div {
   padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 14px;
   background: var(--white);
+}
+
+.hero-metrics div {
+  min-height: 104px;
+  padding: 18px 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--soft);
 }
 
 .focus-list dt {
@@ -276,11 +292,26 @@ figcaption {
   font-weight: 850;
 }
 
+.hero-metrics dt {
+  margin-bottom: 8px;
+  color: var(--blue-strong);
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.18;
+}
+
 .focus-list dd {
   margin: 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.55;
+}
+
+.hero-metrics dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .section,
@@ -472,7 +503,19 @@ figcaption {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.evidence-grid.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .story-card,
+.evidence-card,
 .subcase-card {
   padding: 24px;
   border: 1px solid var(--line);
@@ -480,9 +523,22 @@ figcaption {
   background: var(--soft);
 }
 
+.evidence-card {
+  background: var(--white);
+}
+
 .story-card > span {
   display: inline-flex;
   margin-bottom: 16px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.evidence-card span {
+  display: inline-flex;
+  margin-bottom: 14px;
   color: var(--blue);
   font-size: 12px;
   font-weight: 850;
@@ -757,12 +813,23 @@ figcaption strong {
     gap: 36px;
   }
 
+  .hero-results {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .work-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .story-grid,
   .story-grid.two-col,
+  .evidence-grid,
+  .evidence-grid.two-col,
   .subcase-grid,
   .figure-grid.two-col,
   .final-outline {
@@ -794,11 +861,11 @@ figcaption strong {
   }
 
   .hero-grid {
-    padding: 78px 0 64px;
+    padding: 56px 0 58px;
   }
 
   h1 {
-    font-size: 34px;
+    font-size: 38px;
     overflow-wrap: anywhere;
   }
 
@@ -820,7 +887,8 @@ figcaption strong {
   }
 
   .problem-grid,
-  .work-grid {
+  .work-grid,
+  .hero-metrics {
     grid-template-columns: 1fr;
   }
 
@@ -870,7 +938,7 @@ figcaption strong {
   }
 
   h1 {
-    font-size: 31px;
+    font-size: 32px;
   }
 
   h2 {
@@ -885,6 +953,7 @@ figcaption strong {
   .problem-card,
   .work-card,
   .story-card,
+  .evidence-card,
   .subcase-card,
   .case-meta,
   .final-outline article {

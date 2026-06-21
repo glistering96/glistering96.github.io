@@ -16,11 +16,11 @@
         <small>Production AI Backend</small>
       </a>
       <nav class="site-nav" aria-label="포트폴리오 섹션">
-        <a href="#problems">Problems</a>
-        <a href="#auto-stowage">Auto-stowage</a>
+        <a href="#problems">Overview</a>
+        <a href="#auto-stowage">PCC</a>
         <a href="#agent">Agent</a>
         <a href="#steel">Steel</a>
-        <a href="#k8s">Kubernetes</a>
+        <a href="#k8s">K8s</a>
       </nav>
     </div>
   </header>
@@ -29,40 +29,41 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">AI Backend / Applied AI / Logistics Optimization</p>
-          <h1>연구형 AI 모델을<br />업무 시스템에서 동작하는 서비스로 바꿨습니다.</h1>
+          <p class="eyebrow">김원준 | BE/ML Engineer</p>
+          <h1>AI 모델과 실행 환경을<br />운영 가능한 백엔드로 구현합니다.</h1>
           <p class="hero-text">
-            모델을 호출하는 API 하나를 만드는 데서 끝내지 않고, 오래 걸리는 추론 작업, callback, scale-out 상태 관리,
-            도메인 데이터 계약, 폐쇄망 Kubernetes 배포까지 운영 서비스에 필요한 백엔드 경계를 설계했습니다.
+            FastAPI, Redis, Queue, Kubernetes를 기반으로 장기 실행 모델, 사용자별 runtime,
+            분산 상태 관리, 배포와 운영 흐름을 서비스 구조로 설계해왔습니다.
           </p>
           <div class="hero-actions">
             <a class="primary-action" href="#auto-stowage">대표 사례 읽기</a>
-            <a class="secondary-action" href="#problems">문제 구조 보기</a>
+            <a class="secondary-action" href="#problems">주요 경험 보기</a>
           </div>
         </div>
 
-        <aside class="hero-panel" aria-label="엔지니어링 포지션 요약">
-          <p class="panel-label">Engineering Position</p>
-          <h2>모델 성능과 제품 요구사항 사이의 백엔드 경계를 설계합니다.</h2>
-          <dl class="focus-list">
+        <div class="hero-results" aria-label="대표 성과 요약">
+          <div class="hero-results-heading">
+            <h2>주요 성과</h2>
+          </div>
+          <dl class="hero-metrics">
             <div>
-              <dt>Domain → Contract</dt>
-              <dd>업무 데이터를 API contract와 내부 표준 모델로 고정</dd>
+              <dt>10분 → 2~3분</dt>
+              <dd>PCC 적부 추론 시간 단축</dd>
             </div>
             <div>
-              <dt>Model → Pipeline</dt>
-              <dd>장기 실행 모델을 queue, worker, callback 흐름으로 운영화</dd>
+              <dt>900초 → 1초</dt>
+              <dd>철강 복화 매칭 계산 최적화</dd>
             </div>
             <div>
-              <dt>Runtime → Platform</dt>
-              <dd>사용자별 실행 환경과 skill, PVC, routing을 Kubernetes 리소스로 분리</dd>
+              <dt>Runtime 격리</dt>
+              <dd>Kubernetes 기반 Agent 실행 환경 분리</dd>
             </div>
             <div>
-              <dt>Operation → Reliability</dt>
-              <dd>상태 저장소, 재처리, 로그와 지표 기준으로 장애 범위를 추적</dd>
+              <dt>Kubernetes</dt>
+              <dd>폐쇄망 AI 서비스 인프라 구성/운영</dd>
             </div>
           </dl>
-        </aside>
+        </div>
       </div>
     </section>
 
@@ -70,12 +71,12 @@
       <div class="container">
         <div class="section-heading split-heading">
           <div>
-            <p class="eyebrow">Problem-first Portfolio</p>
-            <h2>프로젝트가 아니라, 반복해서 풀어온 백엔드 문제로 묶었습니다.</h2>
+            <p class="eyebrow">Portfolio Overview</p>
+            <h2>모델 실행과 사용자별 Runtime을 서비스로 구현한 경험</h2>
           </div>
           <p>
-            제 경험의 공통점은 모델을 연구 결과로 남기지 않고, 현업 시스템이 요청하고 회수할 수 있는 서비스 단위로 만드는 일이었습니다.
-            아래 문제들이 각 케이스의 기준점입니다.
+            장기 실행 모델 연동, 사용자별 실행 환경 격리, 분산 상태 관리, 데이터 모델링, Kubernetes 운영까지
+            AI 서비스를 실제 제품 환경에서 운영하기 위한 백엔드 영역을 중심으로 경험을 쌓았습니다.
           </p>
         </div>
 
@@ -129,8 +130,8 @@
           </a>
           <a class="work-card" href="#agent">
             <strong>Personal AI Agent Runtime Platform</strong>
-            <p>사용자별 runtime을 Kubernetes 리소스로 분리하고 provisioning, routing, skill 동기화 책임을 backend로 정리했습니다.</p>
-            <span>플랫폼 케이스</span>
+            <p>사용자별 AI 실행 환경을 Kubernetes 리소스로 분리하고 provisioning, routing, skill 동기화 책임을 backend로 정리했습니다.</p>
+            <span>메인 케이스</span>
           </a>
           <a class="work-card" href="#steel">
             <strong>Steel Logistics Optimization</strong>
@@ -174,6 +175,25 @@
                 </div>
               </dl>
             </aside>
+          </div>
+
+          <div class="evidence-grid two-col">
+            <article class="evidence-card">
+              <span>Domain Modeling</span>
+              <h3>선박 공간을 graph 구조로 추상화했습니다.</h3>
+              <p>
+                현업 도면의 다각형 적재 구역을 그대로 시스템 입력으로 쓰기 어려웠기 때문에,
+                적재 가능 공간을 node, 공간 간 이동 가능성을 edge로 보는 자료구조로 정리했습니다.
+              </p>
+            </article>
+            <article class="evidence-card">
+              <span>Performance</span>
+              <h3>추론 시간을 약 10분에서 2~3분 수준으로 줄였습니다.</h3>
+              <p>
+                모델 호출을 병렬 가능한 parameter 단위로 분산하고, Istio routing을 조정해
+                특정 모델 pod로 요청이 몰리는 병목을 완화했습니다.
+              </p>
+            </article>
           </div>
 
           <div class="story-grid">
@@ -226,6 +246,14 @@
           </div>
 
           <div class="figure-stack">
+            <figure class="embedded-figure">
+              <img src="assets/source/problem_solving_be_pptx_extract/figures/car-passage-graph-example.png" alt="선박 내 차량 통행 가능성을 node와 edge로 표현한 graph 예시" loading="lazy" />
+              <figcaption>
+                <strong>선박 공간 graph 추상화</strong>
+                현업 도면의 적재 구역과 차량 통행 가능성을 graph 구조로 정리해 선박별 차이를 모델 입력으로 다룰 수 있게 했습니다.
+              </figcaption>
+            </figure>
+
             <figure class="embedded-figure">
               <div class="model-interface-diagram" role="img" aria-label="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 데이터 인터페이스">
                 <div class="system-node legacy">
@@ -289,8 +317,8 @@
               <p class="eyebrow">Main Case Study 02</p>
               <h2>Personal AI Agent Runtime Platform</h2>
               <p>
-                개인 AI Agent 서비스의 핵심 백엔드 문제는 LLM 호출 자체보다 사용자별 실행 환경을 어떻게 격리하고 운영할 것인가였습니다.
-                profile, workspace, skill, log, runtime lifecycle이 사용자 사이에서 섞이지 않도록 구조를 분리했습니다.
+                개인 AI Agent 서비스에서 핵심 백엔드 문제는 LLM 호출 자체보다 사용자별 실행 환경을 안정적으로 제공하는 일이었습니다.
+                profile, workspace, skill, log, runtime lifecycle을 사용자 단위로 분리해 AI 실행 환경을 서비스처럼 운영할 수 있도록 설계했습니다.
               </p>
             </div>
             <aside class="case-meta" aria-label="Personal AI Agent Runtime Platform 역할 요약">
@@ -337,6 +365,24 @@
                 <li>runtime 장애나 재시작의 영향을 특정 사용자 범위로 제한했습니다.</li>
                 <li>공용 skill PVC와 sync job으로 skill 업데이트 영향을 줄였습니다.</li>
               </ul>
+            </article>
+          </div>
+
+          <div class="evidence-grid">
+            <article class="evidence-card">
+              <span>Runtime Isolation</span>
+              <h3>사용자별 실행 환경 격리</h3>
+              <p>workspace, profile, PVC, service routing을 사용자 runtime 단위로 분리했습니다.</p>
+            </article>
+            <article class="evidence-card">
+              <span>Skill Management</span>
+              <h3>공용 skill 중앙 관리</h3>
+              <p>공용 skill을 중앙에서 관리하고 사용자 runtime에 동기화하는 흐름을 분리했습니다.</p>
+            </article>
+            <article class="evidence-card">
+              <span>Execution Trace</span>
+              <h3>로그와 실행 상태 추적</h3>
+              <p>user, runtime, execution 기준으로 오류와 실행 흐름을 확인할 수 있는 구조를 잡았습니다.</p>
             </article>
           </div>
 
@@ -511,6 +557,14 @@
             </article>
           </div>
 
+          <div class="decision-note">
+            <strong>운영 안정화</strong>
+            <p>
+              Ingress NGINX 취약점과 지원 종료 리스크에 대응해 Istio + Gateway API로 전환하고,
+              노드 간 방화벽 설정 누락으로 발생한 ingress traffic 장애와 SELinux audit logging 과다 점유 문제를 분석해 조치했습니다.
+            </p>
+          </div>
+
           <figure class="embedded-figure">
             <img src="assets/source/problem_solving_be_pptx_extract/figures/k8s-ai-service-platform-overview.png" alt="Kubernetes 기반 AI 서비스 운영 플랫폼 개요" loading="lazy" />
             <figcaption>
@@ -525,13 +579,21 @@
     <section class="section final-section">
       <div class="container final-grid">
         <div>
-          <p class="eyebrow">Research / Technical Base</p>
-          <h2>연구와 운영 구현을 함께 가져갑니다.</h2>
+          <p class="eyebrow">Research & IP</p>
+          <h2>연구와 제품 구현을 함께 가져갑니다.</h2>
         </div>
         <div class="final-outline">
           <article>
             <h3>AlphaRouter</h3>
             <p>강화학습 기반 조합최적화 연구에서 entropy-based selective MCTS와 vectorized environment 구현을 수행했습니다.</p>
+          </article>
+          <article>
+            <h3>Vectorized Optimization</h3>
+            <p>numpy/torch 기반 vectorized environment로 학습 시간을 약 10~20배 단축한 구현 경험이 있습니다.</p>
+          </article>
+          <article>
+            <h3>Publications & Patents</h3>
+            <p>AlphaRouter 논문과 자동배차, 물류 운송, 적재/양하 계획 관련 특허 출원 경험을 보유하고 있습니다.</p>
           </article>
           <article>
             <h3>Backend / ML / Infra</h3>
