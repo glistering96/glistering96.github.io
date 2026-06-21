@@ -204,31 +204,31 @@
                 <div class="par-flow">
                   <div>
                     <strong>Problem</strong>
-                    <p>장시간 실행되는 모델을 동기 HTTP로 호출하기 어려웠고, scale-out 이후 callback이 원 요청 pod로 돌아온다는 보장도 없었습니다.</p>
+                    <p>장시간 실행되는 모델을 기존 시스템에서 호출해야 했고, 초기에는 요청 수신과 결과 수신을 분리한 비동기 callback 구조로 timeout과 polling 문제를 줄였습니다.</p>
                   </div>
                   <div>
                     <strong>Action</strong>
-                    <p>요청 수신과 결과 수신을 분리하고, queue와 Redis를 기준으로 job 상태를 모든 pod가 공유하도록 바꿨습니다.</p>
+                    <p>운영 구조를 scale-out하면서 callback이 원 요청 pod로 돌아온다는 보장이 없어졌고, 이후 queue와 Redis를 기준으로 job 상태를 모든 pod가 공유하는 구조로 보강했습니다.</p>
                   </div>
                   <div>
                     <strong>Result</strong>
-                    <p>pod-local state 의존을 줄이고 처리 중, 완료, 실패 상태를 job id 기준으로 추적할 수 있게 됐습니다.</p>
+                    <p>초기 비동기 연동 구조에서 출발해 pod-local state 의존을 줄였고, 처리 중, 완료, 실패 상태를 job id 기준으로 추적할 수 있게 됐습니다.</p>
                   </div>
                 </div>
               </div>
-              <div class="topic-figure-grid">
-                <figure class="embedded-figure topic-figure">
+              <div class="topic-figure-grid evolution-steps">
+                <figure class="embedded-figure topic-figure" data-phase="Step 01 · 초기 연동 구조">
                   <img src="assets/source/problem_solving_be_pptx_extract/figures/car-async-callback-architecture.png" alt="장기 추론 모델을 위한 비동기 callback 구조" loading="lazy" />
                   <figcaption>
                     <strong>비동기 callback 구조</strong>
-                    요청 수신과 결과 수신을 분리해 장시간 실행 모델을 timeout과 polling 의존 없이 기존 시스템과 연동했습니다.
+                    먼저 요청 수신과 결과 수신을 분리해 장시간 실행 모델을 timeout과 polling 의존 없이 기존 시스템과 연동했습니다.
                   </figcaption>
                 </figure>
-                <figure class="embedded-figure topic-figure">
+                <figure class="embedded-figure topic-figure" data-phase="Step 02 · scale-out 보강 구조">
                   <img src="assets/redrawn-figures/queue-inference-pipeline-redesign.svg?v=20260621-queue-pipeline" alt="Queue와 Redis 기반 scale-out safe 상태 관리 구조" loading="lazy" />
                   <figcaption>
                     <strong>Queue + Redis 기반 scale-out 구조</strong>
-                    모든 API pod가 동일한 queue와 Redis 상태를 참조하도록 바꿔 callback routing 문제를 해결했습니다.
+                    이후 모든 API pod가 동일한 queue와 Redis 상태를 참조하도록 바꿔 callback routing과 pod-local state 의존 문제를 줄였습니다.
                   </figcaption>
                 </figure>
               </div>

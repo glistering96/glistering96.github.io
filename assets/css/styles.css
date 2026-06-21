@@ -810,6 +810,26 @@ figcaption {
   gap: 24px;
 }
 
+.evolution-steps .embedded-figure {
+  padding-top: 52px;
+}
+
+.evolution-steps .embedded-figure::before {
+  content: attr(data-phase);
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--blue-weak);
+  color: var(--blue-strong);
+  font-size: 12px;
+  font-weight: 900;
+}
+
 .topic-proof-card .embedded-figure {
   overflow-x: auto;
 }
