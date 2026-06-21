@@ -1038,6 +1038,32 @@ body.has-lightbox {
   background: var(--white);
 }
 
+.profile-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.profile-list div {
+  display: grid;
+  gap: 4px;
+}
+
+.profile-list dt {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.profile-list dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.62;
+}
+
 .to-top {
   position: fixed;
   right: 24px;
