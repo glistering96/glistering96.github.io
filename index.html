@@ -161,151 +161,155 @@
             </aside>
           </div>
 
-          <div class="topic-flow-grid">
-            <article class="topic-flow-card">
-              <header>
-                <span>Topic 01</span>
-                <h3>선박 공간과 모델 입력 기준 정리</h3>
-              </header>
-              <div class="par-flow">
-                <div>
-                  <strong>Problem</strong>
-                  <p>현업 도면의 적재 구역, 차량 통행 가능성, 선박별 구조 차이를 그대로 API와 모델 입력으로 쓰기 어려웠습니다.</p>
+          <div class="topic-proof-list">
+            <article class="topic-proof-card">
+              <div class="topic-flow-card">
+                <header>
+                  <span>Topic 01</span>
+                  <h3>선박 공간과 모델 입력 기준 정리</h3>
+                </header>
+                <div class="par-flow">
+                  <div>
+                    <strong>Problem</strong>
+                    <p>현업 도면의 적재 구역, 차량 통행 가능성, 선박별 구조 차이를 그대로 API와 모델 입력으로 쓰기 어려웠습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Action</strong>
+                    <p>적재 가능 공간은 node, 이동 가능성은 edge로 보고 선박 공간을 graph 구조로 정리했습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Result</strong>
+                    <p>선박별 차이를 모델 입력으로 다룰 수 있게 되었고, 이후 선박 확장과 제약 조건 추가가 쉬워졌습니다.</p>
+                  </div>
                 </div>
-                <div>
-                  <strong>Action</strong>
-                  <p>적재 가능 공간은 node, 이동 가능성은 edge로 보고 선박 공간을 graph 구조로 정리했습니다.</p>
+              </div>
+              <figure class="embedded-figure topic-figure">
+                <img src="assets/source/problem_solving_be_pptx_extract/figures/car-passage-graph-example.png" alt="선박 내 차량 통행 가능성을 node와 edge로 표현한 graph 예시" loading="lazy" />
+                <figcaption>
+                  <strong>선박 공간 graph 추상화</strong>
+                  현업 도면의 적재 구역과 차량 통행 가능성을 graph 구조로 정리해 선박별 차이를 모델 입력으로 다룰 수 있게 했습니다.
+                </figcaption>
+              </figure>
+            </article>
+
+            <article class="topic-proof-card">
+              <div class="topic-flow-card">
+                <header>
+                  <span>Topic 02</span>
+                  <h3>시스템 간 데이터 경계 분리</h3>
+                </header>
+                <div class="par-flow">
+                  <div>
+                    <strong>Problem</strong>
+                    <p>기존 시스템, API 서버, Engine 서버, 외부 모델이 서로 다른 데이터 형식을 요구해 변경 영향이 커질 수 있었습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Action</strong>
+                    <p>서비스 내부의 표준 데이터 모델을 두고 각 시스템과 모델은 adapter 계층에서 입출력을 변환하도록 설계했습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Result</strong>
+                    <p>운영 시스템이 모델 세부 구현을 몰라도 요청할 수 있고, 모델 교체 시 변경 범위를 변환 계층으로 제한했습니다.</p>
+                  </div>
                 </div>
-                <div>
-                  <strong>Result</strong>
-                  <p>선박별 차이를 모델 입력으로 다룰 수 있게 되었고, 이후 선박 확장과 제약 조건 추가가 쉬워졌습니다.</p>
+              </div>
+              <figure class="embedded-figure topic-figure">
+                <div class="model-interface-diagram" role="img" aria-label="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 데이터 인터페이스">
+                  <div class="system-node legacy">
+                    <span>기존 사내 시스템</span>
+                    <small>업무 요청 / 결과 수신</small>
+                  </div>
+                  <div class="interface-arrow">request</div>
+                  <div class="system-node api">
+                    <span>API 서버</span>
+                    <small>검증 · 변환 · 상태 관리</small>
+                  </div>
+                  <div class="standard-model">
+                    <b>표준 데이터 모델</b>
+                    <ul>
+                      <li>Vessel / Deck / Hold</li>
+                      <li>Cargo / Port / Height</li>
+                      <li>Capacity / Constraint</li>
+                    </ul>
+                  </div>
+                  <div class="interface-arrow">normalized input</div>
+                  <div class="system-node engine">
+                    <span>Engine 서버</span>
+                    <small>전처리 · 후처리 · 모델 호출</small>
+                  </div>
+                  <div class="model-stack">
+                    <div>외부 상용 모델</div>
+                    <div>내부 강화학습 모델</div>
+                  </div>
                 </div>
+                <figcaption>
+                  <strong>표준 데이터 모델 인터페이스</strong>
+                  기존 시스템, API 서버, 엔진 서버, 외부 모델이 각자 다른 형식에 끌려가지 않도록 내부 표준 모델을 기준으로 입출력을 변환했습니다.
+                </figcaption>
+              </figure>
+            </article>
+
+            <article class="topic-proof-card">
+              <div class="topic-flow-card">
+                <header>
+                  <span>Topic 03</span>
+                  <h3>장기 추론과 scale-out 상태 관리</h3>
+                </header>
+                <div class="par-flow">
+                  <div>
+                    <strong>Problem</strong>
+                    <p>장시간 실행되는 모델을 동기 HTTP로 호출하기 어려웠고, scale-out 이후 callback이 원 요청 pod로 돌아온다는 보장도 없었습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Action</strong>
+                    <p>요청 수신과 결과 수신을 분리하고, queue와 Redis를 기준으로 job 상태를 모든 pod가 공유하도록 바꿨습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Result</strong>
+                    <p>pod-local state 의존을 줄이고 처리 중, 완료, 실패 상태를 job id 기준으로 추적할 수 있게 됐습니다.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="topic-figure-grid">
+                <figure class="embedded-figure topic-figure">
+                  <img src="assets/source/problem_solving_be_pptx_extract/figures/car-async-callback-architecture.png" alt="장기 추론 모델을 위한 비동기 callback 구조" loading="lazy" />
+                  <figcaption>
+                    <strong>비동기 callback 구조</strong>
+                    요청 수신과 결과 수신을 분리해 장시간 실행 모델을 timeout과 polling 의존 없이 기존 시스템과 연동했습니다.
+                  </figcaption>
+                </figure>
+                <figure class="embedded-figure topic-figure">
+                  <img src="assets/source/problem_solving_be_pptx_extract/figures/car-scaleout-queue-redis-architecture-white.png?v=20260620-white" alt="Queue와 Redis 기반 scale-out safe 상태 관리 구조" loading="lazy" />
+                  <figcaption>
+                    <strong>Queue + Redis 기반 scale-out 구조</strong>
+                    모든 API pod가 동일한 queue와 Redis 상태를 참조하도록 바꿔 callback routing 문제를 해결했습니다.
+                  </figcaption>
+                </figure>
               </div>
             </article>
 
-            <article class="topic-flow-card">
-              <header>
-                <span>Topic 02</span>
-                <h3>시스템 간 데이터 경계 분리</h3>
-              </header>
-              <div class="par-flow">
-                <div>
-                  <strong>Problem</strong>
-                  <p>기존 시스템, API 서버, Engine 서버, 외부 모델이 서로 다른 데이터 형식을 요구해 변경 영향이 커질 수 있었습니다.</p>
-                </div>
-                <div>
-                  <strong>Action</strong>
-                  <p>서비스 내부의 표준 데이터 모델을 두고 각 시스템과 모델은 adapter 계층에서 입출력을 변환하도록 설계했습니다.</p>
-                </div>
-                <div>
-                  <strong>Result</strong>
-                  <p>운영 시스템이 모델 세부 구현을 몰라도 요청할 수 있고, 모델 교체 시 변경 범위를 변환 계층으로 제한했습니다.</p>
-                </div>
-              </div>
-            </article>
-
-            <article class="topic-flow-card">
-              <header>
-                <span>Topic 03</span>
-                <h3>장기 추론과 scale-out 상태 관리</h3>
-              </header>
-              <div class="par-flow">
-                <div>
-                  <strong>Problem</strong>
-                  <p>장시간 실행되는 모델을 동기 HTTP로 호출하기 어려웠고, scale-out 이후 callback이 원 요청 pod로 돌아온다는 보장도 없었습니다.</p>
-                </div>
-                <div>
-                  <strong>Action</strong>
-                  <p>요청 수신과 결과 수신을 분리하고, queue와 Redis를 기준으로 job 상태를 모든 pod가 공유하도록 바꿨습니다.</p>
-                </div>
-                <div>
-                  <strong>Result</strong>
-                  <p>pod-local state 의존을 줄이고 처리 중, 완료, 실패 상태를 job id 기준으로 추적할 수 있게 됐습니다.</p>
+            <article class="topic-proof-card text-only">
+              <div class="topic-flow-card">
+                <header>
+                  <span>Topic 04</span>
+                  <h3>모델 호출 분산과 추론 시간 단축</h3>
+                </header>
+                <div class="par-flow">
+                  <div>
+                    <strong>Problem</strong>
+                    <p>외부 모델 호출이 직렬 loop에 가깝게 동작했고, Kubernetes service의 연결 유지 특성 때문에 특정 pod로 요청이 몰렸습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Action</strong>
+                    <p>병렬 가능한 parameter 단위로 모델 호출을 나누고, Istio round-robin routing으로 모델 pod에 요청을 분산했습니다.</p>
+                  </div>
+                  <div>
+                    <strong>Result</strong>
+                    <p>적부 추론 시간을 약 10분에서 2~3분 수준으로 줄여 운영 시스템에서 기다릴 수 있는 응답 흐름을 만들었습니다.</p>
+                  </div>
                 </div>
               </div>
             </article>
-
-            <article class="topic-flow-card">
-              <header>
-                <span>Topic 04</span>
-                <h3>모델 호출 분산과 추론 시간 단축</h3>
-              </header>
-              <div class="par-flow">
-                <div>
-                  <strong>Problem</strong>
-                  <p>외부 모델 호출이 직렬 loop에 가깝게 동작했고, Kubernetes service의 연결 유지 특성 때문에 특정 pod로 요청이 몰렸습니다.</p>
-                </div>
-                <div>
-                  <strong>Action</strong>
-                  <p>병렬 가능한 parameter 단위로 모델 호출을 나누고, Istio round-robin routing으로 모델 pod에 요청을 분산했습니다.</p>
-                </div>
-                <div>
-                  <strong>Result</strong>
-                  <p>적부 추론 시간을 약 10분에서 2~3분 수준으로 줄여 운영 시스템에서 기다릴 수 있는 응답 흐름을 만들었습니다.</p>
-                </div>
-              </div>
-            </article>
-          </div>
-
-          <div class="figure-stack">
-            <figure class="embedded-figure">
-              <img src="assets/source/problem_solving_be_pptx_extract/figures/car-passage-graph-example.png" alt="선박 내 차량 통행 가능성을 node와 edge로 표현한 graph 예시" loading="lazy" />
-              <figcaption>
-                <strong>선박 공간 graph 추상화</strong>
-                현업 도면의 적재 구역과 차량 통행 가능성을 graph 구조로 정리해 선박별 차이를 모델 입력으로 다룰 수 있게 했습니다.
-              </figcaption>
-            </figure>
-
-            <figure class="embedded-figure">
-              <div class="model-interface-diagram" role="img" aria-label="기존 사내 시스템, API 서버, 표준 데이터 모델, 엔진 서버, 외부 모델 사이의 데이터 인터페이스">
-                <div class="system-node legacy">
-                  <span>기존 사내 시스템</span>
-                  <small>업무 요청 / 결과 수신</small>
-                </div>
-                <div class="interface-arrow">request</div>
-                <div class="system-node api">
-                  <span>API 서버</span>
-                  <small>검증 · 변환 · 상태 관리</small>
-                </div>
-                <div class="standard-model">
-                  <b>표준 데이터 모델</b>
-                  <ul>
-                    <li>Vessel / Deck / Hold</li>
-                    <li>Cargo / Port / Height</li>
-                    <li>Capacity / Constraint</li>
-                  </ul>
-                </div>
-                <div class="interface-arrow">normalized input</div>
-                <div class="system-node engine">
-                  <span>Engine 서버</span>
-                  <small>전처리 · 후처리 · 모델 호출</small>
-                </div>
-                <div class="model-stack">
-                  <div>외부 상용 모델</div>
-                  <div>내부 강화학습 모델</div>
-                </div>
-              </div>
-              <figcaption>
-                <strong>표준 데이터 모델 인터페이스</strong>
-                기존 시스템, API 서버, 엔진 서버, 외부 모델이 각자 다른 형식에 끌려가지 않도록 내부 표준 모델을 기준으로 입출력을 변환했습니다.
-              </figcaption>
-            </figure>
-
-            <figure class="embedded-figure">
-              <img src="assets/source/problem_solving_be_pptx_extract/figures/car-async-callback-architecture.png" alt="장기 추론 모델을 위한 비동기 callback 구조" loading="lazy" />
-              <figcaption>
-                <strong>비동기 callback 구조</strong>
-                요청 수신과 결과 수신을 분리해 장시간 실행 모델을 timeout과 polling 의존 없이 기존 시스템과 연동했습니다.
-              </figcaption>
-            </figure>
-
-            <figure class="embedded-figure">
-              <img src="assets/source/problem_solving_be_pptx_extract/figures/car-scaleout-queue-redis-architecture-white.png?v=20260620-white" alt="Queue와 Redis 기반 scale-out safe 상태 관리 구조" loading="lazy" />
-              <figcaption>
-                <strong>Queue + Redis 기반 scale-out 구조</strong>
-                모든 API pod가 동일한 queue와 Redis 상태를 참조하도록 바꿔 callback routing 문제를 해결했습니다.
-              </figcaption>
-            </figure>
           </div>
         </div>
       </div>

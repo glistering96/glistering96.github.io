@@ -774,6 +774,53 @@ figcaption {
   line-height: 1.65;
 }
 
+.topic-proof-list {
+  display: grid;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.topic-proof-card {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.82fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.topic-proof-card.text-only {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.topic-proof-card.text-only .topic-flow-card {
+  max-width: none;
+}
+
+.topic-proof-card .topic-flow-card {
+  height: 100%;
+}
+
+.topic-figure,
+.topic-figure-grid {
+  min-width: 0;
+}
+
+.topic-figure-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.topic-proof-card .embedded-figure {
+  overflow-x: auto;
+}
+
+.topic-proof-card .embedded-figure img {
+  max-height: 520px;
+}
+
+.topic-proof-card .model-interface-diagram {
+  min-width: 920px;
+}
+
 .decision-note {
   display: grid;
   grid-template-columns: 160px minmax(0, 1fr);
@@ -1057,10 +1104,15 @@ figcaption strong {
   .evidence-grid,
   .evidence-grid.two-col,
   .topic-flow-grid,
+  .topic-proof-card,
   .subcase-grid,
   .figure-grid.two-col,
   .final-outline {
     grid-template-columns: 1fr;
+  }
+
+  .topic-proof-card.text-only .topic-flow-card {
+    max-width: none;
   }
 }
 
@@ -1160,6 +1212,14 @@ figcaption strong {
 
   .embedded-figure img,
   .model-interface-diagram {
+    min-width: 720px;
+  }
+
+  .topic-proof-card .embedded-figure img {
+    min-width: 0;
+  }
+
+  .topic-proof-card .model-interface-diagram {
     min-width: 720px;
   }
 
