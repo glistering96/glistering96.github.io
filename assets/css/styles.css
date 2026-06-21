@@ -850,6 +850,11 @@ figcaption {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.topic-flow-grid + .embedded-figure,
+.topic-flow-grid + .figure-grid {
+  margin-top: 46px;
+}
+
 figure {
   margin: 0;
 }
