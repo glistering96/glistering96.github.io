@@ -717,6 +717,63 @@ figcaption {
   padding-left: 2px;
 }
 
+.topic-flow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.topic-flow-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.topic-flow-card header {
+  margin-bottom: 18px;
+}
+
+.topic-flow-card span {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.topic-flow-card h3 {
+  margin-bottom: 0;
+}
+
+.par-flow {
+  display: grid;
+  gap: 10px;
+}
+
+.par-flow div {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.par-flow strong {
+  color: var(--blue-strong);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.par-flow p {
+  margin-bottom: 0;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 .decision-note {
   display: grid;
   grid-template-columns: 160px minmax(0, 1fr);
@@ -999,6 +1056,7 @@ figcaption strong {
   .story-grid.two-col,
   .evidence-grid,
   .evidence-grid.two-col,
+  .topic-flow-grid,
   .subcase-grid,
   .figure-grid.two-col,
   .final-outline {
@@ -1077,6 +1135,11 @@ figcaption strong {
     min-height: auto;
   }
 
+  .par-flow div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
   .main-story-card h3 {
     font-size: 25px;
   }
@@ -1132,6 +1195,7 @@ figcaption strong {
   .work-card,
   .main-story-card,
   .supporting-proof-card,
+  .topic-flow-card,
   .story-card,
   .evidence-card,
   .subcase-card,

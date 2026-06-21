@@ -161,72 +161,90 @@
             </aside>
           </div>
 
-          <div class="evidence-grid two-col">
-            <article class="evidence-card">
-              <span>Domain Modeling</span>
-              <h3>선박 공간을 graph 구조로 추상화했습니다.</h3>
-              <p>
-                현업 도면의 다각형 적재 구역을 그대로 시스템 입력으로 쓰기 어려웠기 때문에,
-                적재 가능 공간을 node, 공간 간 이동 가능성을 edge로 보는 자료구조로 정리했습니다.
-              </p>
+          <div class="topic-flow-grid">
+            <article class="topic-flow-card">
+              <header>
+                <span>Topic 01</span>
+                <h3>선박 공간과 모델 입력 기준 정리</h3>
+              </header>
+              <div class="par-flow">
+                <div>
+                  <strong>Problem</strong>
+                  <p>현업 도면의 적재 구역, 차량 통행 가능성, 선박별 구조 차이를 그대로 API와 모델 입력으로 쓰기 어려웠습니다.</p>
+                </div>
+                <div>
+                  <strong>Action</strong>
+                  <p>적재 가능 공간은 node, 이동 가능성은 edge로 보고 선박 공간을 graph 구조로 정리했습니다.</p>
+                </div>
+                <div>
+                  <strong>Result</strong>
+                  <p>선박별 차이를 모델 입력으로 다룰 수 있게 되었고, 이후 선박 확장과 제약 조건 추가가 쉬워졌습니다.</p>
+                </div>
+              </div>
             </article>
-            <article class="evidence-card">
-              <span>Performance</span>
-              <h3>추론 시간을 약 10분에서 2~3분 수준으로 줄였습니다.</h3>
-              <p>
-                모델 호출을 병렬 가능한 parameter 단위로 분산하고, Istio routing을 조정해
-                특정 모델 pod로 요청이 몰리는 병목을 완화했습니다.
-              </p>
-            </article>
-          </div>
 
-          <div class="story-grid">
-            <article class="story-card">
-              <span>Problem</span>
-              <h3>모델보다 먼저 API 경계가 불안정했습니다.</h3>
-              <p>
-                기존 시스템, API 서버, Engine 서버, 외부 최적화 모델이 서로 다른 데이터 형식을 요구했습니다.
-                모델 입력 형식에 서비스 전체가 종속되면 모델 교체와 선박 확장 시 변경 범위가 커질 수 있었습니다.
-              </p>
-              <ul>
-                <li>장기 추론 모델은 동기 HTTP 호출로 처리하기 어려웠습니다.</li>
-                <li>API 서버 scale-out 시 callback이 원 요청 pod로 돌아온다는 보장이 없었습니다.</li>
-                <li>후처리 결과를 기존 시스템이 이해하는 응답 형태로 변환해야 했습니다.</li>
-              </ul>
+            <article class="topic-flow-card">
+              <header>
+                <span>Topic 02</span>
+                <h3>시스템 간 데이터 경계 분리</h3>
+              </header>
+              <div class="par-flow">
+                <div>
+                  <strong>Problem</strong>
+                  <p>기존 시스템, API 서버, Engine 서버, 외부 모델이 서로 다른 데이터 형식을 요구해 변경 영향이 커질 수 있었습니다.</p>
+                </div>
+                <div>
+                  <strong>Action</strong>
+                  <p>서비스 내부의 표준 데이터 모델을 두고 각 시스템과 모델은 adapter 계층에서 입출력을 변환하도록 설계했습니다.</p>
+                </div>
+                <div>
+                  <strong>Result</strong>
+                  <p>운영 시스템이 모델 세부 구현을 몰라도 요청할 수 있고, 모델 교체 시 변경 범위를 변환 계층으로 제한했습니다.</p>
+                </div>
+              </div>
             </article>
-            <article class="story-card">
-              <span>Action</span>
-              <h3>요청, 실행, 상태, 결과 회수를 분리했습니다.</h3>
-              <p>
-                API 서버는 요청 검증과 표준 데이터 모델 변환을 맡고, Engine 서버는 모델 실행 orchestration과 callback 결과 처리를 맡도록 나눴습니다.
-                Redis와 queue를 기준으로 pod와 무관한 상태 조회 흐름을 만들었습니다.
-              </p>
-              <ul>
-                <li>기존 시스템 입력과 모델 입력을 adapter처럼 변환했습니다.</li>
-                <li>job id 기준으로 Redis 상태를 생성하고 callback 처리에 활용했습니다.</li>
-                <li>API pod와 Engine pod를 producer/consumer 구조로 분리했습니다.</li>
-              </ul>
-            </article>
-            <article class="story-card">
-              <span>Result</span>
-              <h3>운영 시스템이 모델 세부 구현을 몰라도 요청할 수 있게 됐습니다.</h3>
-              <p>
-                요청 생성, 상태 조회, 추론 실행, callback 처리, 후처리 책임이 분리되면서 장기 실행 모델을 운영 API처럼 다룰 수 있게 됐습니다.
-              </p>
-              <ul>
-                <li>pod-local state 의존을 제거해 scale-out 이후 callback routing 문제를 완화했습니다.</li>
-                <li>처리 중, 완료, 실패 상태를 job id와 Redis 기준으로 추적했습니다.</li>
-                <li>모델 교체와 선박 확장 시 변경 범위를 adapter 계층으로 제한했습니다.</li>
-              </ul>
-            </article>
-          </div>
 
-          <div class="decision-note">
-            <strong>설계 판단</strong>
-            <p>
-              단순 polling이나 pod memory 기반 상태 관리는 scale-out, 장애 복구, 장기 실행 작업에 취약했습니다.
-              그래서 요청 수신과 결과 회수를 분리하고, Redis를 전역 상태 기준점으로 두는 구조를 선택했습니다.
-            </p>
+            <article class="topic-flow-card">
+              <header>
+                <span>Topic 03</span>
+                <h3>장기 추론과 scale-out 상태 관리</h3>
+              </header>
+              <div class="par-flow">
+                <div>
+                  <strong>Problem</strong>
+                  <p>장시간 실행되는 모델을 동기 HTTP로 호출하기 어려웠고, scale-out 이후 callback이 원 요청 pod로 돌아온다는 보장도 없었습니다.</p>
+                </div>
+                <div>
+                  <strong>Action</strong>
+                  <p>요청 수신과 결과 수신을 분리하고, queue와 Redis를 기준으로 job 상태를 모든 pod가 공유하도록 바꿨습니다.</p>
+                </div>
+                <div>
+                  <strong>Result</strong>
+                  <p>pod-local state 의존을 줄이고 처리 중, 완료, 실패 상태를 job id 기준으로 추적할 수 있게 됐습니다.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="topic-flow-card">
+              <header>
+                <span>Topic 04</span>
+                <h3>모델 호출 분산과 추론 시간 단축</h3>
+              </header>
+              <div class="par-flow">
+                <div>
+                  <strong>Problem</strong>
+                  <p>외부 모델 호출이 직렬 loop에 가깝게 동작했고, Kubernetes service의 연결 유지 특성 때문에 특정 pod로 요청이 몰렸습니다.</p>
+                </div>
+                <div>
+                  <strong>Action</strong>
+                  <p>병렬 가능한 parameter 단위로 모델 호출을 나누고, Istio round-robin routing으로 모델 pod에 요청을 분산했습니다.</p>
+                </div>
+                <div>
+                  <strong>Result</strong>
+                  <p>적부 추론 시간을 약 10분에서 2~3분 수준으로 줄여 운영 시스템에서 기다릴 수 있는 응답 흐름을 만들었습니다.</p>
+                </div>
+              </div>
+            </article>
           </div>
 
           <div class="figure-stack">
