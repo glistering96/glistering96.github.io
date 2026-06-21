@@ -1,43 +1,104 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
-  <title id="title">선박 공간 graph 추상화</title>
-  <desc id="desc">선박 적재 구역을 node로, 차량 통행 가능성을 edge로 다시 그린 SVG 다이어그램</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">선박 도면 구역 graph 추상화</title>
+  <desc id="desc">자동차선 적재 데크를 여러 적재 구역으로 나누고 각 구역 중심을 node, 차량 통행 가능 관계를 edge로 표현한 도식</desc>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.12"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#1d4ed8"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#313e50" flood-opacity="0.12"/>
+    </filter>
+    <linearGradient id="deck" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f8fbff"/>
+    </linearGradient>
   </defs>
   <style>
-    .bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.deck{fill:#eef6ff;stroke:#1d4ed8;stroke-width:3}.zone{fill:#fff;stroke:#d6dee6;stroke-width:2}.path{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.node{fill:#3182f6;stroke:#fff;stroke-width:5}.node2{fill:#1d4ed8;stroke:#fff;stroke-width:5}.label{font:800 22px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.small{font:700 16px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.caption{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}.pill{fill:#eef6ff;stroke:#d8e8ff;stroke-width:2}.pilltext{font:800 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}
+    .page{fill:#f2f4f6}
+    .panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}
+    .deck{fill:url(#deck);stroke:#171f2f;stroke-width:4;stroke-linejoin:round}
+    .zone-a{fill:#ffe8cc;stroke:#9aa7b5;stroke-width:2}
+    .zone-b{fill:#fff0b8;stroke:#9aa7b5;stroke-width:2}
+    .zone-c{fill:#d9edc9;stroke:#9aa7b5;stroke-width:2}
+    .zone-d{fill:#cfe0f7;stroke:#9aa7b5;stroke-width:2}
+    .lane{fill:none;stroke:#111827;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .edge{fill:none;stroke:#1d4ed8;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+    .edge-soft{fill:none;stroke:#93c5fd;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:10 10}
+    .node{fill:#3182f6;stroke:#fff;stroke-width:6}
+    .node-core{fill:#1d4ed8}
+    .label{font:900 22px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#fff}
+    .title{font:900 38px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#171f2f}
+    .subtitle{font:750 18px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#4e5968}
+    .small{font:750 14px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#6b7684}
+    .zone-text{font:850 15px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#333d4b}
+    .legend{fill:#f8fafb;stroke:#e5e8eb;stroke-width:2}
+    .legend-title{font:900 16px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#171f2f}
+    .legend-text{font:750 14px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#4e5968}
+    .badge{fill:#eef6ff;stroke:#b9d7ff;stroke-width:2}
+    .badge-text{font:850 14px Pretendard,'Noto Sans KR',Arial,sans-serif;fill:#1d4ed8}
   </style>
-  <rect class="bg" width="1200" height="720" rx="0"/>
-  <rect class="panel" x="56" y="54" width="1088" height="612" rx="28"/>
-  <text class="title" x="96" y="116">선박 공간을 Graph로 추상화</text>
-  <text class="caption" x="96" y="154">적재 가능 구역은 node, 차량 통행 가능성은 edge로 모델링해 선박별 구조 차이를 데이터로 다룹니다.</text>
 
-  <path class="deck" d="M112 258 L210 198 L968 198 L1088 282 L1030 534 L204 534 L112 468 Z"/>
-  <path class="zone" d="M218 236 h238 v118 h-238z"/>
-  <path class="zone" d="M486 236 h246 v118 h-246z"/>
-  <path class="zone" d="M764 236 h222 l42 58 v60 h-264z"/>
-  <path class="zone" d="M218 384 h226 v112 h-226z"/>
-  <path class="zone" d="M476 384 h250 v112 h-250z"/>
-  <path class="zone" d="M758 384 h264 v112 h-264z"/>
+  <rect class="page" width="1280" height="760"/>
+  <rect class="panel" x="46" y="42" width="1188" height="676" rx="34"/>
 
-  <path class="path" d="M334 296 C440 268 535 274 612 300"/>
-  <path class="path" d="M612 300 C736 296 826 302 910 318"/>
-  <path class="path" d="M334 296 C320 368 332 421 342 444"/>
-  <path class="path" d="M612 300 C602 356 604 408 606 444"/>
-  <path class="path" d="M910 318 C890 365 890 410 894 444"/>
-  <path class="path" d="M342 444 C448 476 514 472 606 444"/>
-  <path class="path" d="M606 444 C704 474 796 474 894 444"/>
+  <text class="title" x="84" y="104">선박 도면 구역을 graph로 변환</text>
+  <text class="subtitle" x="84" y="136">도면의 적재 구역은 node, 차량이 이동 가능한 인접 관계는 edge로 정리합니다.</text>
 
-  <circle class="node2" cx="334" cy="296" r="24"/><text class="label" x="319" y="304">A</text>
-  <circle class="node" cx="612" cy="300" r="24"/><text class="label" x="597" y="308">B</text>
-  <circle class="node" cx="910" cy="318" r="24"/><text class="label" x="895" y="326">C</text>
-  <circle class="node" cx="342" cy="444" r="24"/><text class="label" x="327" y="452">D</text>
-  <circle class="node" cx="606" cy="444" r="24"/><text class="label" x="592" y="452">E</text>
-  <circle class="node2" cx="894" cy="444" r="24"/><text class="label" x="880" y="452">F</text>
+  <g transform="translate(88 184)">
+    <path class="deck" d="M0 146L100 64H892L1034 174L982 420H104L0 350Z"/>
 
-  <rect class="pill" x="148" y="574" width="220" height="44" rx="22"/><text class="pilltext" x="181" y="602">Node = 적재 가능 공간</text>
-  <rect class="pill" x="396" y="574" width="250" height="44" rx="22"/><text class="pilltext" x="427" y="602">Edge = 차량 통행 가능성</text>
-  <rect class="pill" x="674" y="574" width="324" height="44" rx="22"/><text class="pilltext" x="704" y="602">Graph = 선박별 deck 구조 표준화</text>
-  <text class="small" x="850" y="154">Redrawn SVG · assets/redrawn-figures</text>
+    <path class="zone-a" d="M104 104H326V218H64V150Z"/>
+    <path class="zone-b" d="M326 104H562V218H326Z"/>
+    <path class="zone-c" d="M562 104H854L944 174V218H562Z"/>
+
+    <path class="zone-a" d="M104 248H342V374H86L64 350V248Z"/>
+    <path class="zone-d" d="M342 248H606V374H342Z"/>
+    <path class="zone-c" d="M606 248H934L910 374H606Z"/>
+
+    <path class="lane" d="M160 232H900"/>
+    <path class="lane" d="M454 124V358"/>
+    <path class="lane" d="M732 124V358"/>
+
+    <path class="edge-soft" d="M214 162C310 156 360 178 454 232"/>
+    <path class="edge-soft" d="M454 232C520 174 618 164 732 162"/>
+    <path class="edge-soft" d="M732 162C812 176 860 198 900 232"/>
+    <path class="edge" d="M214 162C234 254 236 298 230 318"/>
+    <path class="edge" d="M454 232C402 270 344 298 230 318"/>
+    <path class="edge" d="M454 232C518 270 556 296 584 318"/>
+    <path class="edge" d="M732 162C692 232 648 276 584 318"/>
+    <path class="edge" d="M584 318C702 322 790 294 862 318"/>
+    <path class="edge" d="M900 232C888 264 878 292 862 318"/>
+
+    <circle class="node" cx="214" cy="162" r="28"/><text class="label" x="197" y="171">N1</text>
+    <circle class="node" cx="454" cy="232" r="28"/><text class="label" x="437" y="241">N2</text>
+    <circle class="node" cx="732" cy="162" r="28"/><text class="label" x="715" y="171">N3</text>
+    <circle class="node" cx="900" cy="232" r="28"/><text class="label" x="883" y="241">N4</text>
+    <circle class="node" cx="230" cy="318" r="28"/><text class="label" x="213" y="327">N5</text>
+    <circle class="node" cx="584" cy="318" r="28"/><text class="label" x="567" y="327">N6</text>
+    <circle class="node" cx="862" cy="318" r="28"/><text class="label" x="845" y="327">N7</text>
+
+    <text class="zone-text" x="142" y="130">A구역</text>
+    <text class="zone-text" x="408" y="130">B구역</text>
+    <text class="zone-text" x="696" y="130">C구역</text>
+    <text class="zone-text" x="150" y="356">D구역</text>
+    <text class="zone-text" x="456" y="356">E구역</text>
+    <text class="zone-text" x="736" y="356">F구역</text>
+
+    <rect class="badge" x="20" y="444" width="240" height="44" rx="22"/>
+    <text class="badge-text" x="48" y="472">Node = 적재 가능 구역</text>
+    <rect class="badge" x="284" y="444" width="278" height="44" rx="22"/>
+    <text class="badge-text" x="314" y="472">Edge = 차량 통행 가능성</text>
+    <rect class="badge" x="586" y="444" width="362" height="44" rx="22"/>
+    <text class="badge-text" x="616" y="472">Graph = 선박별 deck 구조 표준화</text>
+  </g>
+
+  <g transform="translate(846 84)">
+    <rect class="legend" x="0" y="0" width="300" height="96" rx="20"/>
+    <circle class="node-core" cx="34" cy="31" r="9"/>
+    <text class="legend-title" x="54" y="36">도면 구역 중심을 node로 표현</text>
+    <path class="edge" d="M24 66H72"/>
+    <text class="legend-title" x="92" y="72">이동 가능한 관계를 edge로 표현</text>
+  </g>
+
+  <text class="small" x="84" y="684">실제 운영 도면의 세부 형상은 노출하지 않고, 포트폴리오용 예시 구조로 재구성한 figure입니다.</text>
 </svg>
