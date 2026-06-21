@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">표준 데이터 모델 계약</title>
+  <desc id="desc">사내 시스템, API, 엔진, 모델 사이의 입출력 형식 차이를 표준 데이터 모델과 adapter로 정리한 인터페이스 구조</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.box{fill:#fff;stroke:#d6dee6;stroke-width:2}.core{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.adapter{fill:#f8fafb;stroke:#1d4ed8;stroke-width:2}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 20px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 14px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">표준 데이터 모델 계약으로 변경 범위 고정</text>
+  <text class="cap" x="96" y="154">외부 시스템과 모델 포맷이 바뀌어도 내부 서비스 계약은 동일하게 유지합니다.</text>
+
+  <rect class="box" x="92" y="300" width="164" height="110" rx="22"/><text class="h" x="132" y="344">Legacy</text><text class="h" x="126" y="372">System</text><text class="s" x="122" y="398">업무 입력/응답</text>
+  <rect class="adapter" x="326" y="238" width="162" height="86" rx="20"/><text class="h" x="364" y="274">Input</text><text class="h" x="354" y="302">Adapter</text>
+  <rect class="core" x="548" y="256" width="222" height="198" rx="28"/><text class="h" x="596" y="304">Standard</text><text class="h" x="587" y="332">Data Model</text><text class="s" x="586" y="368">Vessel / Hold / Deck</text><text class="s" x="586" y="394">Cargo / Rule / Job</text><text class="s" x="586" y="420">validated contract</text>
+  <rect class="adapter" x="326" y="450" width="162" height="86" rx="20"/><text class="h" x="358" y="486">Output</text><text class="h" x="354" y="514">Adapter</text>
+  <rect class="adapter" x="830" y="238" width="162" height="86" rx="20"/><text class="h" x="868" y="274">Model</text><text class="h" x="858" y="302">Adapter</text>
+  <rect class="box" x="1030" y="300" width="94" height="110" rx="22"/><text class="h" x="1050" y="344">AI</text><text class="h" x="1042" y="372">Model</text>
+  <rect class="box" x="830" y="450" width="162" height="86" rx="20"/><text class="h" x="870" y="486">Engine</text><text class="s" x="865" y="514">orchestration</text>
+
+  <path class="arrow" d="M256 354 C294 324 304 286 326 282"/><path class="arrow" d="M488 282 H548"/><path class="arrow" d="M770 282 H830"/><path class="arrow" d="M992 282 C1016 306 1020 330 1030 354"/>
+  <path class="arrow" d="M1030 384 C1008 494 1000 500 992 500"/><path class="arrow" d="M830 500 H770"/><path class="arrow" d="M548 500 H488"/><path class="arrow" d="M326 500 C292 484 274 426 256 384"/>
+  <text class="tag" x="358" y="216">외부 → 표준</text><text class="tag" x="852" y="216">표준 → 모델</text><text class="tag" x="354" y="572">표준 → 응답</text>
+  <text class="s" x="274" y="626">모델 교체 또는 사내 시스템 변경 시 adapter 조합만 변경하고 core contract는 유지합니다.</text>
+</svg>

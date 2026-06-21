@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">4층 / 5층 / 6층 통행 예시</title>
+  <desc id="desc">자동차선 4층, 5층, 6층의 적재 구획과 통행 가능 경로가 다르게 구성되는 예시</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.floor{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.zone{fill:#fff;stroke:#d6dee6;stroke-width:1.5}.route{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.block{fill:#e5e8eb;stroke:#d6dee6;stroke-width:1}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 22px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 15px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">층별 공간 구조와 통행 경로 차이</text>
+  <text class="cap" x="96" y="154">같은 선박 안에서도 deck마다 통행 가능한 구간과 적재 가능 공간이 달라집니다.</text>
+
+  <g transform="translate(92 232)">
+    <rect class="floor" width="300" height="296" rx="24"/><text class="h" x="34" y="44">Deck 4</text><text class="s" x="34" y="70">중앙 통로 + 좌우 적재</text>
+    <rect class="zone" x="34" y="98" width="90" height="62" rx="10"/><rect class="zone" x="176" y="98" width="90" height="62" rx="10"/><rect class="zone" x="34" y="190" width="90" height="62" rx="10"/><rect class="zone" x="176" y="190" width="90" height="62" rx="10"/>
+    <path class="route" d="M150 84 V260"/><path class="route" d="M150 150 H124"/><path class="route" d="M150 206 H176"/>
+  </g>
+  <g transform="translate(450 232)">
+    <rect class="floor" width="300" height="296" rx="24"/><text class="h" x="34" y="44">Deck 5</text><text class="s" x="34" y="70">우측 램프 연결</text>
+    <rect class="zone" x="34" y="96" width="92" height="62" rx="10"/><rect class="zone" x="154" y="96" width="92" height="62" rx="10"/><rect class="zone" x="34" y="190" width="92" height="62" rx="10"/><rect class="block" x="170" y="190" width="72" height="62" rx="10"/>
+    <path class="route" d="M58 166 C128 176 202 158 238 106"/><path class="route" d="M58 218 C144 218 220 238 250 260"/>
+  </g>
+  <g transform="translate(808 232)">
+    <rect class="floor" width="300" height="296" rx="24"/><text class="h" x="34" y="44">Deck 6</text><text class="s" x="34" y="70">협소 구간과 차단 edge</text>
+    <rect class="zone" x="34" y="96" width="86" height="62" rx="10"/><rect class="block" x="142" y="96" width="58" height="62" rx="10"/><rect class="zone" x="216" y="96" width="50" height="62" rx="10"/><rect class="zone" x="34" y="190" width="86" height="62" rx="10"/><rect class="zone" x="142" y="190" width="124" height="62" rx="10"/>
+    <path class="route" d="M78 166 C86 122 164 124 240 166"/><path class="route" d="M78 218 H204"/>
+  </g>
+  <text class="tag" x="178" y="586">Deck별 edge 구성</text><text class="tag" x="498" y="586">층간 이동 제약</text><text class="tag" x="850" y="586">통행 차단·협소 구간</text>
+  <text class="s" x="264" y="626">API 입력에서 층별 제약을 분리하면 현장 규칙과 모델 입력의 불일치를 줄일 수 있습니다.</text>
+</svg>

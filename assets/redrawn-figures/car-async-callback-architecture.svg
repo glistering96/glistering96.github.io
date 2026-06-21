@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">비동기 callback 구조</title>
+  <desc id="desc">장시간 모델 추론을 요청 접수, queue, worker 실행, callback 수신으로 분리한 아키텍처 다이어그램</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.11"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.box{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.blue{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.store{fill:#fff;stroke:#3182f6;stroke-width:2;stroke-dasharray:8 7}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.dash{stroke:#6b7684;stroke-width:3;fill:none;stroke-dasharray:8 8;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 22px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 15px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">장시간 추론을 위한 비동기 Callback 구조</text>
+  <text class="cap" x="96" y="154">요청 API는 빠르게 job을 접수하고, 모델 완료 시 callback으로 결과를 회수합니다.</text>
+
+  <rect class="box" x="86" y="295" width="150" height="108" rx="20"/><text class="h" x="118" y="340">사내</text><text class="h" x="108" y="368">시스템</text><text class="s" x="114" y="393">request</text>
+  <rect class="blue" x="286" y="250" width="176" height="104" rx="20"/><text class="h" x="327" y="296">API</text><text class="h" x="317" y="324">Server</text><text class="s" x="309" y="344">validate · job id</text>
+  <rect class="store" x="286" y="430" width="176" height="88" rx="18"/><text class="h" x="329" y="468">Redis</text><text class="s" x="320" y="493">job state</text>
+  <rect class="box" x="522" y="250" width="168" height="104" rx="20"/><text class="h" x="563" y="296">Queue</text><text class="s" x="555" y="324">pending jobs</text>
+  <rect class="blue" x="748" y="250" width="178" height="104" rx="20"/><text class="h" x="795" y="296">Engine</text><text class="h" x="792" y="324">Worker</text><text class="s" x="784" y="344">orchestration</text>
+  <rect class="box" x="980" y="250" width="140" height="104" rx="20"/><text class="h" x="1013" y="296">AI</text><text class="h" x="1000" y="324">Model</text><text class="s" x="1004" y="344">long run</text>
+  <rect class="store" x="748" y="430" width="178" height="88" rx="18"/><text class="h" x="790" y="468">Result</text><text class="s" x="791" y="493">normalize</text>
+
+  <path class="arrow" d="M236 335 H286"/><text class="tag" x="245" y="318">1. submit</text>
+  <path class="arrow" d="M462 302 H522"/><text class="tag" x="472" y="284">2. enqueue</text>
+  <path class="arrow" d="M690 302 H748"/><text class="tag" x="702" y="284">3. consume</text>
+  <path class="arrow" d="M926 302 H980"/><text class="tag" x="936" y="284">4. call</text>
+  <path class="dash" d="M1050 354 C1050 548 440 596 374 518"/><text class="tag" x="586" y="610">5. callback / status update</text>
+  <path class="arrow" d="M837 430 V354"/><text class="tag" x="850" y="401">result</text>
+  <path class="arrow" d="M374 430 V354"/><text class="tag" x="386" y="397">state</text>
+  <path class="dash" d="M286 474 C214 476 164 446 160 403"/><text class="s" x="86" y="548">동기 대기 대신 job id 기준 상태 조회와 완료 callback으로 timeout 위험을 줄입니다.</text>
+</svg>

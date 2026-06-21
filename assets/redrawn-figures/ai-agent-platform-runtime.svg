@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">사용자별 격리 Agent runtime 구조</title>
+  <desc id="desc">공통 UI와 platform backend를 기준으로 사용자별 Kubernetes runtime, PVC, service routing, skill registry를 분리한 구조</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.11"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.cluster{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.box{fill:#fff;stroke:#d6dee6;stroke-width:2}.core{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.runtime{fill:#fff;stroke:#3182f6;stroke-width:2}.pvc{fill:#eef6ff;stroke:#1d4ed8;stroke-width:2;stroke-dasharray:7 6}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.dash{stroke:#6b7684;stroke-width:3;fill:none;stroke-dasharray:8 8;marker-end:url(#arrow)}.title{font:900 38px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 21px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 15px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">Kubernetes 기반 사용자별 Agent Runtime</text>
+  <text class="cap" x="96" y="154">공통 진입점은 유지하고, 실행 환경·스토리지·라우팅은 사용자 단위로 격리합니다.</text>
+
+  <rect class="box" x="92" y="290" width="170" height="104" rx="22"/><text class="h" x="127" y="333">Web / Chat</text><text class="s" x="126" y="362">공통 UI</text>
+  <rect class="core" x="326" y="248" width="214" height="138" rx="24"/><text class="h" x="371" y="300">Platform</text><text class="h" x="370" y="328">Backend</text><text class="s" x="363" y="358">provision · auth · lifecycle</text>
+  <rect class="box" x="326" y="444" width="214" height="92" rx="20"/><text class="h" x="375" y="486">Skill Registry</text><text class="s" x="366" y="514">공용 skill version</text>
+
+  <rect class="cluster" x="612" y="218" width="500" height="356" rx="28"/><text class="tag" x="642" y="252">Kubernetes Namespace / Routing Layer</text>
+  <rect class="runtime" x="648" y="288" width="128" height="94" rx="18"/><text class="h" x="676" y="326">User A</text><text class="s" x="676" y="352">agent pod</text>
+  <rect class="pvc" x="648" y="410" width="128" height="70" rx="16"/><text class="h" x="686" y="452">PVC</text>
+  <rect class="runtime" x="816" y="288" width="128" height="94" rx="18"/><text class="h" x="844" y="326">User B</text><text class="s" x="844" y="352">agent pod</text>
+  <rect class="pvc" x="816" y="410" width="128" height="70" rx="16"/><text class="h" x="854" y="452">PVC</text>
+  <rect class="runtime" x="984" y="288" width="92" height="94" rx="18"/><text class="h" x="1007" y="326">User</text><text class="h" x="1010" y="354">N</text>
+  <rect class="pvc" x="984" y="410" width="92" height="70" rx="16"/><text class="h" x="1007" y="452">PVC</text>
+  <rect class="core" x="694" y="514" width="330" height="44" rx="22"/><text class="tag" x="763" y="542">Service / Gateway routing</text>
+
+  <path class="arrow" d="M262 342 H326"/><text class="tag" x="270" y="322">chat request</text>
+  <path class="arrow" d="M540 318 H612"/><text class="tag" x="550" y="298">provision</text>
+  <path class="arrow" d="M540 490 C584 490 604 444 648 444"/><text class="tag" x="552" y="524">skill sync</text>
+  <path class="dash" d="M1030 514 C1040 620 172 620 176 394"/><text class="s" x="310" y="626">runtime identity, storage, skill, lifecycle 소유권을 backend에서 관리</text>
+</svg>

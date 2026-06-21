@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">제품별 차량 유형 예측과 scorer 기반 배차 판단</title>
+  <desc id="desc">제품 속성에서 배차 가능 차량 유형을 예측하고 영업소별 scorer와 score matrix로 배차를 결정하는 흐름</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3182f6"/></marker><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#313e50" flood-opacity="0.10"/></filter></defs>
+  <style>.bg{fill:#f2f4f6}.panel{fill:#fff;stroke:#e5e8eb;stroke-width:2;filter:url(#shadow)}.box{fill:#f8fafb;stroke:#d6dee6;stroke-width:2}.blue{fill:#eef6ff;stroke:#3182f6;stroke-width:3}.matrix{fill:#fff;stroke:#1d4ed8;stroke-width:3}.cell{fill:#eef6ff;stroke:#d8e8ff;stroke-width:1}.arrow{stroke:#3182f6;stroke-width:4;fill:none;marker-end:url(#arrow)}.title{font:900 36px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.h{font:900 20px Pretendard,'Noto Sans KR',sans-serif;fill:#171f2f}.s{font:750 14px Pretendard,'Noto Sans KR',sans-serif;fill:#6b7684}.tag{font:850 15px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.num{font:900 16px Pretendard,'Noto Sans KR',sans-serif;fill:#1d4ed8}.cap{font:750 18px Pretendard,'Noto Sans KR',sans-serif;fill:#333d4b}</style>
+  <rect class="bg" width="1200" height="720"/>
+  <rect class="panel" x="54" y="54" width="1092" height="612" rx="28"/>
+  <text class="title" x="96" y="116">제품별 차량 유형 예측 + Scorer 기반 배차 판단</text>
+  <text class="cap" x="96" y="154">제품 속성, 차량 후보, 영업소별 업무 규칙을 score matrix로 합성합니다.</text>
+
+  <rect class="box" x="92" y="264" width="168" height="120" rx="22"/><text class="h" x="128" y="309">Product</text><text class="h" x="127" y="337">Features</text><text class="s" x="118" y="364">규격 · 중량 · 상차지</text>
+  <rect class="blue" x="326" y="244" width="198" height="132" rx="24"/><text class="h" x="376" y="292">Vehicle</text><text class="h" x="370" y="320">Type Model</text><text class="s" x="365" y="350">제품별 가능 차종 예측</text>
+  <rect class="box" x="326" y="440" width="198" height="92" rx="20"/><text class="h" x="376" y="480">Rule Store</text><text class="s" x="360" y="508">영업소별 business logic</text>
+  <rect class="blue" x="602" y="244" width="178" height="132" rx="24"/><text class="h" x="641" y="292">Candidate</text><text class="h" x="646" y="320">Vehicles</text><text class="s" x="635" y="350">운행 가능 차량 pool</text>
+  <rect class="box" x="602" y="440" width="178" height="92" rx="20"/><text class="h" x="649" y="480">Scorer</text><text class="s" x="636" y="508">거리·제약·우선순위</text>
+  <rect class="matrix" x="856" y="234" width="226" height="260" rx="24"/><text class="h" x="910" y="274">Score Matrix</text>
+  <rect class="cell" x="902" y="304" width="48" height="38" rx="8"/><text class="num" x="916" y="329">92</text>
+  <rect class="cell" x="956" y="304" width="48" height="38" rx="8"/><text class="num" x="970" y="329">41</text>
+  <rect class="cell" x="1010" y="304" width="48" height="38" rx="8"/><text class="num" x="1024" y="329">76</text>
+  <rect class="cell" x="902" y="350" width="48" height="38" rx="8"/><text class="num" x="916" y="375">55</text>
+  <rect class="cell" x="956" y="350" width="48" height="38" rx="8"/><text class="num" x="970" y="375">88</text>
+  <rect class="cell" x="1010" y="350" width="48" height="38" rx="8"/><text class="num" x="1024" y="375">62</text>
+  <rect class="cell" x="902" y="396" width="48" height="38" rx="8"/><text class="num" x="916" y="421">21</text>
+  <rect class="cell" x="956" y="396" width="48" height="38" rx="8"/><text class="num" x="970" y="421">70</text>
+  <rect class="cell" x="1010" y="396" width="48" height="38" rx="8"/><text class="num" x="1024" y="421">94</text>
+  <text class="s" x="906" y="464">argmax + 제약 통과</text>
+  <rect class="blue" x="856" y="542" width="226" height="74" rx="22"/><text class="h" x="912" y="587">Dispatch</text>
+
+  <path class="arrow" d="M260 324 H326"/><path class="arrow" d="M524 310 H602"/><path class="arrow" d="M780 310 H856"/>
+  <path class="arrow" d="M425 376 V440"/><path class="arrow" d="M524 486 H602"/><path class="arrow" d="M780 486 C816 486 830 454 856 430"/>
+  <path class="arrow" d="M969 494 V542"/>
+  <text class="s" x="366" y="626">business logic을 scorer로 분리해 모델 예측값과 규칙 기반 점수를 같은 행렬에서 비교합니다.</text>
+</svg>
