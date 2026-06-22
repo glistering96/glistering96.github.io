@@ -1,5 +1,7 @@
 ﻿node_modules/
 _captures/
+artifacts/
+AGENTS.md
 .playwright-mcp/
 .DS_Store
 Thumbs.db
